@@ -13,7 +13,7 @@ export default {
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <!-- LOGO DA MODIFICARE -->
-      <img class="my_logo" src="../assets/img/food-logo-template-design-95c24a79e8088a9d763b0ae77658e055_screen.png"
+      <img class="my_logo" src="../assets/img/logo.png"
         alt="">
       <!-- HAMBURGHER BUTTON -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -82,43 +82,49 @@ export default {
 
 
 <style lang="scss" scoped>
-.container-fluid {
-  .my_logo {
-    width: 100px;
+@use '../styles/partials/variables' as*;
+
+nav {
+  height: $height-nav;
+
+  .container-fluid {
+    .my_logo {
+      height: $height-nav;
+    }
+
+    .dropdown-menu.show {
+      display: flex;
+      flex-wrap: wrap;
+      width: 300px;
+
+      li {
+        width: calc(100% / 3);
+      }
+    }
   }
 
-  .dropdown-menu.show {
-    display: flex;
-    flex-wrap: wrap;
-    width: 300px;
-    li {
-      width: calc(100% / 3);
+  .my_btn {
+    font-weight: 0;
+    font-size: 14px;
+    color: #fff;
+    background: linear-gradient(90deg, #75BBFD 0%, #FAA343 100%);
+    padding: 10px 30px;
+    border: 2px solid #75BBFD;
+    box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+    border-radius: 50px;
+    transition: 1000ms;
+    transform: translateY(0);
+    cursor: pointer;
+
+    &:hover {
+      transition: 1000ms;
+      padding: 10px 50px;
+      transform: translateY(-0px);
+      background: linear-gradient(90deg, #75BBFD 0%, #FAA343 100%);
+      color: #75BBFD;
+      border: solid 2px #75BBFD;
     }
   }
 }
-
-.my_btn {
-  font-weight: 0;
-  font-size: 14px;
-  color: #fff;
-  background: linear-gradient(90deg, #75BBFD 0%, #FAA343 100%);
-  padding: 10px 30px;
-  border: 2px solid #75BBFD;
-  box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
-  border-radius: 50px;
-  transition: 1000ms;
-  transform: translateY(0);
-  cursor: pointer;
-
-  &:hover {
-    transition: 1000ms;
-    padding: 10px 50px;
-    transform: translateY(-0px);
-    background: linear-gradient(90deg, #75BBFD 0%, #FAA343 100%);
-    color: #75BBFD;
-    border: solid 2px #75BBFD;
-  }
-}
-
 </style>
 

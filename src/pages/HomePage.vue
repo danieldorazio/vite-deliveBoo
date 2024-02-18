@@ -19,7 +19,10 @@ export default {
 
 
 <style lang="scss" scoped>
-
-
+@use '../styles/partials/variables' as*;
+.container {
+    height: $height-main;
+    background-color: aliceblue;
+}
 
 </style>

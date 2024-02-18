@@ -6,12 +6,20 @@ export default {
 
 
 <template>
-    <h1>Home page</h1>
+    <div class="container">
+        <div>
+            <h1>Home page</h1>
+        </div>
+        
+    </div>
+    
   
 </template>
 
 
 
-<style>
+<style lang="scss" scoped>
+
+
 
 </style>

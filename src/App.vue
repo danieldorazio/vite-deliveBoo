@@ -4,9 +4,9 @@ import AppHeader from "./components/AppHeader.vue";
 
 
 export default {
-    data () {
+    data() {
         return {
-            
+
         }
     },
     components: { AppHeader, AppFooter },
@@ -15,14 +15,21 @@ export default {
 </script>
 
 <template>
-    <AppHeader />
-    
+    <div class="wrapper">
+        <AppHeader />
 
-    <router-view></router-view>
 
-    <AppFooter />
+        <router-view></router-view>
+
+        <AppFooter />
+    </div>
 </template>
 
 <style lang="scss">
 @use "./styles/general.scss" as*;
+
+.wrapper {
+    height: 100vh;
+    width: 100%;
+}
 </style>

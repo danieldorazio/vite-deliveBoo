@@ -1,28 +1,49 @@
 <script>
+import AppJumbotron from '../components/AppJumbotron.vue';
+
 export default {
 
+    components: { AppJumbotron },
 }
 </script>
 
 
 <template>
-    <div class="container">
-        <div>
+
+<div class="my_main">
+    <AppJumbotron />
+        <div class="container p-0">
             <h1>Home page</h1>
         </div>
-        
-    </div>
-    
-  
+</div>
+   
 </template>
 
 
 
 <style lang="scss" scoped>
 @use '../styles/partials/variables' as*;
-.container {
+
+.my_main {
     height: $height-main;
+    overflow-y: scroll;
     background-color: aliceblue;
 }
 
+.my_main::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 10px;
+}
+
+.my_main::-webkit-scrollbar-track {
+    border-radius: 10px;
+    border: 1px solid #cacaca;
+    background-color: #f1f1f1;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+.my_main::-webkit-scrollbar-thumb {
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(.5, #FAA343), color-stop(1, #75BBFD));
+    border-radius: 10px;
+}
 </style>

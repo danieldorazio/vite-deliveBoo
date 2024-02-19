@@ -86,8 +86,9 @@ export default {
 
 nav {
   height: $height-nav;
-  background-color: #75bbfd;
-
+  background-image: url(../assets/img/navbar-wood.jpg);
+  background-position: center;
+  background-size: cover;
   .container-fluid {
     .my_logo {
       height: $height-nav;

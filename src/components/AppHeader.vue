@@ -86,6 +86,7 @@ export default {
 
 nav {
   height: $height-nav;
+  background-color: #75bbfd;
 
   .container-fluid {
     .my_logo {

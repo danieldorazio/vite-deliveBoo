@@ -108,10 +108,10 @@ nav {
   .my_btn {
     font-weight: 0;
     font-size: 14px;
-    color: #fff;
-    background: linear-gradient(90deg, #75BBFD 0%, #FAA343 100%);
+    color: black;
+    background: linear-gradient(90deg, #F8E16C 0%, #FAA343 100%);
     padding: 10px 30px;
-    border: 2px solid #75BBFD;
+    border: 2px solid #F8E16C;
     box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
     border-radius: 50px;
     transition: 1000ms;
@@ -122,9 +122,8 @@ nav {
       transition: 1000ms;
       padding: 10px 50px;
       transform: translateY(-0px);
-      background: linear-gradient(90deg, #75BBFD 0%, #FAA343 100%);
-      color: #75BBFD;
-      border: solid 2px #75BBFD;
+      background: linear-gradient(90deg, #F8E16C 0%, #FAA343 100%);
+      border: solid 2px #F8E16C;
     }
   }
 }

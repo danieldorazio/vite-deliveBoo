@@ -120,8 +120,9 @@ export default{
             </div>
             <br>
         </div>
+        <AppFooter />
     </div>
-    <AppFooter />
+    
 </template>
 
 <style lang="scss" scoped>

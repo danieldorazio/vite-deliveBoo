@@ -12,7 +12,7 @@ export default {
 
 <template>
 
-<div class="my_main">
+<div class="my_main ">
     <AppJumbotron />
         <div class="container p-0">
             <h1>Home page</h1>
@@ -20,8 +20,9 @@ export default {
                 <AppCard />
             </div>
         </div>
+        <AppFooter/>
 </div>
-   <AppFooter/>
+   
 </template>
 
 

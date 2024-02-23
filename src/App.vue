@@ -1,5 +1,6 @@
 <script >
-import AppHeader from "./components/AppHeader.vue";
+import AppFooter from "./components/partials/AppFooter.vue";
+import AppHeader from "./components/partials/AppHeader.vue";
 
 
 export default {
@@ -8,19 +9,23 @@ export default {
 
         }
     },
-    components: { AppHeader },
+    components: { AppHeader, AppFooter },
 }
 
 </script>
 
 <template>
+        
     <div class="wrapper">
         <AppHeader />
 
 
         <router-view></router-view>
 
+       
+      
     </div>
+    
 </template>
 
 <style lang="scss">

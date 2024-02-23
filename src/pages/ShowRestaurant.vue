@@ -16,7 +16,11 @@ export default{
 <template>
     <div class="my_main">
         <div class="back">
-            <img src="" alt="Logo ristorante">
+            <div class="d-flex justify-content-between">
+                <img src="" alt="Logo ristorante">
+                <!-- , params: {slug: restaurant.slug} -->
+                <router-link :to="{name: 'restaurants'}" class="btn btn-info">Restaurants</router-link>
+            </div>
             <div class="container">
                 <div class="row">
                     <div class="col-3">

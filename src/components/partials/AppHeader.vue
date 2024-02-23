@@ -13,10 +13,10 @@ export default {
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <!-- LOGO DA MODIFICARE -->
-      <img class="my_logo" src="../assets/img/logo.png"
+      <img class="my_logo" src="../../assets/img/logo.png"
         alt="">
       <!-- HAMBURGHER BUTTON -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -25,49 +25,49 @@ export default {
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
           <li class="nav-item">
-            <router-link :to="{ name: 'home' }" class="nav-link">Home</router-link>
+            <router-link :to="{ name: 'home' }" class="nav-link text-info">Home</router-link>
           </li>
 
           <!-- DROPDOWN DELLE CATEGORIE -->
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            <a class="nav-link dropdown-toggle text-info" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
               Categorie
             </a>
             <ul class="dropdown-menu my_dropdown" aria-labelledby="navbarDropdown">
               <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../assets/img/burger.png" alt=""><span>Burgers</span>
+                    src="../../assets/img/burger.png" alt=""><span>Burgers</span>
                 </router-link></li>
               <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../assets/img/burrito.png" alt="">
+                    src="../../assets/img/burrito.png" alt="">
                   <span>Messicano</span>
                 </router-link></li>
               <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../assets/img/cooking.png" alt="">
+                    src="../../assets/img/cooking.png" alt="">
                   <span>Greco</span>
                 </router-link></li>
               <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../assets/img/dumpling.png" alt="">
+                    src="../../assets/img/dumpling.png" alt="">
                   <span>Cinese</span>
                 </router-link></li>
               <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../assets/img/pizza.png" alt="">
+                    src="../../assets/img/pizza.png" alt="">
                   <span>Pizza</span>
                 </router-link></li>
               <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../assets/img/poke-bowl.png" alt="">
+                    src="../../assets/img/poke-bowl.png" alt="">
                   <span>Poke</span>
                 </router-link></li>
               <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../assets/img/spaghetti.png" alt="">
+                    src="../../assets/img/spaghetti.png" alt="">
                   <span>Italiano</span>
                 </router-link></li>
               <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../assets/img/sushi.png" alt="">
+                    src="../../assets/img/sushi.png" alt="">
                   <span>Giapponese</span>
                 </router-link></li>
               <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../assets/img/dessert.png" alt="">
+                    src="../../assets/img/dessert.png" alt="">
                   <span>Dolci</span>
                 </router-link></li>
             </ul>
@@ -82,11 +82,11 @@ export default {
 
 
 <style lang="scss" scoped>
-@use '../styles/partials/variables' as*;
+@use '../../styles/partials/variables' as*;
 
 nav {
   height: $height-nav;
-  background-image: url(../assets/img/navbar-wood.jpg);
+  background-image: url(../../assets/img/navbar-wood.jpg);
   background-position: center;
   background-size: cover;
   .container-fluid {

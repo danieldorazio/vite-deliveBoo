@@ -1,2 +1,7 @@
 $height-nav: 80px;
-$height-main: calc(100vh - $height-nav );
+$height-main: calc(100vh - $height-nav - 100px );
+$height-footer:100px;
+$color-footer : #422FB2; 
+$color-main : #FAA343;
+
+

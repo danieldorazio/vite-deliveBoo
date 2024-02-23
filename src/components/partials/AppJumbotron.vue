@@ -16,11 +16,11 @@ export default {
 
 
 <style lang="scss" scoped>
-@use '../styles/partials/variables' as*;
+@use '../../styles/partials/variables' as*;
 
 .my_jumbotron {
     height: calc($height-main - 15px);
-    background-image: url(../assets/img/jumbotron.jpg);
+    background-image: url(../../assets/img/jumbotron.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size:cover;

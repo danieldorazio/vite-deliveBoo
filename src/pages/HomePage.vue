@@ -1,10 +1,11 @@
 <script>
-import AppCard from '../components/AppCard.vue';
-import AppJumbotron from '../components/AppJumbotron.vue';
+import AppCard from '../components/partials/AppCard.vue';
+import AppFooter from '../components/partials/AppFooter.vue';
+import AppJumbotron from '../components/partials/AppJumbotron.vue';
 
 export default {
 
-    components: { AppJumbotron, AppCard },
+    components: { AppJumbotron, AppCard, AppFooter },
 }
 </script>
 
@@ -20,7 +21,7 @@ export default {
             </div>
         </div>
 </div>
-   
+   <AppFooter/>
 </template>
 
 

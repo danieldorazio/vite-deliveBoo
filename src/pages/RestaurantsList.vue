@@ -11,7 +11,7 @@ export default {
 
 
 <template>
-    <div class="my-main">
+    <div class="my_main">
         <h1>Pier ti odio </h1>
         <div class="container">
             <div>

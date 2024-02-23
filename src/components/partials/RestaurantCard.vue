@@ -2,7 +2,7 @@
 export default {
     data(){
         return{
-            category: [
+            restaurant: [
                 {
                     imagePath: "burger1.png",
                     name: "Hamburger",
@@ -57,16 +57,16 @@ export default {
 
 
 <template>
-    <div class="card mt-5 me-3" style="width: 18rem;" v-for="cat in category">
-        <router-link :to="{name: 'restaurants'}" class="nav-link">
+    <div class="card mt-5 me-3" style="width: 18rem;" v-for="rest in restaurant">
+        <!-- <router-link :to="{name: 'restaurants'}" class="nav-link"> -->
         <div class="img-up text-center">
-            <img :src="getImagePath(cat.imagePath)" alt="">
+            <img :src="getImagePath(rest.imagePath)" alt="">
         </div>
-        </router-link>
+        <!-- </router-link> -->
         
         <div class="card-body text-center">
-            <h5 class="card-title">{{ cat.name }}</h5>
-            <p class="card-text">{{ cat.description }}</p>
+            <h5 class="card-title">{{ rest.name }}</h5>
+            <p class="card-text">{{ rest.description }}</p>
         </div>
     </div>
 </template>

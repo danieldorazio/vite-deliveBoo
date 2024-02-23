@@ -1,31 +1,35 @@
 <script >
+import axios from 'axios';
+import { store } from './store';
 import AppFooter from "./components/partials/AppFooter.vue";
 import AppHeader from "./components/partials/AppHeader.vue";
 
 
 export default {
+    components: { AppHeader, AppFooter },
     data() {
         return {
-
+            store,
+            categories: [],
         }
     },
-    components: { AppHeader, AppFooter },
+    created() {
+        axios.get(`${this.store.baseUrl}/api/categories`)
+            .then((resp) => {
+                this.categories = resp.data.result
+                console.log(this.categories);
+            })
+    },
+
 }
 
 </script>
 
 <template>
-        
     <div class="wrapper">
-        <AppHeader />
-
-
+        <AppHeader :categories="categories" />
         <router-view></router-view>
-
-       
-      
     </div>
-    
 </template>
 
 <style lang="scss">

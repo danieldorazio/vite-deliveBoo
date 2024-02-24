@@ -21,7 +21,8 @@ export default {
             .then((resp) => {
                 this.categories = resp.data.result
                 console.log(this.categories);
-            }).finally(() => {
+            })
+            .finally(() => {
                 this.loading = false;
             });
     },
@@ -36,7 +37,7 @@ export default {
             <div v-if="loading">
                 <h3>Loading...</h3>
             </div>
-            <div v-else>
+            <div v-else> 
                 <h1>Home page</h1>
                 <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3" v-for="category in categories"
                     :key="category.name">

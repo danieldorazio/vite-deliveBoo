@@ -1,4 +1,5 @@
 <script>
+import { store } from '../../store';
 export default {
   props: {
     categories: Array,
@@ -7,6 +8,7 @@ export default {
   data() {
     return {
       array: ["ciao", "casa", "mia"],
+      store,
     }
   }
 
@@ -41,7 +43,7 @@ export default {
 
               <li class="text-center" v-for="category in categories" :key="category.id">
                 <router-link :to="{ name: 'restaurants' }">
-                  <!-- <img class="dropdown-item" :src="`${store.baseUrl}/storage/${category.image_header}`" alt=""> -->
+                  <img class="dropdown-item" :src="`${store.baseUrl}/storage/${category.image_header}`" alt="">
                   <div>{{category.name }}</div>
                 </router-link></li>
             </ul>

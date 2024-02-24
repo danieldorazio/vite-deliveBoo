@@ -1,4 +1,5 @@
 <script>
+import { store } from '../../store';
 export default {
     props: {
         category: Object, 
@@ -6,9 +7,12 @@ export default {
 
     data(){
         return{
-            
+            store,
         }
     },
+    created() {
+        console.log(this.category);
+    }
     // methods:{
     //     getImagePath(path){
     //         return new URL(`../../assets/img/${path}`, import.meta.url).href;
@@ -22,7 +26,7 @@ export default {
     <div class="card mt-5 me-3" style="width: 18rem;">
         <router-link :to="{name: 'restaurants'}" class="nav-link">
         <div class="img-up text-center">
-            <!-- <img :src="`${store.baseUrl}/storage/${category.image_category}`" alt=""> -->
+            <img :src="`${store.baseUrl}/storage/${category.image_category}`" alt="">
         </div> 
         </router-link>
         

@@ -34,29 +34,34 @@ export default {
             <p class="card-text"> {{ restaurant.time_close }} </p>
         </div> -->
 
-        
+
         <!-- <router-link :to="{ name: 'show-restaurant' }" class="text-decoration-none text-black img-up rounded">
          
         </router-link> -->
-            <router-link :to="{name: 'show-restaurant', params: {id: restaurant.id }}" class="text-decoration-none text-black img-up rounded">
+        <router-link :to="{ name: 'show-restaurant', params: { id: restaurant.id } }"
+            class="text-decoration-none text-black rounded text-center">
+            <div class="img-up ">
                 <img :src="getImagePath('rice.png')" alt="" class="card-img-top ">
-                <div class="card-body text-center position-relative">
+            </div>
 
-                <div class="position-absolute top-0 start-50 translate-middle btn btn-light rounded-pill">
+            <div class="card-body my-bg-div text-white ">
+
+                <div class="  ">
                     <h5 class="card-title">{{ restaurant.restaurant_name }}</h5>
                 </div>
 
                 <p class="card-text mt-3 ">{{ restaurant.street }}</p>
             </div>
-            </router-link>
-       
-       
+        </router-link>
+
+
     </div>
 </template>
 
 
 
 <style lang="scss" scoped>
+@use '../../styles/partials/variables' as*;
 .img-up {
 
     background: linear-gradient(90deg, #F8E16C 0%, #FAA343 100%);
@@ -67,5 +72,9 @@ export default {
 
     }
 
+}
+.my-bg-div {
+    background-color: $color-footer ;
+    
 }
 </style>

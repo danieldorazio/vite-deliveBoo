@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { store } from '../store';
 import AppFooter from '../components/partials/AppFooter.vue';
+import AppCardMeals from '../components/partials/AppCardMeals.vue'
 
 export default {
     data() {
@@ -33,7 +34,7 @@ export default {
                 this.loading = false;
             });
     },
-    components: { AppFooter }
+    components: { AppFooter , AppCardMeals}
 }
 
 </script>
@@ -60,7 +61,7 @@ export default {
                 </div>
             </div>
             <br>
-            <div class="container" v-for="meal in meals" :key="meal.id">
+            <!-- <div class="container" v-for="meal in meals" :key="meal.id">
                 <div class="row">
                     <div class="col-3">
                         card meals
@@ -73,7 +74,8 @@ export default {
                     </div>
                 </div>
                 <br>
-            </div>
+            </div> -->
+            <AppCardMeals />
         </div>
         <AppFooter />
     </div>
@@ -125,4 +127,5 @@ export default {
 .col-3 {
     background-color: lightgray;
 }
+
 </style>

@@ -33,15 +33,18 @@ export default {
 <template>
     <div class="my_main">
         <AppJumbotron />
-        <div class="container p-0">
+        <div class="container p-0 mt-5">
             <div v-if="loading">
                 <h3>Loading...</h3>
             </div>
             <div v-else> 
-                <h1>Home page</h1>
-                <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3" v-for="category in categories"
+                <h1>The most popular cuisines</h1>
+                <p>Find the most popular cuisines from restaurants in your area and order online for delivery.</p>
+                <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
+                    <div class="col" v-for="category in categories"
                     :key="category.name">
-                    <AppCard :category="category" />
+                        <AppCard :category="category" />
+                    </div>
                 </div>
             </div>
         </div>

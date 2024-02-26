@@ -1,17 +1,19 @@
 <script>
+import {store} from '../../store';
 export default {
     props: {
         restaurant: Object,
     },
     data() {
         return {
+            store,
 
         }
     },
     methods: {
-        getImagePath(path) {
-            return new URL(`../../assets/img/${path}`, import.meta.url).href;
-        },
+        // getImagePath(path) {
+        //     return new URL(`../../assets/img/${path}`, import.meta.url).href;
+        // },
     }
 }
 </script>
@@ -41,7 +43,7 @@ export default {
         <router-link :to="{ name: 'show-restaurant', params: { id: restaurant.id } }"
             class="text-decoration-none text-black rounded text-center">
             <div class="img-up ">
-                <img :src="getImagePath('rice.png')" alt="" class="card-img-top ">
+                <img :src="`${store.baseUrl}/storage/${restaurant.image}`" alt="" class="card-img-top ">
             </div>
 
             <div class="card-body my-bg-div text-white ">

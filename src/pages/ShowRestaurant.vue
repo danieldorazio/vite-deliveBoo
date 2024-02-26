@@ -54,8 +54,19 @@ export default {
                     <div class="col-3">
                         Shortcut menu
                     </div>
-                    <div class="col-6">
-                        Name: <strong>{{ restaurant.restaurant_name }}</strong>
+                    <div class="col-6 d-flex flex-column">
+                        <div>
+                            <p>Name: <strong>{{ restaurant.restaurant_name }}</strong></p>
+                        </div>
+                        <div>
+                            <p> Street: <strong>{{ restaurant.street }}</strong></p>
+                        </div>
+                        <div>
+                            <p> Open Time: <strong>{{ restaurant.time_open }}</strong></p>
+                        </div>
+                        <div>
+                            <p> Close Time: <strong>{{ restaurant.time_close }}</strong></p>
+                        </div>
                     </div>
                     <div class="col-3">
                         Visione carrello
@@ -63,8 +74,12 @@ export default {
                 </div>
             </div>
             <br>
-            <div class="container" v-for="meal in meals" :key="meal.id">
-                <AppCardMeals :meal = "meal"/>
+            <div class="container">
+                <div class="d-flex justify-content-evenly flex-wrap gap-3">
+                    <div class="col-4 mt-5 mb-5" v-for="meal in meals" :key="meal.id">
+                        <AppCardMeals :meal = "meal"/>
+                    </div>
+                </div>
             </div>
         </div>
         <AppFooter />
@@ -105,10 +120,6 @@ export default {
     background-color: #FAA343;
 }
 
-.container {
-    background-color: beige;
-    height: 300px;
-}
 
 .col-6 {
     background-color: antiquewhite;

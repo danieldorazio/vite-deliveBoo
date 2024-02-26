@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-    <div class="fake-h mt-5">
+    <div class="fake-h">
         <div class="container ">
             <div class="row d-flex justify-content-between ">
                 <div class="col ">contact us link</div>

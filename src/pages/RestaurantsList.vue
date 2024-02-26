@@ -33,7 +33,7 @@ export default {
 <template>
     <div class="my_main">
         <h1>Pier ti odio </h1>
-        <div class="container">
+        <div class="container mb-5">
             <div>
                 Bottoni categoria
                 SearchBar

@@ -36,7 +36,7 @@ export default {
         <div>
             <!-- , params: {slug: restaurant.slug} -->
             <p>page clicked restaurant</p>
-            <router-link :to="{name: 'show-restaurant'}" class="btn btn-success">Prova</router-link>
+            <router-link :to="{name: 'show-restaurant', params: {id: restaurant.id }}" class="btn btn-success">Prova</router-link>
         </div>
     </div>
 </template>

@@ -1,12 +1,37 @@
 <script>
 import axios from 'axios';
+import { store } from '../store';
 import AppFooter from '../components/partials/AppFooter.vue';
 
-export default{
+export default {
     data() {
-        return {};
+        return {
+            store,
+            restaurant: {},
+            meals: [],
+        };
     },
     created() {
+        // CHIAMATA DATI RISTORNATE
+        this.loading = true;
+        axios.get(`${this.store.baseUrl}/api/restaurant/show/${this.$route.params.id}`)
+            .then((resp) => {
+                this.restaurant = resp.data.result
+                console.log(this.restaurant);
+            })
+            .finally(() => {
+                this.loading = false;
+            });
+        // CHIAMATA DATI PIATTO RISTORANTE
+        this.loading = true;
+        axios.get(`${this.store.baseUrl}/api/meals/${this.$route.params.id}`)
+            .then((resp) => {
+                this.meals = resp.data.result
+                console.log(this.meals);
+            })
+            .finally(() => {
+                this.loading = false;
+            });
     },
     components: { AppFooter }
 }
@@ -18,8 +43,8 @@ export default{
         <div class="back">
             <div class="d-flex justify-content-between">
                 <img src="" alt="Logo ristorante">
-                <!-- , params: {slug: restaurant.slug} -->
-                <router-link :to="{name: 'restaurants'}" class="btn btn-info">Restaurants</router-link>
+                <!-- , params: {slug: restaurant.slug} 
+                <router-link :to="{name: 'restaurants'}" class="btn btn-info">Restaurants</router-link> -->
             </div>
             <div class="container">
                 <div class="row">
@@ -27,7 +52,7 @@ export default{
                         Shortcut menu
                     </div>
                     <div class="col-6">
-                        Info ristorante
+                        {{ restaurant.restaurant_name }}
                     </div>
                     <div class="col-3">
                         Visione carrello
@@ -35,94 +60,23 @@ export default{
                 </div>
             </div>
             <br>
-            <div class="container">
+            <div class="container" v-for="meal in meals" :key="meal.id">
                 <div class="row">
                     <div class="col-3">
                         card meals
                     </div>
                     <div class="col-6">
-                        dettagli meals
+                        {{ meal.name }}
                     </div>
                     <div class="col-3">
                         + - quantitá
                     </div>
                 </div>
+                <br>
             </div>
-            <br>
-            <div class="container">
-                <div class="row">
-                    <div class="col-3">
-                        card meals
-                    </div>
-                    <div class="col-6">
-                        dettagli meals
-                    </div>
-                    <div class="col-3">
-                        + - quantitá
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="container">
-                <div class="row">
-                    <div class="col-3">
-                        card meals
-                    </div>
-                    <div class="col-6">
-                        dettagli meals
-                    </div>
-                    <div class="col-3">
-                        + - quantitá
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="container">
-                <div class="row">
-                    <div class="col-3">
-                        card meals
-                    </div>
-                    <div class="col-6">
-                        dettagli meals
-                    </div>
-                    <div class="col-3">
-                        + - quantitá
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="container">
-                <div class="row">
-                    <div class="col-3">
-                        card meals
-                    </div>
-                    <div class="col-6">
-                        dettagli meals
-                    </div>
-                    <div class="col-3">
-                        + - quantitá
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="container ">
-                <div class="row">
-                    <div class="col-3">
-                        card meals
-                    </div>
-                    <div class="col-6">
-                        dettagli meals
-                    </div>
-                    <div class="col-3">
-                        + - quantitá
-                    </div>
-                </div>
-            </div>
-            <br>
         </div>
         <AppFooter />
     </div>
-    
 </template>
 
 <style lang="scss" scoped>
@@ -145,29 +99,30 @@ export default{
     background-color: #f1f1f1;
     box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
 }
- 
+
 .my_main::-webkit-scrollbar-thumb {
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(.5, #FAA343), color-stop(1, #F8E16C));
     border-radius: 10px;
 }
 
-.row{
+.row {
     height: 100%;
 }
-.back{
+
+.back {
     background-color: green;
 }
 
-.container{
+.container {
     background-color: beige;
     height: 300px;
 }
 
-.col-6{
+.col-6 {
     background-color: antiquewhite;
 }
 
-.col-3{
+.col-3 {
     background-color: lightgray;
 }
 </style>

@@ -42,7 +42,7 @@ export default {
             <ul class="dropdown-menu my_dropdown" aria-labelledby="navbarDropdown">
 
               <li class="text-center" v-for="category in categories" :key="category.id">
-                <router-link :to="{ name: 'restaurants' }">
+                <router-link :to="{ name: 'restaurants', params: {slug: category.slug}}">
                   <img class="dropdown-item" :src="`${store.baseUrl}/storage/${category.image_header}`" alt="">
                   <div>{{category.name }}</div>
                 </router-link></li>

@@ -18,7 +18,7 @@ export default {
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <!-- LOGO DA MODIFICARE -->
-      <router-link :to="{ name: 'home' }" class="nav-link text-info">
+      <router-link :to="{ name: 'home' }" class="nav-link text-black">
         <img class="my_logo" src="../../assets/img/logo.png" alt="">
       </router-link>
       <!-- HAMBURGHER BUTTON -->
@@ -38,7 +38,7 @@ export default {
             </a>
             <ul class="dropdown-menu my_dropdown" aria-labelledby="navbarDropdown">
               <li class="text-center" v-for="category in categories" :key="category.id">
-                <router-link :to="{ name: 'restaurants', params: {slug: category.slug}}">
+                <router-link :to="{ name: 'restaurants', params: {slug: category.slug}}" class="text-decoration-none text-black">
                   <img class="dropdown-item" :src="`${store.baseUrl}/storage/${category.image_header}`" alt="">
                   <div>{{category.name }}</div>
                 </router-link>
@@ -47,7 +47,7 @@ export default {
           </li>
         </ul>
         <div class="text-white my_btn ">
-          <a href="http://127.0.0.1:8000/" class="text-decoration-none text-info">Lavora con noi</a>
+          <a href="http://127.0.0.1:8000/" class="text-decoration-none text-black">Lavora con noi</a>
         </div>
       </div>
     </div>

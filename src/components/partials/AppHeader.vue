@@ -19,7 +19,9 @@ export default {
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <!-- LOGO DA MODIFICARE -->
-      <img class="my_logo" src="../../assets/img/logo.png" alt="">
+      <router-link :to="{ name: 'home' }" class="nav-link text-info">
+        <img class="my_logo" src="../../assets/img/logo.png" alt="">
+      </router-link>
       <!-- HAMBURGHER BUTTON -->
       <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,23 +31,19 @@ export default {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-          <li class="nav-item">
-            <router-link :to="{ name: 'home' }" class="nav-link text-info">Home</router-link>
-          </li>
-
           <!-- DROPDOWN DELLE CATEGORIE -->
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-info" href="#" id="navbarDropdown" role="button"
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               Categorie
             </a>
             <ul class="dropdown-menu my_dropdown" aria-labelledby="navbarDropdown">
-
               <li class="text-center" v-for="category in categories" :key="category.id">
-                <router-link :to="{ name: 'restaurants' }">
+                <router-link :to="{ name: 'restaurants' }" class="text-decoration-none text-black">
                   <img class="dropdown-item" :src="`${store.baseUrl}/storage/${category.image_header}`" alt="">
                   <div>{{category.name }}</div>
-                </router-link></li>
+                </router-link>
+              </li>
             </ul>
           </li>
         </ul>
@@ -62,7 +60,8 @@ export default {
 
 nav {
   height: $height-nav;
-  background-image: url(../../assets/img/navbar-wood.jpg);
+  //background-image: url(../../assets/img/navbar-wood.jpg);
+  background-color: $color-footer;
   background-position: center;
   background-size: cover;
 

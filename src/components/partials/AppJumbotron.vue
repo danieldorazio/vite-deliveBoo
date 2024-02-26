@@ -19,9 +19,9 @@ export default {
 @use '../../styles/partials/variables' as*;
 
 .my_jumbotron {
-    height: calc($height-main - 15px);
+    height: calc($height-main - 175px);
     background-image: url(../../assets/img/jumbotron.jpg);
-    background-position: center;
+    background-position: bottom;
     background-repeat: no-repeat;
     background-size:cover;
 .my_slogan {

@@ -112,7 +112,7 @@ export default {
 }
 
 .back {
-    background-color: green;
+    background-color: #FAA343;
 }
 
 .container {

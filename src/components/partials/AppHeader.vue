@@ -1,8 +1,14 @@
 <script>
+import { store } from '../../store';
 export default {
+  props: {
+    categories: Array,
+  },
+
   data() {
     return {
       array: ["ciao", "casa", "mia"],
+      store,
     }
   }
 
@@ -13,8 +19,7 @@ export default {
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <!-- LOGO DA MODIFICARE -->
-      <img class="my_logo" src="../../assets/img/logo.png"
-        alt="">
+      <img class="my_logo" src="../../assets/img/logo.png" alt="">
       <!-- HAMBURGHER BUTTON -->
       <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,45 +35,16 @@ export default {
 
           <!-- DROPDOWN DELLE CATEGORIE -->
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-info" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
+            <a class="nav-link dropdown-toggle text-info" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
               Categorie
             </a>
             <ul class="dropdown-menu my_dropdown" aria-labelledby="navbarDropdown">
-              <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../../assets/img/burger.png" alt=""><span>Burgers</span>
-                </router-link></li>
-              <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../../assets/img/burrito.png" alt="">
-                  <span>Messicano</span>
-                </router-link></li>
-              <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../../assets/img/cooking.png" alt="">
-                  <span>Greco</span>
-                </router-link></li>
-              <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../../assets/img/dumpling.png" alt="">
-                  <span>Cinese</span>
-                </router-link></li>
-              <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../../assets/img/pizza.png" alt="">
-                  <span>Pizza</span>
-                </router-link></li>
-              <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../../assets/img/poke-bowl.png" alt="">
-                  <span>Poke</span>
-                </router-link></li>
-              <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../../assets/img/spaghetti.png" alt="">
-                  <span>Italiano</span>
-                </router-link></li>
-              <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../../assets/img/sushi.png" alt="">
-                  <span>Giapponese</span>
-                </router-link></li>
-              <li class="text-center"><router-link :to="{ name: 'home' }"><img class="dropdown-item"
-                    src="../../assets/img/dessert.png" alt="">
-                  <span>Dolci</span>
+
+              <li class="text-center" v-for="category in categories" :key="category.id">
+                <router-link :to="{ name: 'restaurants' }">
+                  <img class="dropdown-item" :src="`${store.baseUrl}/storage/${category.image_header}`" alt="">
+                  <div>{{category.name }}</div>
                 </router-link></li>
             </ul>
           </li>
@@ -89,6 +65,7 @@ nav {
   background-image: url(../../assets/img/navbar-wood.jpg);
   background-position: center;
   background-size: cover;
+
   .container-fluid {
     .my_logo {
       height: $height-nav;

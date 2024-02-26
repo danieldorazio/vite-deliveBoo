@@ -57,7 +57,7 @@ export default {
 
 
 <template>
-    <div class="card mt-5 me-3" style="width: 18rem;" v-for="rest in restaurant">
+    <div class="card mt-5 me-3" style="width: 18rem;" v-for="rest in restaurant" :key="rest.name">
         <!-- <router-link :to="{name: 'restaurants'}" class="nav-link"> -->
         <div class="img-up text-center">
             <img :src="getImagePath(rest.imagePath)" alt="">

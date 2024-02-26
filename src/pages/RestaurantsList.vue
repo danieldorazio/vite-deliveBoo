@@ -2,10 +2,30 @@
 import AppHeader from '../components/partials/AppHeader.vue';
 import RestaurantCard from '../components/partials/RestaurantCard.vue';
 import AppFooter from '../components/partials/AppFooter.vue';
+import axios from 'axios';
+import { store } from '../store';
 
 export default {
-
     components: { AppHeader, RestaurantCard, AppFooter },
+
+    data() {
+        return {
+            store,
+            categories: [],
+            loading: false,
+        }
+    },
+    created() {
+        this.loading = true;
+        axios.get(`${this.store.baseUrl}/api/categories`)
+            .then((resp) => {
+                this.categories =resp.data.result
+                console.log(this.categories);
+            })
+            .finally(() => {
+                this.loading = false;
+            });
+    },
 }
 </script>
 

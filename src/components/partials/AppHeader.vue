@@ -47,7 +47,9 @@ export default {
             </ul>
           </li>
         </ul>
-        <router-link :to="{ name: 'home' }"><button class="my_btn">Accedi</button></router-link>
+        <div class="text-white my_btn ">
+          <a href="http://127.0.0.1:8000/" class="text-decoration-none text-info">Lavora con noi</a>
+        </div>
       </div>
     </div>
   </nav>

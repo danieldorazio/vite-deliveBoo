@@ -7,7 +7,6 @@ export default {
 
   data() {
     return {
-      array: ["ciao", "casa", "mia"],
       store,
     }
   }

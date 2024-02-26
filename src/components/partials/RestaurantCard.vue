@@ -27,7 +27,8 @@ export default {
         
         <div class="card-body text-center">
             <h5 class="card-title">{{ restaurant.restaurant_name }}</h5>
-            <!-- <p class="card-text">{{ rest.description }}</p> -->
+            <img :src=" getImagePath('rice.png')" alt="">
+             <!-- <p class="card-text">{{ rest.description }}</p> -->
             <p class="card-text"> {{ restaurant.street }} </p>
             <p class="card-text"> {{ restaurant.time_open }} </p>
             <p class="card-text"> {{ restaurant.time_close }} </p>

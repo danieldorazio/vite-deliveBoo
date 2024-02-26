@@ -11,16 +11,16 @@ export default {
     data() {
         return {
             store,
-            categories: [],
+            restaurants: [],
             loading: false,
         }
     },
     created() {
         this.loading = true;
-        axios.get(`${this.store.baseUrl}/api/categories`)
+        axios.get(`${this.store.baseUrl}/api/restaurants/${this.$route.params.slug}`)
             .then((resp) => {
-                this.categories =resp.data.result
-                console.log(this.categories);
+                this.restaurants =resp.data.result
+                console.log(this.restaurants);
             })
             .finally(() => {
                 this.loading = false;
@@ -40,7 +40,10 @@ export default {
             </div>
             <div>
                 <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
-                    <RestaurantCard />
+                    <div v-for=" restaurant in restaurants" :key="restaurant.id">
+                        <RestaurantCard :restaurant="restaurant"/>
+                    </div>
+                    
                 </div>
             </div>
         </div>

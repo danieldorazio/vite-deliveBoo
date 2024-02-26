@@ -1,50 +1,11 @@
 <script>
 export default {
+    props: {
+        restaurant: Object,
+    },
     data(){
         return{
-            restaurant: [
-                {
-                    imagePath: "burger1.png",
-                    name: "Hamburger",
-                    description: "I migliori hamburger del mondo."
-
-                },
-                {
-                    imagePath: "burritos1.png",
-                    name: "Burrito",
-                    description: "I migliori burrito del mondo."
-                },
-                {
-                    imagePath: "pizza-slice1.png",
-                    name: "Pizza",
-                    description: "La miglior pizza del mondo."
-                },
-                {
-                    imagePath: "spaghetti1.png",
-                    name: "Spaghetti",
-                    description: "I migliori spaghetti del mondo."
-                },
-                {
-                    imagePath: "sawara1.png",
-                    name: "Sushi",
-                    description: "Che schifo il sushi"
-                },
-                {
-                    imagePath: "taco.png",
-                    name: "Cooking",
-                    description: "Non so cosa sia"
-                },
-                {
-                    imagePath: "dessert1.png",
-                    name: "Dessert",
-                    description: "Troppo buono"
-                },
-                {
-                    imagePath: "rice.png",
-                    name: "Poke",
-                    description: "blew"
-                },
-            ]
+    
         }
     },
     methods:{
@@ -59,14 +20,17 @@ export default {
 <template>
     <div class="card mt-5 me-3" style="width: 18rem;" v-for="rest in restaurant" :key="rest.name">
         <!-- <router-link :to="{name: 'restaurants'}" class="nav-link"> -->
-        <div class="img-up text-center">
+        <!-- <div class="img-up text-center">
             <img :src="getImagePath(rest.imagePath)" alt="">
-        </div>
+        </div> -->
         <!-- </router-link> -->
         
         <div class="card-body text-center">
-            <h5 class="card-title">{{ rest.name }}</h5>
-            <p class="card-text">{{ rest.description }}</p>
+            <h5 class="card-title">{{ restaurant.restaurant_name }}</h5>
+            <!-- <p class="card-text">{{ rest.description }}</p> -->
+            <p class="card-text"> {{ restaurant.street }} </p>
+            <p class="card-text"> {{ restaurant.time_open }} </p>
+            <p class="card-text"> {{ restaurant.time_close }} </p>
         </div>
         <div>
             <!-- , params: {slug: restaurant.slug} -->

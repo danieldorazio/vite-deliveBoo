@@ -33,7 +33,35 @@ export default {
                 this.loading = false;
             });
     },
-    components: { AppFooter }
+    components: { AppFooter },
+    methods: {
+        addToCart(meal) {
+            // this.store.cart = JSON.parse(localStorage.getItem('cart'))
+            // console.log(this.store.cart);
+            // this.store.cart.push(meal)
+            // console.log(this.store.cart);
+            // console.log(localStorage.getItem('cart'));
+            localStorage.removeItem('cart')
+            localStorage.setItem('cart', JSON.stringify(this.store.cart))
+
+            localStorage.setItem('cart', '[]')
+            let cart = JSON.parse(localStorage.getItem('cart'))
+
+            if(!cart){
+                cart.push(meal)
+                console.log(cart);
+            } else {
+                let res = cart.find((element) => element.id == meal.id)
+                console.log(res);
+                if (res === undefined) {
+                    cart.push(meal)
+                }
+            }
+            console.log(cart.length);
+
+            localStorage.setItem('cart', JSON.stringify(cart))
+        },
+    }
 }
 
 </script>
@@ -70,6 +98,7 @@ export default {
                     </div>
                     <div class="col-3">
                         + - quantitá
+                        <button @click="addToCart(meal)">Aggiungi al carrello</button>
                     </div>
                 </div>
                 <br>

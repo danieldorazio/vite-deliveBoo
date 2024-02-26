@@ -18,9 +18,20 @@ export default {
             .then((resp) => {
                 this.categories = resp.data.result
                 console.log(this.categories);
-            })
+            });
     },
-
+    methods: {
+        // createCart() {
+        //     fetch(JSON.stringify(this.categories))
+        //     .then(function(response){
+        //     console.log(response);
+        //     return response.json()
+        // })
+        //     .then(function(data){
+        //     console.log(data);
+        // })
+        // }
+    }
 }
 
 </script>

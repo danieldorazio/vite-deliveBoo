@@ -42,8 +42,10 @@ export default {
 <template>
     <div class="my_main">
         <div class="back">
-            <div class="d-flex justify-content-between">
-                <img src="" alt="Logo ristorante">
+            <div class="d-flex justify-content-center bg-white mb-3">
+                <div class="w-25 ">
+                    <img :src="`${store.baseUrl}/storage/${restaurant.image}`" alt="" class="card-img-top ">
+                </div>  
                 <!-- , params: {slug: restaurant.slug} 
                 <router-link :to="{name: 'restaurants'}" class="btn btn-info">Restaurants</router-link> -->
             </div>
@@ -53,7 +55,7 @@ export default {
                         Shortcut menu
                     </div>
                     <div class="col-6">
-                        {{ restaurant.restaurant_name }}
+                        Name: <strong>{{ restaurant.restaurant_name }}</strong>
                     </div>
                     <div class="col-3">
                         Visione carrello
@@ -61,21 +63,9 @@ export default {
                 </div>
             </div>
             <br>
-            <!-- <div class="container" v-for="meal in meals" :key="meal.id">
-                <div class="row">
-                    <div class="col-3">
-                        card meals
-                    </div>
-                    <div class="col-6">
-                        {{ meal.name }}
-                    </div>
-                    <div class="col-3">
-                        + - quantitá
-                    </div>
-                </div>
-                <br>
-            </div> -->
-            <AppCardMeals />
+            <div class="container" v-for="meal in meals" :key="meal.id">
+                <AppCardMeals :meal = "meal"/>
+            </div>
         </div>
         <AppFooter />
     </div>

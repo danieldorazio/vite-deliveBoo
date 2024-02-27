@@ -33,7 +33,7 @@ export default {
 <template>
     <div class="my_main">
         <AppJumbotron />
-        <div class="container p-0 mt-5">
+        <div class="container p-0 mt-5 mb-5">
             <div v-if="loading">
                 <h3>Loading...</h3>
             </div>

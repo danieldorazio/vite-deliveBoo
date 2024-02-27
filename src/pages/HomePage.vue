@@ -1,34 +1,39 @@
 <script>
-import axios from 'axios';
-import { store } from '../store';
-import AppCard from '../components/partials/AppCard.vue';
-import AppFooter from '../components/partials/AppFooter.vue';
-import AppJumbotron from '../components/partials/AppJumbotron.vue';
+import axios from "axios";
+import { store } from "../store";
+import AppCard from "../components/partials/AppCard.vue";
+import AppFooter from "../components/partials/AppFooter.vue";
+import AppJumbotron from "../components/partials/AppJumbotron.vue";
+import AppButtonHome from "../components/partials/AppButtonHome.vue";
 
 export default {
-    components: { AppJumbotron, AppCard, AppFooter },
+    components: { AppJumbotron, AppCard, AppFooter, AppButtonHome },
 
     data() {
         return {
             store,
             categories: [],
             loading: false,
-        }
+            checkedCategories: []
+        };
     },
     created() {
         this.loading = true;
-        axios.get(`${this.store.baseUrl}/api/categories`)
+        axios
+            .get(`${this.store.baseUrl}/api/categories`)
             .then((resp) => {
-                this.categories = resp.data.result
+                this.categories = resp.data.result;
                 console.log(this.categories);
             })
             .finally(() => {
                 this.loading = false;
             });
     },
-}
-</script>
+    methods:{
 
+    }
+};
+</script>
 
 <template>
     <div class="my_main">
@@ -37,26 +42,41 @@ export default {
             <div v-if="loading">
                 <h3>Loading...</h3>
             </div>
-            <div v-else> 
-                <h1>The most popular cuisines</h1>
-                <p>Find the most popular cuisines from restaurants in your area and order online for delivery.</p>
-                <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
-                    <div class="col" v-for="category in categories"
-                    :key="category.name">
-                        <AppCard :category="category" />
+            <div v-else>
+                <div>
+                    <h1>The most popular cuisines</h1>
+                    <p>
+                        Find the most popular cuisines from restaurants in your area and
+                        order online for delivery.
+                    </p>
+                    <hr />
+                    <h6>Select the categories that you want to search</h6>
+                    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
+                        <div class="col" v-for="category in categories" :key="category.name">
+                            <div class="position-relative">
+                                <input type="checkbox" :name="category.slug" :id="category.slug" :value="category.slug"                    class="position-absolute my-pos" v-model="checkedCategories"/>
+                                <label :for="category.slug">
+                                    <span>
+                                        <AppCard :category="category" />
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div>Checked categories: {{ checkedCategories }}</div>
+                <div class="mt-3">
+                    <AppButtonHome :categories="categories" />
+                </div>
+                
             </div>
         </div>
-        <AppFooter/>
-</div>
-   
+        <AppFooter />
+    </div>
 </template>
 
-
-
 <style lang="scss" scoped>
-@use '../styles/partials/variables' as*;
+@use "../styles/partials/variables" as *;
 
 .my_main {
     height: $height-main;
@@ -77,7 +97,16 @@ export default {
 }
 
 .my_main::-webkit-scrollbar-thumb {
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(.5, #FAA343), color-stop(1, #F8E16C));
+    background-image: -webkit-gradient(linear,
+            left bottom,
+            left top,
+            color-stop(0.5, #faa343),
+            color-stop(1, #f8e16c));
     border-radius: 10px;
+}
+
+.my-pos {
+    top: 94.5%;
+    z-index: 999;
 }
 </style>

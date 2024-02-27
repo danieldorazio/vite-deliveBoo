@@ -13,11 +13,12 @@ export default {
             store,
             restaurants: [],
             loading: false,
+            categoryName: this.$route.params.slug,
         }
     },
     created() {
         this.loading = true;
-        axios.get(`${this.store.baseUrl}/api/restaurants/${this.$route.params.slug}`)
+        axios.get(`${this.store.baseUrl}/api/restaurants/${this.categoryName}`)
             .then((resp) => {
                 this.restaurants =resp.data.result
                 console.log(this.restaurants);
@@ -33,6 +34,9 @@ export default {
 <template>
     <div class="my_main">
         <div class="container mb-5">
+            <div>
+                <h2>Here are the results of the category: <strong> {{ categoryName }}</strong></h2>
+            </div>
             <!-- <div>
                 Category buttons
                 SearchBar

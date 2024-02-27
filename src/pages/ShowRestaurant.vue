@@ -71,7 +71,7 @@ export default {
             let sum = this.store.cart.reduce(function (accumulator, obj) {
                 return parseFloat(accumulator) + parseFloat(obj.price * obj.quantity);
             }, 0);
-            console.log(sum);
+            return sum
         }
     }
 }

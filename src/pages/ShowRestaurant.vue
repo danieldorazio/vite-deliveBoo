@@ -35,17 +35,17 @@ export default {
                 this.loading = false;
             });
     },
-    components: { AppFooter , AppCardMeals},
+    components: { AppFooter, AppCardMeals },
     methods: {
-        addToCart(mealId) {            
-            let meal = this.meals.find(function(meal){
+        addToCart(mealId) {
+            let meal = this.meals.find(function (meal) {
                 return meal.id == mealId
             })
             console.log(meal);
             console.log(this.store.cart);
             if (this.store.cart.length == 0) {
                 this.store.cart.push(meal)
-            }else {
+            } else {
                 let res = this.store.cart.find(element => element.id == mealId)
                 if (res === undefined) {
                     this.store.cart.push(meal)
@@ -62,13 +62,13 @@ export default {
         updateQuantity(mealId, quantity) {
             for (const meal of this.store.cart) {
                 if (meal.id == mealId) {
-                    meal.quantity = quantity     
+                    meal.quantity = quantity
                 }
             }
             localStorage.setItem('cart', JSON.stringify(this.store.cart))
         },
         getTotal() {
-            let sum = this.store.cart.reduce(function(accumulator, obj){
+            let sum = this.store.cart.reduce(function (accumulator, obj) {
                 return parseFloat(accumulator) + parseFloat(obj.price * obj.quantity);
             }, 0);
             console.log(sum);
@@ -80,34 +80,60 @@ export default {
 <template>
     <div class="my_main">
         <div class="back">
+
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasRightLabel">Your cart</h5>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart">
+                        <img :src="`${store.baseUrl}/storage/${item.image}`" alt="" class="my-cart-img">
+                        <div>
+                            <p>{{ item.name }}</p>
+                            <p>{{ item.quantity }}</p>
+                            <p>{{ item.price }} €</p>
+                        </div>
+
+                    </div>
+                    <div v-if="store.cart.length > 0" class="subtotal">Totale: <span>€ {{ getTotal() }}</span></div>
+                    <div v-if="store.cart.length === 0">
+
+                        <p>The cart is empty</p>
+                    </div>
+                </div>
+            </div>
             <div class="d-flex justify-content-center bg-white mb-3">
-                <div class="w-25 ">
+                <!-- <div class="w-25 ">
                     <img :src="`${store.baseUrl}/storage/${restaurant.image}`" alt="" class="card-img-top ">
-                </div>  
+                </div> -->
                 <!-- , params: {slug: restaurant.slug} 
                 <router-link :to="{name: 'restaurants'}" class="btn btn-info">Restaurants</router-link> -->
             </div>
             <div class="container">
                 <div class="row">
                     <div class="col-3">
-                        Shortcut menu
+                        <img :src="`${store.baseUrl}/storage/${restaurant.image}`" alt="" class="card-img-top ">
                     </div>
-                    <div class="col-6 d-flex flex-column">
+                    <div class="col-6 d-flex flex-column justify-content-center align-items-center">
                         <div>
-                            <p>Name: <strong>{{ restaurant.restaurant_name }}</strong></p>
+                            <p class="fs-5">Name: <strong>{{ restaurant.restaurant_name }}</strong></p>
                         </div>
                         <div>
-                            <p> Street: <strong>{{ restaurant.street }}</strong></p>
+                            <p class="fs-5"> Street: <strong>{{ restaurant.street }}</strong></p>
                         </div>
                         <div>
-                            <p> Open Time: <strong>{{ restaurant.time_open }}</strong></p>
+                            <p class="fs-5"> Open Time: <strong>{{ restaurant.time_open }}</strong></p>
                         </div>
                         <div>
-                            <p> Close Time: <strong>{{ restaurant.time_close }}</strong></p>
+                            <p class="fs-5"> Close Time: <strong>{{ restaurant.time_close }}</strong></p>
                         </div>
                     </div>
-                    <div class="col-3">
-                        Visione carrello
+                    <div class="col-3 d-flex flex-column justify-content-center align-items-center">
+                        <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Show cart</button>
                     </div>
                 </div>
             </div>
@@ -115,13 +141,30 @@ export default {
             <div class="container">
                 <div class="d-flex justify-content-evenly flex-wrap gap-3">
                     <div class="col-4 mt-5 mb-5" v-for="meal in meals" :key="meal.id">
-                        <AppCardMeals :meal = "meal"/>
-                        <button @click="addToCart(meal.id), getTotal()">Aggiungi al carrello</button>
-                        <button @click="removeFromCart(meal.id), getTotal()">Rimuovi dal carrello</button>
-                        <button @click="updateQuantity(meal.id, 3), getTotal()">Quantità</button>
-                        <button>-</button>
-                        <input type="number" disabled>
-                        <button>+</button>
+                        <AppCardMeals :meal="meal" />
+                        <div class="mt-5 d-flex flex-column text-center">
+                            
+                            <!-- <button @click="addToCart(meal.id), getTotal()">Aggiungi al carrello</button> -->
+                            
+                            <!-- <button @click="updateQuantity(meal.id, 3), getTotal()">Quantità</button> -->
+                            <div class="mt-3">
+                                <button @click="addToCart(meal.id), getTotal()" class="btn btn-info" type="button"
+                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                                aria-controls="offcanvasRight">Add to cart</button>
+                            </div>
+                            <div class="mt-3">
+                                <button class="btn btn-danger" @click="removeFromCart(meal.id), getTotal()">Rimuovi dal
+                                carrello</button>
+                            </div>
+                            <div class="mt-3">
+                                
+                                <button>-</button>
+                                <input type="number" disabled>
+                                <button>+</button>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -132,6 +175,12 @@ export default {
 
 <style lang="scss" scoped>
 @use '../styles/partials/variables' as*;
+
+.my-cart-img {
+    width: 150px;
+    height: 150px;
+    aspect-ratio: 1;
+}
 
 .my_main {
     height: $height-main;
@@ -166,11 +215,10 @@ export default {
 
 
 .col-6 {
-    background-color: antiquewhite;
+    background-color: white;
 }
 
 .col-3 {
-    background-color: lightgray;
+    background-color: white;
 }
-
 </style>

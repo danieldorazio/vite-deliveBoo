@@ -9,6 +9,7 @@ export default {
             store,
             restaurant: {},
             meals: [],
+            quantity: 1
         };
     },
     created() {
@@ -35,32 +36,42 @@ export default {
     },
     components: { AppFooter },
     methods: {
-        addToCart(meal) {
-            // this.store.cart = JSON.parse(localStorage.getItem('cart'))
-            // console.log(this.store.cart);
-            // this.store.cart.push(meal)
-            // console.log(this.store.cart);
-            // console.log(localStorage.getItem('cart'));
-            localStorage.removeItem('cart')
-            localStorage.setItem('cart', JSON.stringify(this.store.cart))
-
-            localStorage.setItem('cart', '[]')
-            let cart = JSON.parse(localStorage.getItem('cart'))
-
-            if(!cart){
-                cart.push(meal)
-                console.log(cart);
-            } else {
-                let res = cart.find((element) => element.id == meal.id)
-                console.log(res);
+        addToCart(mealId) {            
+            let meal = this.meals.find(function(meal){
+                return meal.id == mealId
+            })
+            console.log(meal);
+            console.log(this.store.cart);
+            if (this.store.cart.length == 0) {
+                this.store.cart.push(meal)
+            }else {
+                let res = this.store.cart.find(element => element.id == mealId)
                 if (res === undefined) {
-                    cart.push(meal)
+                    this.store.cart.push(meal)
                 }
             }
-            console.log(cart.length);
-
-            localStorage.setItem('cart', JSON.stringify(cart))
+            meal.quantity = 1
+            localStorage.setItem('cart', JSON.stringify(this.store.cart))
         },
+        removeFromCart(mealId) {
+            let temp = this.store.cart.filter(elem => elem.id != mealId)
+            this.store.cart = temp
+            localStorage.setItem('cart', JSON.stringify(temp))
+        },
+        updateQuantity(mealId, quantity) {
+            for (const meal of this.store.cart) {
+                if (meal.id == mealId) {
+                    meal.quantity = quantity     
+                }
+            }
+            localStorage.setItem('cart', JSON.stringify(this.store.cart))
+        },
+        getTotal() {
+            let sum = this.store.cart.reduce(function(accumulator, obj){
+                return parseFloat(accumulator) + parseFloat(obj.price * obj.quantity);
+            }, 0);
+            console.log(sum);
+        }
     }
 }
 
@@ -98,7 +109,9 @@ export default {
                     </div>
                     <div class="col-3">
                         + - quantitá
-                        <button @click="addToCart(meal)">Aggiungi al carrello</button>
+                        <button @click="addToCart(meal.id), getTotal()">Aggiungi al carrello</button>
+                        <button @click="removeFromCart(meal.id), getTotal()">Rimuovi dal carrello</button>
+                        <button @click="updateQuantity(meal.id, 5), getTotal()">Quantità</button>
                     </div>
                 </div>
                 <br>

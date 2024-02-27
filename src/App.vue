@@ -19,19 +19,10 @@ export default {
                 this.categories = resp.data.result
                 console.log(this.categories);
             });
+        if (!localStorage.getItem('cart')) {
+            localStorage.setItem('cart', '[]')
+        }    
     },
-    methods: {
-        // createCart() {
-        //     fetch(JSON.stringify(this.categories))
-        //     .then(function(response){
-        //     console.log(response);
-        //     return response.json()
-        // })
-        //     .then(function(data){
-        //     console.log(data);
-        // })
-        // }
-    }
 }
 
 </script>

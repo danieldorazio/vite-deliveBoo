@@ -7,13 +7,43 @@ export default {
     data() {
         return {
             store,
+            quantity: 1
         };
     },
     methods: {
-        // getImagePath(path) {
-        //     return new URL(`../../assets/img/${path}`, import.meta.url).href;
-        // },
+        addRemoveQty(number) {
+            if (number == 1) {
+                if (this.quantity < 10) {
+                    this.quantity++
+                    this.meal.quantity = this.quantity
+                }
+            }
+            if (number == -1) {
+                if (this.quantity > 1) {
+                    this.quantity--
+                    this.meal.quantity = this.quantity
+                }
+            }
+
+        },
+        updateQuantity(mealId, quantity) {
+            for (const meal of this.store.cart) {
+                if (meal.id == mealId) {
+                    meal.quantity = quantity
+                }
+            }
+            localStorage.setItem('cart', JSON.stringify(this.store.cart))
+        },
+
     },
+    mounted() {
+        console.log(this.meal.id);
+        for (const meal of this.store.cart) {
+                if (meal.id == this.meal.id) {
+                    this.quantity = parseFloat(meal.quantity)
+                }
+            }
+    }
 };
 </script>
 
@@ -29,25 +59,16 @@ export default {
             </div>
             <h4>{{ meal.name }}</h4>
         </div>
+        <div v-if="this.store.cart.find(element => element.id == meal.id)">
+            <button @click="addRemoveQty(-1), updateQuantity(meal.id, this.quantity)">-</button>
+            <input type="number" v-model="quantity" disabled>
+            <button @click="addRemoveQty(1), updateQuantity(meal.id, this.quantity)">+</button>
+        </div>
     </div>
-    <!-- <div class="row">
-                <div class="col-3">
-                    card meals
-                    <div class="img-bx">
-                        <img :src="`${store.baseUrl}/storage/${meal.image}`" alt="" class="card-img-top" />
-                    </div>
-                </div>
-                <div class="col-6">
-                    <p><strong>Name meal: </strong> {{ meal.name }}</p>
-                    <p><strong>Description meal: </strong> {{ meal.description }}</p>
-                    <p><strong>Price meal: </strong> {{ meal.price }}</p>
-                </div>
-                <div class="col-3">+ 0 - quantitá</div>
-            </div> -->
 </template>
 
 <style lang="scss" scoped>
-@use '../../styles/partials/variables' as*;
+@use '../../styles/partials/variables' as *;
 .container-meals {
     .my-card-meals {
         width: 320px;

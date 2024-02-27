@@ -10,6 +10,7 @@ export default {
             store,
             restaurant: {},
             meals: [],
+            quantity: 1
         };
     },
     created() {
@@ -34,9 +35,46 @@ export default {
                 this.loading = false;
             });
     },
-    components: { AppFooter , AppCardMeals}
+    components: { AppFooter , AppCardMeals},
+    methods: {
+        addToCart(mealId) {            
+            let meal = this.meals.find(function(meal){
+                return meal.id == mealId
+            })
+            console.log(meal);
+            console.log(this.store.cart);
+            if (this.store.cart.length == 0) {
+                this.store.cart.push(meal)
+            }else {
+                let res = this.store.cart.find(element => element.id == mealId)
+                if (res === undefined) {
+                    this.store.cart.push(meal)
+                }
+            }
+            meal.quantity = 1
+            localStorage.setItem('cart', JSON.stringify(this.store.cart))
+        },
+        removeFromCart(mealId) {
+            let temp = this.store.cart.filter(elem => elem.id != mealId)
+            this.store.cart = temp
+            localStorage.setItem('cart', JSON.stringify(temp))
+        },
+        updateQuantity(mealId, quantity) {
+            for (const meal of this.store.cart) {
+                if (meal.id == mealId) {
+                    meal.quantity = quantity     
+                }
+            }
+            localStorage.setItem('cart', JSON.stringify(this.store.cart))
+        },
+        getTotal() {
+            let sum = this.store.cart.reduce(function(accumulator, obj){
+                return parseFloat(accumulator) + parseFloat(obj.price * obj.quantity);
+            }, 0);
+            console.log(sum);
+        }
+    }
 }
-
 </script>
 
 <template>
@@ -78,6 +116,12 @@ export default {
                 <div class="d-flex justify-content-evenly flex-wrap gap-3">
                     <div class="col-4 mt-5 mb-5" v-for="meal in meals" :key="meal.id">
                         <AppCardMeals :meal = "meal"/>
+                        <button @click="addToCart(meal.id), getTotal()">Aggiungi al carrello</button>
+                        <button @click="removeFromCart(meal.id), getTotal()">Rimuovi dal carrello</button>
+                        <button @click="updateQuantity(meal.id, 3), getTotal()">Quantità</button>
+                        <button>-</button>
+                        <input type="number" disabled>
+                        <button>+</button>
                     </div>
                 </div>
             </div>

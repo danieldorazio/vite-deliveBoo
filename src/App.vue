@@ -18,9 +18,11 @@ export default {
             .then((resp) => {
                 this.categories = resp.data.result
                 console.log(this.categories);
-            })
+            });
+        if (!localStorage.getItem('cart')) {
+            localStorage.setItem('cart', '[]')
+        }    
     },
-
 }
 
 </script>

@@ -74,7 +74,6 @@ export default {
         }
     }
 }
-
 </script>
 
 <template>
@@ -111,7 +110,10 @@ export default {
                         + - quantitá
                         <button @click="addToCart(meal.id), getTotal()">Aggiungi al carrello</button>
                         <button @click="removeFromCart(meal.id), getTotal()">Rimuovi dal carrello</button>
-                        <button @click="updateQuantity(meal.id, 5), getTotal()">Quantità</button>
+                        <button @click="updateQuantity(meal.id, 3), getTotal()">Quantità</button>
+                        <button>-</button>
+                        <input type="number" disabled>
+                        <button>+</button>
                     </div>
                 </div>
                 <br>

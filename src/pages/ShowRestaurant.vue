@@ -153,8 +153,7 @@ export default {
                                 aria-controls="offcanvasRight">Add to cart</button>
                             </div>
                             <div class="mt-3">
-                                <button class="btn btn-danger" @click="removeFromCart(meal.id), getTotal()">Rimuovi dal
-                                carrello</button>
+                                <button class="btn btn-danger" @click="removeFromCart(meal.id), getTotal()">Remove from cart</button>
                             </div>
                             <div class="mt-3">
                                 

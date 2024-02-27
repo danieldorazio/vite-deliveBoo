@@ -34,7 +34,7 @@ export default {
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
-              Categorie
+              Categories
             </a>
             <ul class="dropdown-menu my_dropdown" aria-labelledby="navbarDropdown">
               <li class="text-center" v-for="category in categories" :key="category.id">
@@ -47,7 +47,7 @@ export default {
           </li>
         </ul>
         <div class="text-white my_btn ">
-          <a href="http://127.0.0.1:8000/" class="text-decoration-none text-black">Lavora con noi</a>
+          <a href="http://127.0.0.1:8000/" class="text-decoration-none text-black">Work with us</a>
         </div>
       </div>
     </div>

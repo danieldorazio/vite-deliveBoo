@@ -32,12 +32,11 @@ export default {
 
 <template>
     <div class="my_main">
-        <h1>Pier ti odio </h1>
         <div class="container mb-5">
-            <div>
-                Bottoni categoria
+            <!-- <div>
+                Category buttons
                 SearchBar
-            </div>
+            </div> -->
             <div>
                 <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
                     <div v-for=" restaurant in restaurants" :key="restaurant.id">

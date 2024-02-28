@@ -44,9 +44,13 @@ export default {
             // controlla se il ristorante è stato cambiato, se vero cancella il carrello precedente
             for (const storemeal of this.store.cart) {
                 if (storemeal.restaurant_id != meal.restaurant_id) {
-                    console.log('svuota carrello');
-                    this.store.cart = []
-                    break
+                    // let message = 'Are you sure'
+                    
+                    if (confirm('Are you sure')) {     
+                        this.store.cart = []
+                    } else {
+                        return 
+                    }
                 }
             }
             console.log(meal);
@@ -61,11 +65,11 @@ export default {
             meal.quantity = 1
             localStorage.setItem('cart', JSON.stringify(this.store.cart))
         },
-        removeFromCart(mealId) {
-            let temp = this.store.cart.filter(elem => elem.id != mealId)
-            this.store.cart = temp
-            localStorage.setItem('cart', JSON.stringify(temp))
-        },
+        // removeFromCart(mealId) {
+        //     let temp = this.store.cart.filter(elem => elem.id != mealId)
+        //     this.store.cart = temp
+        //     localStorage.setItem('cart', JSON.stringify(temp))
+        // },
         getTotal() {
             let sum = this.store.cart.reduce(function (accumulator, obj) {
                 return parseFloat(accumulator) + parseFloat(obj.price * obj.quantity);
@@ -76,6 +80,7 @@ export default {
             this.store.cart = []
             localStorage.setItem('cart', JSON.stringify(this.store.cart))
         }
+        
     }
 }
 </script>
@@ -148,22 +153,15 @@ export default {
                         <AppCardMeals :meal="meal" />
                         <div class="mt-5 d-flex flex-column text-center">
                             
-                            <!-- <button @click="addToCart(meal.id), getTotal()">Aggiungi al carrello</button> -->
-                            
-                            <!-- <button @click="updateQuantity(meal.id, 3), getTotal()">Quantità</button> -->
                             <div class="mt-3">
                                 <button @click="addToCart(meal.id), getTotal()" class="btn btn-info" type="button"
                                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                                aria-controls="offcanvasRight">Add to cart</button>
+                                aria-controls="offcanvasRight" >Add to cart</button>
                             </div>
-                            <div class="mt-3">
+                            <!-- <div class="mt-3">
                                 <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                                 aria-controls="offcanvasRight" class="btn btn-danger" @click="removeFromCart(meal.id), getTotal()">Remove from cart</button>
-                            </div>
-                            <div class="mt-3">
-                                
-                            </div>
-
+                            </div> -->
                         </div>
 
                     </div>

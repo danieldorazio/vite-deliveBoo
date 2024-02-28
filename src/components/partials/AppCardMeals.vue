@@ -34,15 +34,21 @@ export default {
             }
             localStorage.setItem('cart', JSON.stringify(this.store.cart))
         },
+        removeFromCart(mealId) {
+            let temp = this.store.cart.filter(elem => elem.id != mealId)
+            this.store.cart = temp
+            this.quantity = 1
+            localStorage.setItem('cart', JSON.stringify(temp))
+        },
 
     },
     mounted() {
         console.log(this.meal.id);
         for (const meal of this.store.cart) {
-                if (meal.id == this.meal.id) {
-                    this.quantity = parseFloat(meal.quantity)
-                }
+            if (meal.id == this.meal.id) {
+                this.quantity = parseFloat(meal.quantity)
             }
+        }
     }
 };
 </script>
@@ -59,6 +65,14 @@ export default {
             </div>
             <h4>{{ meal.name }}</h4>
         </div>
+
+        <div>
+            <div class="mt-3">
+                <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                    class="btn btn-danger" @click="removeFromCart(meal.id), getTotal()">Remove from cart</button>
+            </div>
+        </div>
+
         <div v-if="this.store.cart.find(element => element.id == meal.id)">
             <button @click="addRemoveQty(-1), updateQuantity(meal.id, this.quantity)">-</button>
             <input type="number" v-model="quantity" disabled>
@@ -69,6 +83,7 @@ export default {
 
 <style lang="scss" scoped>
 @use '../../styles/partials/variables' as *;
+
 .container-meals {
     .my-card-meals {
         width: 320px;

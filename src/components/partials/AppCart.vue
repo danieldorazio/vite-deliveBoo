@@ -1,9 +1,9 @@
 <script>
 import { store } from '../../store'
 export default {
-    //     props: {
-    //     all: Object,
-    // },
+    props: {
+        meals: Array,
+    },    
     data() {
         return {
             store,
@@ -18,7 +18,17 @@ export default {
                 return parseFloat(accumulator) + parseFloat(obj.price * obj.quantity);
             }, 0);
             return sum
-        }
+        },
+        emptyCart() {
+            this.store.cart = []
+            localStorage.setItem('cart', JSON.stringify(this.store.cart))
+        },
+        // removeFromCart(mealId) {
+        //     let temp = this.store.cart.filter(elem => elem.id != mealId)
+        //     this.store.cart = temp
+        //     this.quantity = 1
+        //     localStorage.setItem('cart', JSON.stringify(temp))
+        // },
     }
 }
 
@@ -72,11 +82,14 @@ export default {
                     <p>{{ item.name }}</p>
                     <p>{{ item.quantity }}</p>
                     <p>{{ item.price }} €</p>
+                    <!-- <button class="btn btn-danger" @click="removeFromCart(item.id), getTotal()">Remove from
+                    cart</button> -->
                 </div>
 
             </div>
-            <div v-if="store.cart.length > 0" class="subtotal">Totale: <span>€ {{ getTotal() }}</span></div>
-            
+            <div v-if="store.cart.length > 0" class="subtotal">Totale: <span>€ {{ getTotal() }}</span>
+                <button class="btn btn-danger ms-2" @click="emptyCart()">Empty cart</button>
+            </div>
             <div v-if="store.cart.length === 0">
 
                 <p>The cart is empty</p>

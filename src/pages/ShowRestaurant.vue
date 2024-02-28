@@ -11,7 +11,6 @@ export default {
             store,
             restaurant: {},
             meals: [],
-            
         };
     },
     created() {
@@ -38,50 +37,6 @@ export default {
     },
     components: { AppFooter, AppCardMeals, AppCart },
     methods: {
-        addToCart(mealId) {
-            let meal = this.meals.find(function (meal) {
-                return meal.id == mealId
-            })
-            // controlla se il ristorante è stato cambiato, se vero cancella il carrello precedente
-            for (const storemeal of this.store.cart) {
-                if (storemeal.restaurant_id != meal.restaurant_id) {
-                    // let message = 'Are you sure'
-                    
-                    if (confirm('Are you sure')) {     
-                        this.store.cart = []
-                    } else {
-                        return 
-                    }
-                }
-            }
-            console.log(meal);
-            if (this.store.cart.length == 0) {
-                this.store.cart.push(meal)
-            } else {
-                let res = this.store.cart.find(element => element.id == mealId)
-                if (res === undefined) {
-                    this.store.cart.push(meal)
-                }
-            }
-            meal.quantity = 1
-            localStorage.setItem('cart', JSON.stringify(this.store.cart))
-        },
-        // removeFromCart(mealId) {
-        //     let temp = this.store.cart.filter(elem => elem.id != mealId)
-        //     this.store.cart = temp
-        //     localStorage.setItem('cart', JSON.stringify(temp))
-        // },
-        getTotal() {
-            let sum = this.store.cart.reduce(function (accumulator, obj) {
-                return parseFloat(accumulator) + parseFloat(obj.price * obj.quantity);
-            }, 0);
-            return sum
-        },
-        emptyCart() {
-            this.store.cart = []
-            localStorage.setItem('cart', JSON.stringify(this.store.cart))
-        }
-        
     }
 }
 </script>
@@ -89,13 +44,9 @@ export default {
 <template>
     <div class="my_main">
 
-
-
-
-
         <div class="back">
 
-            <AppCart />
+            <AppCart :meals="meals"/>
 
             <!-- DA TOGLIERE DISPLAY NONE -->
             <!-- <div class="offcanvas offcanvas-end d-none" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -163,9 +114,7 @@ export default {
                                 <!-- <button  class="btn btn-info" type="button"
                                     data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                                     aria-controls="offcanvasRight"></button> -->
-                                <button @click="addToCart(meal.id), getTotal()" class="btn btn-primary" type="button"
-                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
-                                    aria-controls="offcanvasScrolling">Add to cart</button>
+                             
                             </div>
                             <!-- <div class="mt-3">
                                 <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"

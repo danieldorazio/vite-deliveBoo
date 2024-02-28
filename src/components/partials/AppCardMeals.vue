@@ -7,7 +7,8 @@ export default {
     data() {
         return {
             store,
-            quantity: 1
+            quantity: 1,
+            flagAdd: false
         };
     },
     methods: {
@@ -40,7 +41,57 @@ export default {
             this.quantity = 1
             localStorage.setItem('cart', JSON.stringify(temp))
         },
+        getTotal() {
+            let sum = this.store.cart.reduce(function (accumulator, obj) {
+                return parseFloat(accumulator) + parseFloat(obj.price * obj.quantity);
+            }, 0);
+            return sum
+        },
+        addToCart(mealId) {
+            // controlla se il ristorante è stato cambiato, se vero cancella il carrello precedente
+            for (const storemeal of this.store.cart) {
+                if (storemeal.restaurant_id != this.meal.restaurant_id) {
 
+                    if (confirm('Are you sure')) {
+                        this.store.cart = []
+                        if (this.store.cart.length == 0) {
+                            this.store.cart.push(this.meal)
+                        } else {
+                            let res = this.store.cart.find(element => element.id == mealId)
+                            if (res === undefined) {
+                                this.store.cart.push(this.meal)
+                            }
+                        }
+                        this.meal.quantity = 1
+                        localStorage.setItem('cart', JSON.stringify(this.store.cart))
+                        return
+                    } else {
+                        return
+                    }
+                }
+            }
+
+            if (this.store.cart.length == 0) {
+                this.store.cart.push(this.meal)
+            } else {
+                let res = this.store.cart.find(element => element.id == mealId)
+                if (res === undefined) {
+                    this.store.cart.push(this.meal)
+                }
+            }
+            this.meal.quantity = 1
+            localStorage.setItem('cart', JSON.stringify(this.store.cart))
+        },
+        emptyCart() {
+            this.store.cart = []
+            localStorage.setItem('cart', JSON.stringify(this.store.cart))
+        },
+        flagFalse() {
+            this.flagAdd = false
+        },
+        flagTrue() {
+            this.flagAdd = true
+        },
     },
     mounted() {
         console.log(this.meal.id);
@@ -49,7 +100,12 @@ export default {
                 this.quantity = parseFloat(meal.quantity)
             }
         }
-    }
+        for (const meal of this.store.cart) {
+            if (meal.id == this.meal.id) {
+                this.flagAdd = true
+            }
+        }
+    },
 };
 </script>
 
@@ -68,8 +124,13 @@ export default {
 
         <div>
             <div class="mt-3">
-                <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-                    class="btn btn-danger" @click="removeFromCart(meal.id), getTotal()">Remove from cart</button>
+                <button class="btn btn-danger" :class="flagAdd ? '' : 'd-none'" @click="removeFromCart(this.meal.id), getTotal(), flagFalse()">Remove from
+                    cart</button>
+            </div>
+            <div>
+                <button @click="addToCart(this.meal.id), getTotal(), flagTrue()" class="btn btn-primary" :class="flagAdd ? 'd-none' : ''" type="button"
+                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Add
+                    to cart</button>
             </div>
         </div>
 

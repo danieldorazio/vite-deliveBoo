@@ -11,7 +11,7 @@ export default {
             store,
             restaurant: {},
             meals: [],
-            quantity: 1
+            
         };
     },
     created() {
@@ -42,8 +42,19 @@ export default {
             let meal = this.meals.find(function (meal) {
                 return meal.id == mealId
             })
+            // controlla se il ristorante è stato cambiato, se vero cancella il carrello precedente
+            for (const storemeal of this.store.cart) {
+                if (storemeal.restaurant_id != meal.restaurant_id) {
+                    // let message = 'Are you sure'
+                    
+                    if (confirm('Are you sure')) {     
+                        this.store.cart = []
+                    } else {
+                        return 
+                    }
+                }
+            }
             console.log(meal);
-            console.log(this.store.cart);
             if (this.store.cart.length == 0) {
                 this.store.cart.push(meal)
             } else {
@@ -55,25 +66,22 @@ export default {
             meal.quantity = 1
             localStorage.setItem('cart', JSON.stringify(this.store.cart))
         },
-        removeFromCart(mealId) {
-            let temp = this.store.cart.filter(elem => elem.id != mealId)
-            this.store.cart = temp
-            localStorage.setItem('cart', JSON.stringify(temp))
-        },
-        updateQuantity(mealId, quantity) {
-            for (const meal of this.store.cart) {
-                if (meal.id == mealId) {
-                    meal.quantity = quantity
-                }
-            }
-            localStorage.setItem('cart', JSON.stringify(this.store.cart))
-        },
+        // removeFromCart(mealId) {
+        //     let temp = this.store.cart.filter(elem => elem.id != mealId)
+        //     this.store.cart = temp
+        //     localStorage.setItem('cart', JSON.stringify(temp))
+        // },
         getTotal() {
             let sum = this.store.cart.reduce(function (accumulator, obj) {
                 return parseFloat(accumulator) + parseFloat(obj.price * obj.quantity);
             }, 0);
             return sum
+        },
+        emptyCart() {
+            this.store.cart = []
+            localStorage.setItem('cart', JSON.stringify(this.store.cart))
         }
+        
     }
 }
 </script>
@@ -106,7 +114,8 @@ export default {
                         </div>
 
                     </div>
-                    <div v-if="store.cart.length > 0" class="subtotal">Totale: <span>€ {{ getTotal() }}</span></div>
+                    <div v-if="store.cart.length > 0"> <button @click="emptyCart()" class="btn btn-danger">Empty cart</button> </div>
+                    <div v-if="store.cart.length > 0" class="subtotal">Total price: <span>€ {{ getTotal() }}</span></div>
                     <div v-if="store.cart.length === 0">
 
                         <p>The cart is empty</p>
@@ -149,10 +158,7 @@ export default {
                     <div class="col-4 mt-5 mb-5" v-for="meal in meals" :key="meal.id">
                         <AppCardMeals :meal="meal" />
                         <div class="mt-5 d-flex flex-column text-center">
-
-                            <!-- <button @click="addToCart(meal.id), getTotal()">Aggiungi al carrello</button> -->
-
-                            <!-- <button @click="updateQuantity(meal.id, 3), getTotal()">Quantità</button> -->
+                            
                             <div class="mt-3">
                                 <!-- <button  class="btn btn-info" type="button"
                                     data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
@@ -161,17 +167,10 @@ export default {
                                     data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
                                     aria-controls="offcanvasScrolling">Add to cart</button>
                             </div>
-                            <div class="mt-3">
-                                <button class="btn btn-danger" @click="removeFromCart(meal.id), getTotal()">Remove from
-                                    cart</button>
-                            </div>
-                            <div class="mt-3">
-
-                                <button>-</button>
-                                <input type="number" disabled>
-                                <button>+</button>
-                            </div>
-
+                            <!-- <div class="mt-3">
+                                <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                                aria-controls="offcanvasRight" class="btn btn-danger" @click="removeFromCart(meal.id), getTotal()">Remove from cart</button>
+                            </div> -->
                         </div>
 
                     </div>

@@ -13,20 +13,23 @@ export default {
             store,
             restaurants: [],
             loading: false,
-            categoryName: this.$route.params.slug,
+
         }
     },
     created() {
         this.loading = true;
-        axios.get(`${this.store.baseUrl}/api/restaurants/${this.categoryName}`)
+        axios.get(`${this.store.baseUrl}/api/restaurants`, {
+            params: { category_slug: this.store.category_slug, }
+        })
             .then((resp) => {
-                this.restaurants =resp.data.result
-                console.log(this.restaurants);
+                this.restaurants = resp.data.result;
+
             })
             .finally(() => {
                 this.loading = false;
             });
     },
+
 }
 </script>
 
@@ -35,24 +38,23 @@ export default {
     <div class="my_main">
         <div class="container mb-5">
             <div>
-                <h2>Here are the results of the category: <strong> {{ categoryName }}</strong></h2>
+                <h2>Here are the results of this category: <strong v-for="category in this.store.category_slug"
+                        :key="category"> -{{ category }}</strong></h2>
             </div>
+
             <!-- <div>
                 Category buttons
                 SearchBar
             </div> -->
-            <div>
-                <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
-                    <div v-for=" restaurant in restaurants" :key="restaurant.id">
-                        <RestaurantCard :restaurant="restaurant"/>
-                    </div>
-                    
+
+            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
+                <div v-for=" restaurant in restaurants" :key="restaurant.id">
+                    <RestaurantCard :restaurant="restaurant" />
                 </div>
             </div>
         </div>
         <AppFooter />
     </div>
-    
 </template>
 
 

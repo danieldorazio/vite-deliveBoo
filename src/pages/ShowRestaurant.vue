@@ -3,6 +3,7 @@ import axios from 'axios';
 import { store } from '../store';
 import AppFooter from '../components/partials/AppFooter.vue';
 import AppCardMeals from '../components/partials/AppCardMeals.vue'
+import AppCart from '../components/partials/AppCart.vue'
 
 export default {
     data() {
@@ -35,7 +36,7 @@ export default {
                 this.loading = false;
             });
     },
-    components: { AppFooter, AppCardMeals },
+    components: { AppFooter, AppCardMeals, AppCart },
     methods: {
         addToCart(mealId) {
             let meal = this.meals.find(function (meal) {
@@ -79,10 +80,17 @@ export default {
 
 <template>
     <div class="my_main">
+
+
+
+
+
         <div class="back">
 
+            <AppCart />
 
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <!-- DA TOGLIERE DISPLAY NONE -->
+            <!-- <div class="offcanvas offcanvas-end d-none" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasRightLabel">Your cart</h5>
 
@@ -104,7 +112,7 @@ export default {
                         <p>The cart is empty</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="d-flex justify-content-center bg-white mb-3">
                 <!-- <div class="w-25 ">
                     <img :src="`${store.baseUrl}/storage/${restaurant.image}`" alt="" class="card-img-top ">
@@ -112,7 +120,7 @@ export default {
                 <!-- , params: {slug: restaurant.slug} 
                 <router-link :to="{name: 'restaurants'}" class="btn btn-info">Restaurants</router-link> -->
             </div>
-            <div class="container">
+            <div class="container ">
                 <div class="row">
                     <div class="col-3">
                         <img :src="`${store.baseUrl}/storage/${restaurant.image}`" alt="" class="card-img-top ">
@@ -131,11 +139,9 @@ export default {
                             <p class="fs-5"> Close Time: <strong>{{ restaurant.time_close }}</strong></p>
                         </div>
                     </div>
-                    <div class="col-3 d-flex flex-column justify-content-center align-items-center">
-                        <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Show cart</button>
-                    </div>
+
                 </div>
+
             </div>
             <br>
             <div class="container">
@@ -143,20 +149,24 @@ export default {
                     <div class="col-4 mt-5 mb-5" v-for="meal in meals" :key="meal.id">
                         <AppCardMeals :meal="meal" />
                         <div class="mt-5 d-flex flex-column text-center">
-                            
+
                             <!-- <button @click="addToCart(meal.id), getTotal()">Aggiungi al carrello</button> -->
-                            
+
                             <!-- <button @click="updateQuantity(meal.id, 3), getTotal()">Quantità</button> -->
                             <div class="mt-3">
-                                <button @click="addToCart(meal.id), getTotal()" class="btn btn-info" type="button"
-                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                                aria-controls="offcanvasRight">Add to cart</button>
+                                <!-- <button  class="btn btn-info" type="button"
+                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                                    aria-controls="offcanvasRight"></button> -->
+                                <button @click="addToCart(meal.id), getTotal()" class="btn btn-primary" type="button"
+                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+                                    aria-controls="offcanvasScrolling">Add to cart</button>
                             </div>
                             <div class="mt-3">
-                                <button class="btn btn-danger" @click="removeFromCart(meal.id), getTotal()">Remove from cart</button>
+                                <button class="btn btn-danger" @click="removeFromCart(meal.id), getTotal()">Remove from
+                                    cart</button>
                             </div>
                             <div class="mt-3">
-                                
+
                                 <button>-</button>
                                 <input type="number" disabled>
                                 <button>+</button>
@@ -166,14 +176,20 @@ export default {
 
                     </div>
                 </div>
+
             </div>
+
         </div>
+
+
         <AppFooter />
     </div>
 </template>
 
 <style lang="scss" scoped>
 @use '../styles/partials/variables' as*;
+
+
 
 .my-cart-img {
     width: 150px;
@@ -185,6 +201,7 @@ export default {
     height: $height-main;
     overflow-y: scroll;
     background-color: aliceblue;
+    position: relative;
 }
 
 .my_main::-webkit-scrollbar {

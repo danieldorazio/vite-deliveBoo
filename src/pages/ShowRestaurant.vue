@@ -46,13 +46,12 @@ export default {
 
         <div class="back">
 
-            <AppCart :meals="meals"/>
-
+            
             <!-- DA TOGLIERE DISPLAY NONE -->
             <!-- <div class="offcanvas offcanvas-end d-none" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasRightLabel">Your cart</h5>
-
+                    
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -63,12 +62,12 @@ export default {
                             <p>{{ item.quantity }}</p>
                             <p>{{ item.price }} €</p>
                         </div>
-
+                        
                     </div>
                     <div v-if="store.cart.length > 0"> <button @click="emptyCart()" class="btn btn-danger">Empty cart</button> </div>
                     <div v-if="store.cart.length > 0" class="subtotal">Total price: <span>€ {{ getTotal() }}</span></div>
                     <div v-if="store.cart.length === 0">
-
+                        
                         <p>The cart is empty</p>
                     </div>
                 </div>
@@ -78,28 +77,29 @@ export default {
                     <img :src="`${store.baseUrl}/storage/${restaurant.image}`" alt="" class="card-img-top ">
                 </div> -->
                 <!-- , params: {slug: restaurant.slug} 
-                <router-link :to="{name: 'restaurants'}" class="btn btn-info">Restaurants</router-link> -->
-            </div>
-            <div class="container ">
-                <div class="row">
-                    <div class="col-3">
-                        <img :src="`${store.baseUrl}/storage/${restaurant.image}`" alt="" class="card-img-top ">
-                    </div>
-                    <div class="col-6 d-flex flex-column justify-content-center align-items-center">
-                        <div>
-                            <p class="fs-5">Name: <strong>{{ restaurant.restaurant_name }}</strong></p>
+                    <router-link :to="{name: 'restaurants'}" class="btn btn-info">Restaurants</router-link> -->
+                </div>
+                <div class="container ">
+                    <div class="row">
+                        <div class="col-3">
+                            <img :src="`${store.baseUrl}/storage/${restaurant.image}`" alt="" class="card-img-top ">
                         </div>
-                        <div>
-                            <p class="fs-5"> Street: <strong>{{ restaurant.street }}</strong></p>
+                        <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                            <div>
+                                <p class="fs-5">Name: <strong>{{ restaurant.restaurant_name }}</strong></p>
+                            </div>
+                            <div>
+                                <p class="fs-5"> Street: <strong>{{ restaurant.street }}</strong></p>
+                            </div>
+                            <div>
+                                <p class="fs-5"> Open Time: <strong>{{ restaurant.time_open }}</strong></p>
+                            </div>
+                            <div>
+                                <p class="fs-5"> Close Time: <strong>{{ restaurant.time_close }}</strong></p>
+                            </div>
+                            <AppCart :meals="meals"/>
                         </div>
-                        <div>
-                            <p class="fs-5"> Open Time: <strong>{{ restaurant.time_open }}</strong></p>
-                        </div>
-                        <div>
-                            <p class="fs-5"> Close Time: <strong>{{ restaurant.time_close }}</strong></p>
-                        </div>
-                    </div>
-
+                        
                 </div>
 
             </div>

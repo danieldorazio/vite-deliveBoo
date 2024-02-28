@@ -14,7 +14,7 @@ export default {
             store,
             categories: [],
             loading: false,
-            checkedCategories: []
+            
         };
     },
     created() {
@@ -29,9 +29,6 @@ export default {
                 this.loading = false;
             });
     },
-    methods:{
-
-    }
 };
 </script>
 
@@ -54,7 +51,8 @@ export default {
                     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
                         <div class="col" v-for="category in categories" :key="category.name">
                             <div class="position-relative">
-                                <input type="checkbox" :name="category.slug" :id="category.slug" :value="category.slug"                    class="position-absolute my-pos" v-model="checkedCategories"/>
+                                <input type="checkbox" :name="category.slug" :id="category.slug" :value="category.slug"
+                                    class="position-absolute my-pos" v-model="this.store.category_slug" />
                                 <label :for="category.slug">
                                     <span>
                                         <AppCard :category="category" />
@@ -64,11 +62,11 @@ export default {
                         </div>
                     </div>
                 </div>
-                <div>Checked categories: {{ checkedCategories }}</div>
+                <div>Checked categories: {{ this.store.category_slug }}</div>
                 <div class="mt-3">
                     <AppButtonHome :categories="categories" />
                 </div>
-                
+
             </div>
         </div>
         <AppFooter />

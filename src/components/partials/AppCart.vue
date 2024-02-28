@@ -1,0 +1,140 @@
+<script>
+import { store } from '../../store'
+export default {
+    //     props: {
+    //     all: Object,
+    // },
+    data() {
+        return {
+            store,
+        }
+    },
+    methods: {
+        log() {
+            console.log('ciao');
+        },
+        getTotal() {
+            let sum = this.store.cart.reduce(function (accumulator, obj) {
+                return parseFloat(accumulator) + parseFloat(obj.price * obj.quantity);
+            }, 0);
+            return sum
+        }
+    }
+}
+
+</script>
+
+<template>
+    <!-- <div class=" my-sticky-btn">
+        <button class="btn btn-danger " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+        aria-controls="offcanvasRight"> <i class="fa-solid fa-cart-shopping"></i></button>
+    </div>
+    
+
+     <div class="offcanvas offcanvas-end d-flex" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel">Your cart</h5>
+
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart">
+                <img :src="`${store.baseUrl}/storage/${item.image}`" alt="" class="my-cart-img">
+                <div>
+                    <p>{{ item.name }}</p>
+                    <p>{{ item.quantity }}</p>
+                    <p>{{ item.price }} €</p>
+                </div>
+
+            </div>
+            <div v-if="store.cart.length > 0" class="subtotal">Totale: <span>€ {{ getTotal() }}</span></div>
+            <div v-if="store.cart.length === 0">
+
+                <p>The cart is empty</p>
+            </div>
+        </div>
+    </div>  -->
+
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+        aria-controls="offcanvasScrolling">Enable body scrolling</button>
+
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+        id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div v-if="store.cart.length > 0" class="subtotal"> <a href="" class="btn btn-info">checkout </a></div>
+            <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart">
+                <img :src="`${store.baseUrl}/storage/${item.image}`" alt="" class="my-cart-img">
+                <div>
+                    <p>{{ item.name }}</p>
+                    <p>{{ item.quantity }}</p>
+                    <p>{{ item.price }} €</p>
+                </div>
+
+            </div>
+            <div v-if="store.cart.length > 0" class="subtotal">Totale: <span>€ {{ getTotal() }}</span></div>
+            
+            <div v-if="store.cart.length === 0">
+
+                <p>The cart is empty</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="bg-white my-w my-sticky-btn">
+        <a href="" class="btn btn-info">Vai al pagamento</a>
+        <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart">
+
+            
+            <div class="d-flex">
+                <p class="me-1"><span class="circle">{{ item.quantity }} </span></p>
+                <p>{{ item.name }}</p>
+
+            </div>
+            <div>
+                <p>{{ item.price }} €</p>
+            </div>
+
+        </div>
+        <div v-if="store.cart.length > 0" class="subtotal">Totale: <span>€ {{ getTotal() }}</span></div>
+        <div v-if="store.cart.length === 0">
+
+            <p>The cart is empty</p>
+        </div>
+    </div> -->
+</template>
+
+<style lang="scss" scoped>
+.my-sticky-btn {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 25%;
+    left: 75%;
+    padding: 5px;
+
+
+}
+
+.my-w {
+    width: 300px;
+    min-height: 200px;
+    margin-top: -100px;
+
+}
+
+.my-cart-img {
+    width: 150px;
+    height: 150px;
+    aspect-ratio: 1;
+
+}
+
+
+
+.circle {
+    background-color: gray;
+
+}</style>

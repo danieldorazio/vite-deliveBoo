@@ -1,5 +1,5 @@
 <script>
-import { store } from '../../store';
+import { store } from "../../store";
 export default {
   props: {
     categories: Array,
@@ -8,10 +8,13 @@ export default {
   data() {
     return {
       store,
+    };
+  },methods:{
+    searchRestaurant(){
+      console.log('ciao cesare');
     }
   }
-
-}
+};
 </script>
 
 <template>
@@ -19,17 +22,16 @@ export default {
     <div class="container-fluid">
       <!-- LOGO DA MODIFICARE -->
       <router-link :to="{ name: 'home' }" class="nav-link text-black">
-        <img class="my_logo" src="../../assets/img/logo.png" alt="">
+        <img class="my_logo" src="../../assets/img/logo.png" alt="" />
       </router-link>
       <!-- HAMBURGHER BUTTON -->
-      <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
           <!-- DROPDOWN DELLE CATEGORIE -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
@@ -38,15 +40,19 @@ export default {
             </a>
             <ul class="dropdown-menu my_dropdown" aria-labelledby="navbarDropdown">
               <li class="text-center" v-for="category in categories" :key="category.id">
-                <router-link :to="{ name: 'restaurants', params: {slug: category.slug}}" class="text-decoration-none text-black">
-                  <img class="dropdown-item" :src="`${store.baseUrl}/storage/${category.image_header}`" alt="">
-                  <div>{{category.name }}</div>
+                <router-link :to="{ name: 'restaurants', params: { slug: category.slug } }"
+                  class="text-decoration-none text-black">
+                  <img class="dropdown-item" :src="`${store.baseUrl}/storage/${category.image_header}`" alt="" />
+                  <div>{{ category.name }}</div>
                 </router-link>
               </li>
             </ul>
           </li>
         </ul>
-        <div class="text-white my_btn ">
+        <div class="me-5">
+          <input type="search" name="search-restaurant" id="search-restaurant" placeholder="Search restaurant.." class="btn btn-info" v-model="searchText" @keyup="searchRestaurant">
+        </div>
+        <div class="text-white my_btn">
           <a href="http://127.0.0.1:8000/" class="text-decoration-none text-black">Work with us</a>
         </div>
       </div>
@@ -54,10 +60,8 @@ export default {
   </nav>
 </template>
 
-
-
 <style lang="scss" scoped>
-@use '../../styles/partials/variables' as*;
+@use "../../styles/partials/variables" as *;
 
 nav {
   height: $height-nav;
@@ -86,9 +90,9 @@ nav {
     font-weight: 0;
     font-size: 14px;
     color: black;
-    background: linear-gradient(90deg, #F8E16C 0%, #FAA343 100%);
+    background: linear-gradient(90deg, #f8e16c 0%, #faa343 100%);
     padding: 10px 30px;
-    border: 2px solid #F8E16C;
+    border: 2px solid #f8e16c;
     box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
     border-radius: 50px;
     transition: 1000ms;
@@ -99,10 +103,9 @@ nav {
       transition: 1000ms;
       padding: 10px 50px;
       transform: translateY(-0px);
-      background: linear-gradient(90deg, #F8E16C 0%, #FAA343 100%);
-      border: solid 2px #F8E16C;
+      background: linear-gradient(90deg, #f8e16c 0%, #faa343 100%);
+      border: solid 2px #f8e16c;
     }
   }
 }
 </style>
-

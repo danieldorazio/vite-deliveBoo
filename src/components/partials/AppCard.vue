@@ -24,11 +24,11 @@ export default {
 
 <template>
     <div class="card mt-5 me-3" style="width: 18rem;">
-        <router-link :to="{name: 'restaurants', params: {slug: category.slug}}" class="nav-link">
+        <!-- <router-link :to="{name: 'restaurants', params: {slug: category.slug}}" class="nav-link"> -->
         <div class="img-up text-center">
             <img :src="`${store.baseUrl}/storage/${category.image_category}`" alt="">
         </div> 
-        </router-link>
+        <!-- </router-link> -->
         
         <div class="card-body text-center">
             <h5 class="card-title">{{ category.name }}</h5>

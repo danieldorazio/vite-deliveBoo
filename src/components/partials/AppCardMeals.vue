@@ -1,5 +1,6 @@
 <script>
 import { store } from "../../store";
+import AppCartAddRemBtn from "./AppCartAddRemBtn.vue";
 export default {
     props: {
         meal: Object,
@@ -7,105 +8,67 @@ export default {
     data() {
         return {
             store,
-            quantity: 1,
-            flagAdd: false
         };
     },
     methods: {
-        addRemoveQty(number) {
-            if (number == 1) {
-                if (this.quantity < 10) {
-                    this.quantity++
-                    this.meal.quantity = this.quantity
-                }
-            }
-            if (number == -1) {
-                if (this.quantity > 1) {
-                    this.quantity--
-                    this.meal.quantity = this.quantity
-                }
-            }
-
-        },
-        updateQuantity(mealId, quantity) {
-            for (const meal of this.store.cart) {
-                if (meal.id == mealId) {
-                    meal.quantity = quantity
-                }
-            }
-            localStorage.setItem('cart', JSON.stringify(this.store.cart))
-        },
         removeFromCart(mealId) {
-            let temp = this.store.cart.filter(elem => elem.id != mealId)
-            this.store.cart = temp
-            this.quantity = 1
-            localStorage.setItem('cart', JSON.stringify(temp))
+            let temp = this.store.cart.filter(elem => elem.id != mealId);
+            this.store.cart = temp;
+            this.quantity = 1;
+            localStorage.setItem('cart', JSON.stringify(temp));
         },
         getTotal() {
             let sum = this.store.cart.reduce(function (accumulator, obj) {
                 return parseFloat(accumulator) + parseFloat(obj.price * obj.quantity);
             }, 0);
-            return sum
+            return sum;
         },
         addToCart(mealId) {
             // controlla se il ristorante è stato cambiato, se vero cancella il carrello precedente
             for (const storemeal of this.store.cart) {
                 if (storemeal.restaurant_id != this.meal.restaurant_id) {
-
                     if (confirm('Are you sure')) {
-                        this.store.cart = []
+                        this.store.cart = [];
                         if (this.store.cart.length == 0) {
-                            this.store.cart.push(this.meal)
-                        } else {
-                            let res = this.store.cart.find(element => element.id == mealId)
+                            this.store.cart.push(this.meal);
+                        }
+                        else {
+                            let res = this.store.cart.find(element => element.id == mealId);
                             if (res === undefined) {
-                                this.store.cart.push(this.meal)
+                                this.store.cart.push(this.meal);
                             }
                         }
-                        this.meal.quantity = 1
-                        localStorage.setItem('cart', JSON.stringify(this.store.cart))
-                        return
-                    } else {
-                        return
+                        this.meal.quantity = 1;
+                        localStorage.setItem('cart', JSON.stringify(this.store.cart));
+                        return;
+                    }
+                    else {
+                        return;
                     }
                 }
             }
-
             if (this.store.cart.length == 0) {
-                this.store.cart.push(this.meal)
-            } else {
-                let res = this.store.cart.find(element => element.id == mealId)
+                this.store.cart.push(this.meal);
+            }
+            else {
+                let res = this.store.cart.find(element => element.id == mealId);
                 if (res === undefined) {
-                    this.store.cart.push(this.meal)
+                    this.store.cart.push(this.meal);
                 }
             }
-            this.meal.quantity = 1
-            localStorage.setItem('cart', JSON.stringify(this.store.cart))
-        },
-        emptyCart() {
-            this.store.cart = []
-            localStorage.setItem('cart', JSON.stringify(this.store.cart))
-        },
-        flagFalse() {
-            this.flagAdd = false
-        },
-        flagTrue() {
-            this.flagAdd = true
+            this.meal.quantity = 1;
+            localStorage.setItem('cart', JSON.stringify(this.store.cart));
         },
     },
     mounted() {
         console.log(this.meal.id);
         for (const meal of this.store.cart) {
             if (meal.id == this.meal.id) {
-                this.quantity = parseFloat(meal.quantity)
-            }
-        }
-        for (const meal of this.store.cart) {
-            if (meal.id == this.meal.id) {
-                this.flagAdd = true
+                this.quantity = parseFloat(meal.quantity);
             }
         }
     },
+    components: { AppCartAddRemBtn }
 };
 </script>
 
@@ -123,21 +86,11 @@ export default {
         </div>
 
         <div>
-            <div class="mt-3">
-                <button class="btn btn-danger" :class="flagAdd ? '' : 'd-none'" @click="removeFromCart(this.meal.id), getTotal(), flagFalse()">Remove from
-                    cart</button>
-            </div>
             <div>
-                <button @click="addToCart(this.meal.id), getTotal(), flagTrue()" class="btn btn-primary" :class="flagAdd ? 'd-none' : ''" type="button"
+                <button v-if="!this.store.cart.find(element => element.id == this.meal.id)" @click="addToCart(this.meal.id), getTotal()" class="btn btn-primary" type="button"
                     data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Add
                     to cart</button>
             </div>
-        </div>
-
-        <div v-if="this.store.cart.find(element => element.id == meal.id)">
-            <button @click="addRemoveQty(-1), updateQuantity(meal.id, this.quantity)">-</button>
-            <input type="number" v-model="quantity" disabled>
-            <button @click="addRemoveQty(1), updateQuantity(meal.id, this.quantity)">+</button>
         </div>
     </div>
 </template>

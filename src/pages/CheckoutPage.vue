@@ -9,10 +9,13 @@ export default {
             token: "",
             instance: null,
             paymentNonce: null,
-            amount: 10
+            amount: 10,
+            totalPrice: localStorage.getItem('totalPrice'),
         }
     },
     created() {
+
+        
         axios
             .get(`${this.store.baseUrl}/api/braintree/token`)
             .then((resp) => {
@@ -23,24 +26,31 @@ export default {
     },
     methods: {
         createForm() {
+            var totalPrice = this.totalPrice;
             const button = document.querySelector('#submit-button');
+
+            
 
             braintree.dropin.create({
                 authorization: this.token,
                 container: '#dropin-container'
             }, function (createErr, instance) {
+
                 button.addEventListener('click', function () {
+                    
                     instance.requestPaymentMethod((requestPaymentMethodErr, payload) => {
 
                         this.paymentNonce = payload.nonce;
-
                         console.log("Paymentnonce", this.paymentNonce);
+
+
                         axios
-                        .post("http://127.0.0.1:8000/api/order", {
-                            total: 10,
-                            payment_method_nonce: payload.nonce
-                        })
-                        .then((resp) => console.log(resp))
+                            .post("http://127.0.0.1:8000/api/order", {
+                                
+                                total: totalPrice,
+                                payment_method_nonce: payload.nonce
+                            })
+                            .then((resp) => console.log(resp))
                     });
                     console.log("Pagamento avvenuto");
                 });

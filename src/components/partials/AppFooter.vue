@@ -19,7 +19,7 @@ export default {
                 "Cookies",
                 "Requests from Public Authorities",
             ],
-            help_links: ["Contacts", "FAQ"],
+            help_links: ["Contacts", "FAQ",],
         };
     },
 };

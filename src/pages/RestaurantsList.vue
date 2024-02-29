@@ -28,6 +28,7 @@ export default {
             .finally(() => {
                 this.loading = false;
             });
+
     },
 
 }
@@ -38,8 +39,10 @@ export default {
     <div class="my_main">
         <div class="container mb-5">
             <div>
-                <h2>Here are the results of this category: <strong v-for="category in this.store.category_slug"
-                        :key="category"> -{{ category }}</strong></h2>
+                <h2>You have selected the following categories: </h2>
+                <h4 v-for="category in this.store.category_slug" :key="category">
+                    <strong>- {{ category }}</strong>
+                </h4>
             </div>
 
             <!-- <div>
@@ -47,10 +50,13 @@ export default {
                 SearchBar
             </div> -->
 
-            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
+            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3" v-if="restaurants">
                 <div v-for=" restaurant in restaurants" :key="restaurant.id">
                     <RestaurantCard :restaurant="restaurant" />
                 </div>
+            </div>
+            <div v-else class="no-res">
+               <p>No restaurant available</p>
             </div>
         </div>
         <AppFooter />

@@ -1,5 +1,6 @@
 <script>
 import { store } from "../../store";
+import AppCartAddRemBtn from "./AppCartAddRemBtn.vue";
 export default {
     props: {
         meal: Object,
@@ -7,54 +8,72 @@ export default {
     data() {
         return {
             store,
-            quantity: 1
         };
     },
     methods: {
-        addRemoveQty(number) {
-            if (number == 1) {
-                if (this.quantity < 10) {
-                    this.quantity++
-                    this.meal.quantity = this.quantity
-                }
-            }
-            if (number == -1) {
-                if (this.quantity > 1) {
-                    this.quantity--
-                    this.meal.quantity = this.quantity
-                }
-            }
-
-        },
-        updateQuantity(mealId, quantity) {
-            for (const meal of this.store.cart) {
-                if (meal.id == mealId) {
-                    meal.quantity = quantity
-                }
-            }
-            localStorage.setItem('cart', JSON.stringify(this.store.cart))
-        },
         removeFromCart(mealId) {
-            let temp = this.store.cart.filter(elem => elem.id != mealId)
-            this.store.cart = temp
-            this.quantity = 1
-            localStorage.setItem('cart', JSON.stringify(temp))
+            let temp = this.store.cart.filter(elem => elem.id != mealId);
+            this.store.cart = temp;
+            this.quantity = 1;
+            localStorage.setItem('cart', JSON.stringify(temp));
         },
-
+        getTotal() {
+            let sum = this.store.cart.reduce(function (accumulator, obj) {
+                return parseFloat(accumulator) + parseFloat(obj.price * obj.quantity);
+            }, 0);
+            return sum;
+        },
+        addToCart(mealId) {
+            // controlla se il ristorante è stato cambiato, se vero cancella il carrello precedente
+            for (const storemeal of this.store.cart) {
+                if (storemeal.restaurant_id != this.meal.restaurant_id) {
+                    if (confirm('Are you sure')) {
+                        this.store.cart = [];
+                        if (this.store.cart.length == 0) {
+                            this.store.cart.push(this.meal);
+                        }
+                        else {
+                            let res = this.store.cart.find(element => element.id == mealId);
+                            if (res === undefined) {
+                                this.store.cart.push(this.meal);
+                            }
+                        }
+                        this.meal.quantity = 1;
+                        localStorage.setItem('cart', JSON.stringify(this.store.cart));
+                        return;
+                    }
+                    else {
+                        return;
+                    }
+                }
+            }
+            if (this.store.cart.length == 0) {
+                this.store.cart.push(this.meal);
+            }
+            else {
+                let res = this.store.cart.find(element => element.id == mealId);
+                if (res === undefined) {
+                    this.store.cart.push(this.meal);
+                }
+            }
+            this.meal.quantity = 1;
+            localStorage.setItem('cart', JSON.stringify(this.store.cart));
+        },
     },
     mounted() {
         console.log(this.meal.id);
         for (const meal of this.store.cart) {
             if (meal.id == this.meal.id) {
-                this.quantity = parseFloat(meal.quantity)
+                this.quantity = parseFloat(meal.quantity);
             }
         }
-    }
+    },
+    components: { AppCartAddRemBtn }
 };
 </script>
 
 <template>
-    <div class="container-meals position-relative d-flex justify-content-center align-items-center flex-wrap gap-5">
+    <div class="container-meals position-relative d-flex justify-content-center align-items-center flex-wrap">
         <div class="my-card-meals position-relative">
             <div class="img-bx">
                 <img :src="`${store.baseUrl}/storage/${meal.image}`" alt="" class="card-img-top" />
@@ -65,20 +84,14 @@ export default {
             </div>
             <h4>{{ meal.name }}</h4>
         </div>
-
-        <div>
-            <div class="mt-3">
-                <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-                    class="btn btn-danger" @click="removeFromCart(meal.id), getTotal()">Remove from cart</button>
+    </div>
+    <div class="text-center mt-5">
+            <div>
+                <button v-if="!this.store.cart.find(element => element.id == this.meal.id)" @click="addToCart(this.meal.id), getTotal()" class="btn btn-primary" type="button"
+                     data-bs-target="#ciao" >Add
+                    to cart</button>
             </div>
         </div>
-
-        <div v-if="this.store.cart.find(element => element.id == meal.id)">
-            <button @click="addRemoveQty(-1), updateQuantity(meal.id, this.quantity)">-</button>
-            <input type="number" v-model="quantity" disabled>
-            <button @click="addRemoveQty(1), updateQuantity(meal.id, this.quantity)">+</button>
-        </div>
-    </div>
 </template>
 
 <style lang="scss" scoped>

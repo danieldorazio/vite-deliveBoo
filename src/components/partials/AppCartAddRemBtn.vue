@@ -16,13 +16,17 @@ export default {
             console.log(quantity,'quantyt');
             for (const meal of this.store.cart) {
                 if(number == 1){
-                    if (meal.id == mealId) {
+                    if (meal.quantity < 10) {
+                        if (meal.id == mealId) {
                         meal.quantity = meal.quantity + 1;
                     }
                 }
+                }
                 if(number == -1){
-                    if (meal.id == mealId) {
-                        meal.quantity = meal.quantity -1;
+                    if (meal.quantity > 1) {
+                        if (meal.id == mealId) {
+                            meal.quantity = meal.quantity -1;
+                        }
                     }
                 }
             }

@@ -86,10 +86,11 @@ export default {
         </div>
     </div>
     <div class="text-center mt-5">
-            <div>
-                <button v-if="!this.store.cart.find(element => element.id == this.meal.id)" @click="addToCart(this.meal.id), getTotal()" class="btn btn-primary" type="button"
-                     data-bs-target="#ciao" >Add
-                    to cart</button>
+            <div v-if="!this.store.cart.find(element => element.id == this.meal.id)">
+                <button  @click="addToCart(this.meal.id), getTotal()" class="btn btn-success" type="button" data-bs-target="#ciao" >Add to cart</button>
+            </div>
+            <div v-else class="btn btn-light">
+                <strong>Added to cart</strong>
             </div>
         </div>
 </template>

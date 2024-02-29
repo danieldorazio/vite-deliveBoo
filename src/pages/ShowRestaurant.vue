@@ -35,7 +35,7 @@ export default {
                 this.loading = false;
             });
     },
-    components: { AppFooter, AppCardMeals, AppCartAddRemBtn},
+    components: { AppFooter, AppCardMeals, AppCartAddRemBtn },
     methods: {
         removeFromCart(mealId) {
             let temp = this.store.cart.filter(elem => elem.id != mealId);
@@ -47,6 +47,7 @@ export default {
             let sum = this.store.cart.reduce(function (accumulator, obj) {
                 return parseFloat(accumulator) + parseFloat(obj.price * obj.quantity);
             }, 0);
+            this.store.totalPrice = localStorage.setItem('totalPrice', JSON.stringify(sum))
             return sum;
         },
         emptyCart() {
@@ -136,9 +137,9 @@ export default {
                             <div class="card my-cart-brutto">
                                 <h5 class="card-title">Your Cart</h5>
                                 <div class="card-body" id="ciao">
-                                    <div v-if="store.cart.length > 0" class="subtotal"> <a href=""
-                                            class="btn btn-info">checkout </a></div>
-                                    <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart">
+                                    <div v-if="store.cart.length > 0" class="subtotal"> <router-link  :to="{ name: 'checkout'}">checkout</router-link></div>
+                                    <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart"
+                                        :key="item.id">
                                         <img :src="`${store.baseUrl}/storage/${item.image}`" alt="" class="my-cart-img">
                                         <div>
                                             <p>{{ item.name }}</p>
@@ -232,7 +233,7 @@ export default {
     right: 10%;
 }
 
-.my-cart-brutto{
+.my-cart-brutto {
     max-height: 700px;
     width: 400px;
     overflow-y: scroll;

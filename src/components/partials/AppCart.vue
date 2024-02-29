@@ -67,7 +67,7 @@ export default {
         </div>
         <div class="offcanvas-body">
             <div v-if="store.cart.length > 0" class="subtotal"> <a href="" class="btn btn-info">checkout </a></div>
-            <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart">
+            <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart" :key="item.id">
                 <img :src="`${store.baseUrl}/storage/${item.image}`" alt="" class="my-cart-img">
                 <div>
                     <p>{{ item.name }}</p>

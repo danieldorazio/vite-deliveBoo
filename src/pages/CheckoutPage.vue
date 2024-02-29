@@ -10,15 +10,16 @@ export default {
             instance: null,
             paymentNonce: null,
             amount: 10,
+            flag: false,
             user_data: {
                 totalPrice: localStorage.getItem('totalPrice'),
-                payment: 'card',
-                date: '24-02-25',
-                client_email: 'franco@gmail.com',
-                client_name: 'franco',
-                delivery_address: 'via di franco',
-                delivery_time: '2024-02-17 20:30:00',
-                client_phone: '1234567890'
+                payment: 'Credit Card',
+                date: '',
+                client_email: '',
+                client_name: '',
+                delivery_address: '',
+                delivery_time: '',
+                client_phone: ''
             },
         }
     },
@@ -69,35 +70,54 @@ export default {
                     console.log("Pagamento avvenuto");
                 });
             });
+        },
+        waitPag(){
+            setTimeout(() => {
+                this.flag = false;
+            }, 5000);
         }
     }
 }
 </script>
 
 <template>
-    <form>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <form :class="this.flag ? 'd-none' : '' " >
+        <div class="mb-3 w-50">
+            <label for="client_name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="client_name" v-model="this.user_data.client_name">
+        </div>
+        <div class="mb-3 w-50">
+            <label for="client_email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="client_email" aria-describedby="emailHelp" v-model="this.user_data.client_email" >
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+        <div class="mb-3 w-50">
+            <label for="delivery_address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="delivery_address" v-model="this.user_data.delivery_address" >
         </div>
-        <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        <div class="mb-3 w-50">
+            <label for="client_phone" class="form-label">Phone number</label>
+            <input type="text" class="form-control" id="client_phone" v-model="this.user_data.client_phone" >
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="mb-3 w-25">
+            <label for="date" class="form-label">Date</label>
+            <input type="date"  id="date" class="form-control" name="date" data-format="yyyy/mm/dd" v-model="this.user_data.date" >
+        </div>
+        <div class="mb-3 w-25">
+            <label for="delivery_time" class="form-label">Delivery Time</label>
+            <input type="datetime-local"  id="delivery_time" class="form-control" name="delivery_time" data-format="dd/mm/yyyy HH:mm:ss" v-model="this.user_data.delivery_time">
+        </div>
+        <button type="submit" class="btn btn-primary" @click.prevent="this.flag = true">Submit</button>
     </form>
 
-
-    <div id="dropin-wrapper">
-        <div id="checkout-message"></div>
-        <div id="dropin-container"></div>
-        <button id="submit-button">Submit payment</button>
+    <div :class="this.flag ? '' : 'd-none'">
+        <div id="dropin-wrapper">
+            <div id="checkout-message"></div>
+            <div id="dropin-container"></div>
+            <button id="submit-button" @click.prevent="waitPag()" class="btn btn-info">Submit payment</button>
+        </div>
     </div>
+    <!-- <router-link  :to="{ name: 'home'}" @click="waitPag()"></router-link> -->
 </template>
 
 

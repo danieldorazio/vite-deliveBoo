@@ -8,6 +8,7 @@ export default {
     data(){
         return{
             store,
+            flag: false,
         }
     },
     created() {
@@ -23,7 +24,7 @@ export default {
 
 
 <template>
-    <div class="card mt-5 me-3" style="width: 18rem;">
+    <div class="card mt-5 me-3" style="width: 18rem;" @click="this.flag = !this.flag" :class="this.flag ? 'border border-info border-5' :''">
         <!-- <router-link :to="{name: 'restaurants', params: {slug: category.slug}}" class="nav-link"> -->
         <div class="img-up text-center">
             <img :src="`${store.baseUrl}/storage/${category.image_category}`" alt="">

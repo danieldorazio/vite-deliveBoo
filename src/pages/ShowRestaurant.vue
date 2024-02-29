@@ -133,11 +133,10 @@ export default {
             <div class="destra">
                 <div class="container my-sticky">
                     <div class="row">
-                        <div class="col border bg-info">
-                            <div class="card my-cart-brutto">
+                        <div class="col">
+                            <div class="card my-cart-br  p-3">
                                 <h5 class="card-title">Your Cart</h5>
                                 <div class="card-body" id="ciao">
-                                    <div v-if="store.cart.length > 0" class="subtotal"> <router-link  :to="{ name: 'checkout'}">checkout</router-link></div>
                                     <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart"
                                         :key="item.id">
                                         <img :src="`${store.baseUrl}/storage/${item.image}`" alt="" class="my-cart-img">
@@ -145,19 +144,24 @@ export default {
                                             <p>{{ item.name }}</p>
                                             <AppCartAddRemBtn :item="item" />
                                             <p>{{ item.price * item.quantity }} €</p>
-                                            <button class="btn btn-danger"
+                                            <button class="btn btn-warning"
                                                 @click="removeFromCart(item.id), getTotal()">Remove from
                                                 cart</button>
+                                                
                                         </div>
+                                        
 
                                     </div>
-                                    <div v-if="store.cart.length > 0" class="subtotal">Totale: <span>€ {{ getTotal()
-                                    }}</span>
-                                        <button class="btn btn-danger ms-2" @click="emptyCart()">Empty cart</button>
+                                    <div v-if="store.cart.length > 0">
+                                        <strong>Totale:</strong> 
+                                        <span>{{ getTotal()}} € </span>
+                                    </div>
+                                    <div v-if="store.cart.length > 0" class="subtotal mt-3">
+                                        <button class="btn btn-danger me-3" @click="emptyCart()">Empty cart</button>
+                                        <router-link  :to="{ name: 'checkout'}" class="btn btn-info">Go To Payment</router-link>
                                     </div>
                                     <div v-if="store.cart.length === 0">
-
-                                        <p>The cart is empty</p>
+                                        <p class="text-danger">The cart is empty</p>
                                     </div>
                                 </div>
                             </div>
@@ -233,7 +237,7 @@ export default {
     right: 10%;
 }
 
-.my-cart-brutto {
+.my-cart-br {
     max-height: 700px;
     width: 400px;
     overflow-y: scroll;

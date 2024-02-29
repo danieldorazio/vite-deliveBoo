@@ -73,7 +73,7 @@ export default {
 </script>
 
 <template>
-    <div class="container-meals position-relative d-flex justify-content-center align-items-center flex-wrap gap-5">
+    <div class="container-meals position-relative d-flex justify-content-center align-items-center flex-wrap">
         <div class="my-card-meals position-relative">
             <div class="img-bx">
                 <img :src="`${store.baseUrl}/storage/${meal.image}`" alt="" class="card-img-top" />
@@ -84,15 +84,14 @@ export default {
             </div>
             <h4>{{ meal.name }}</h4>
         </div>
-
-        <div>
+    </div>
+    <div class="text-center mt-5">
             <div>
                 <button v-if="!this.store.cart.find(element => element.id == this.meal.id)" @click="addToCart(this.meal.id), getTotal()" class="btn btn-primary" type="button"
-                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Add
+                     data-bs-target="#ciao" >Add
                     to cart</button>
             </div>
         </div>
-    </div>
 </template>
 
 <style lang="scss" scoped>

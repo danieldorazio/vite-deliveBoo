@@ -56,65 +56,35 @@ export default {
 </script>
 
 <template>
-    <!-- <div class=" my-sticky-btn">
-        <button class="btn btn-danger " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-        aria-controls="offcanvasRight"> <i class="fa-solid fa-cart-shopping"></i></button>
-    </div>
-    
-
-     <div class="offcanvas offcanvas-end d-flex" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+        id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasRightLabel">Your cart</h5>
-
+            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Your Cart</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
+            <div v-if="store.cart.length > 0" class="subtotal"> <a href="" class="btn btn-info">checkout </a></div>
             <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart">
                 <img :src="`${store.baseUrl}/storage/${item.image}`" alt="" class="my-cart-img">
                 <div>
                     <p>{{ item.name }}</p>
-                    <p>{{ item.quantity }}</p>
-                    <p>{{ item.price }} €</p>
+                    <AppCartAddRemBtn :item="item" />
+                    <p>{{ item.price * item.quantity }} €</p>
+                    <button class="btn btn-danger" @click="removeFromCart(item.id), getTotal()">Remove from
+                        cart</button>
                 </div>
 
-            </div>
-            <div v-if="store.cart.length > 0" class="subtotal">Totale: <span>€ {{ getTotal() }}</span></div>
-            <div v-if="store.cart.length === 0">
-
-                <p>The cart is empty</p>
-            </div>
-        </div>
-    </div>  -->
-    
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
-    id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <div v-if="store.cart.length > 0" class="subtotal"> <a href="" class="btn btn-info">checkout </a></div>
-        <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart">
-            <img :src="`${store.baseUrl}/storage/${item.image}`" alt="" class="my-cart-img">
-            <div>
-                <p>{{ item.name }}</p>
-                <AppCartAddRemBtn :item="item"/>
-                <p>{{ item.price * item.quantity }} €</p>
-                <button class="btn btn-danger" @click="removeFromCart(item.id), getTotal()">Remove from
-                    cart</button>
-                </div>
-                
             </div>
             <div v-if="store.cart.length > 0" class="subtotal">Totale: <span>€ {{ getTotal() }}</span>
                 <button class="btn btn-danger ms-2" @click="emptyCart()">Empty cart</button>
             </div>
             <div v-if="store.cart.length === 0">
-                
+
                 <p>The cart is empty</p>
             </div>
         </div>
     </div>
-    
+
     <!-- <div class="bg-white my-w my-sticky-btn">
         <a href="" class="btn btn-info">Vai al pagamento</a>
         <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart">
@@ -136,9 +106,10 @@ export default {
             <p>The cart is empty</p>
         </div>
     </div> -->
-    
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
-            aria-controls="offcanvasScrolling">Enable body scrolling</button>
+
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+        aria-controls="offcanvasScrolling">Open the cart
+    </button>
 </template>
 
 <style lang="scss" scoped>

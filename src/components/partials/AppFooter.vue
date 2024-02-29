@@ -11,6 +11,7 @@ export default {
                 "Design",
                 "Work with us",
                 "Become our partner",
+                "TEAM 5"
             ],
             legal_links: [
                 "Terms & Conditions",
@@ -31,29 +32,40 @@ export default {
                 <div class="col-6">
                     <div class="card-1 rounded">
                         <h3 class="text-center">Contact us</h3>
-                        <ul>
-                            <li v-for="link in contact_links">
+                        <ul class="row">
+                            <li v-for="link in contact_links" class="col-4">
                                 <p>{{ link }}</p>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-3">
                     <div class="card-1 rounded">
                         <h3 class="text-center">Legal Disclaimers</h3>
-                        <ul>
-                            <li v-for="link in legal_links">
+                        <ul class="row">
+                            <li v-for="link in legal_links" class="">
                                 <p>{{ link }}</p>
                             </li>
                         </ul>
-                        <h3 class="text-center">Help</h3>
-                        <ul>
+                        <!-- <h3 class="text-center">Help</h3> -->
+                        <!-- <ul>
                             <li v-for="link in help_links">
                                 <p>{{ link }}</p>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
+                <div class="col-3">
+                    <div class="card-1 rounded">
+                    <h3 class="text-center">Contact us</h3>
+                    <ul class="row row-colums">
+                        <li v-for="link in help_links" class="col-4">
+                            <p>{{ link }}</p>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -74,6 +86,7 @@ export default {
     margin-bottom: 10px;
     text-align: left;
     padding: 1rem;
+    height: 240px;
 }
 
 ul {

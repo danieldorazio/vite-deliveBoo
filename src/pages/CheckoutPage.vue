@@ -12,6 +12,7 @@ export default {
             amount: 10,
             user_data: {
                 totalPrice: localStorage.getItem('totalPrice'),
+                cart: localStorage.getItem('cart'),
                 payment: 'card',
                 date: '24-02-25',
                 client_email: 'franco@gmail.com',
@@ -55,6 +56,7 @@ export default {
                             .post("http://127.0.0.1:8000/api/order", {
 
                                 total: user_data.totalPrice,
+                                cart: user_data.cart,
                                 payment: user_data.payment,
                                 date: user_data.date,
                                 client_email: user_data.client_email,

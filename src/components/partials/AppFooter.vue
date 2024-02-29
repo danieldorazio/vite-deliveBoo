@@ -19,7 +19,7 @@ export default {
                 "Cookies",
                 "Requests from Public Authorities",
             ],
-            help_links: ["Contacts", "FAQ",],
+            help_links: ['Contact Us', 'FAQ'],
         };
     },
 };
@@ -44,7 +44,7 @@ export default {
                         <h3 class="text-center">Legal Disclaimers</h3>
                         <ul class="row">
                             <li v-for="link in legal_links" class="">
-                                <p>{{ link }}</p>
+                               <p>{{ link }}</p>
                             </li>
                         </ul>
                         <!-- <h3 class="text-center">Help</h3> -->
@@ -59,8 +59,23 @@ export default {
                     <div class="card-1 rounded">
                     <h3 class="text-center">Contact us</h3>
                     <ul class="row row-colums">
-                        <li v-for="link in help_links" class="col-4">
+                        <!-- <li v-for="link in help_links" class="col-6">
                             <p>{{ link }}</p>
+                        </li> -->
+                        <li>
+                            <a href="https://github.com/danieldorazio" class="text-decoration-none text-black">Dittatore</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/PierluigiTornesi" class="text-decoration-none text-black">Clown</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/ludovicaghemo" class="text-decoration-none text-black">Segretaria</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/cesarecicolin" class="text-decoration-none text-black">Annegato</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/MarcoGranata9" class="text-decoration-none text-black">Napoletano</a>
                         </li>
                     </ul>
                 </div>

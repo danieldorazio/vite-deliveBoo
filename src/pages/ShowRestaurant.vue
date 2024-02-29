@@ -2,8 +2,8 @@
 import axios from 'axios';
 import { store } from '../store';
 import AppFooter from '../components/partials/AppFooter.vue';
+import AppCartAddRemBtn from '../components/partials/AppCartAddRemBtn.vue';
 import AppCardMeals from '../components/partials/AppCardMeals.vue'
-import AppCart from '../components/partials/AppCart.vue'
 
 export default {
     data() {
@@ -35,8 +35,60 @@ export default {
                 this.loading = false;
             });
     },
-    components: { AppFooter, AppCardMeals, AppCart },
+    components: { AppFooter, AppCardMeals, AppCartAddRemBtn},
     methods: {
+        removeFromCart(mealId) {
+            let temp = this.store.cart.filter(elem => elem.id != mealId);
+            this.store.cart = temp;
+            this.quantity = 1;
+            localStorage.setItem('cart', JSON.stringify(temp));
+        },
+        getTotal() {
+            let sum = this.store.cart.reduce(function (accumulator, obj) {
+                return parseFloat(accumulator) + parseFloat(obj.price * obj.quantity);
+            }, 0);
+            return sum;
+        },
+        emptyCart() {
+            this.store.cart = [];
+            localStorage.setItem('cart', JSON.stringify(this.store.cart));
+        },
+        addToCart(mealId) {
+            // controlla se il ristorante è stato cambiato, se vero cancella il carrello precedente
+            for (const storemeal of this.store.cart) {
+                if (storemeal.restaurant_id != this.meal.restaurant_id) {
+                    if (confirm('Are you sure')) {
+                        this.store.cart = [];
+                        if (this.store.cart.length == 0) {
+                            this.store.cart.push(this.meal);
+                        }
+                        else {
+                            let res = this.store.cart.find(element => element.id == mealId);
+                            if (res === undefined) {
+                                this.store.cart.push(this.meal);
+                            }
+                        }
+                        this.meal.quantity = 1;
+                        localStorage.setItem('cart', JSON.stringify(this.store.cart));
+                        return;
+                    }
+                    else {
+                        return;
+                    }
+                }
+            }
+            if (this.store.cart.length == 0) {
+                this.store.cart.push(this.meal);
+            }
+            else {
+                let res = this.store.cart.find(element => element.id == mealId);
+                if (res === undefined) {
+                    this.store.cart.push(this.meal);
+                }
+            }
+            this.meal.quantity = 1;
+            localStorage.setItem('cart', JSON.stringify(this.store.cart));
+        },
     }
 }
 </script>
@@ -44,41 +96,9 @@ export default {
 <template>
     <div class="my_main">
 
-        <div class="back">
-
-            
-            <!-- DA TOGLIERE DISPLAY NONE -->
-            <!-- <div class="offcanvas offcanvas-end d-none" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasRightLabel">Your cart</h5>
-                    
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart">
-                        <img :src="`${store.baseUrl}/storage/${item.image}`" alt="" class="my-cart-img">
-                        <div>
-                            <p>{{ item.name }}</p>
-                            <p>{{ item.quantity }}</p>
-                            <p>{{ item.price }} €</p>
-                        </div>
-                        
-                    </div>
-                    <div v-if="store.cart.length > 0"> <button @click="emptyCart()" class="btn btn-danger">Empty cart</button> </div>
-                    <div v-if="store.cart.length > 0" class="subtotal">Total price: <span>€ {{ getTotal() }}</span></div>
-                    <div v-if="store.cart.length === 0">
-                        
-                        <p>The cart is empty</p>
-                    </div>
-                </div>
-            </div> -->
-            <div class="d-flex justify-content-center bg-white mb-3">
-                <!-- <div class="w-25 ">
-                    <img :src="`${store.baseUrl}/storage/${restaurant.image}`" alt="" class="card-img-top ">
-                </div> -->
-                <!-- , params: {slug: restaurant.slug} 
-                    <router-link :to="{name: 'restaurants'}" class="btn btn-info">Restaurants</router-link> -->
-                </div>
+        <div class="back d-flex justify-content-evenly">
+            <div>
+                <br>
                 <div class="container ">
                     <div class="row">
                         <div class="col-3">
@@ -97,39 +117,54 @@ export default {
                             <div>
                                 <p class="fs-5"> Close Time: <strong>{{ restaurant.time_close }}</strong></p>
                             </div>
-                            <AppCart :meals="meals"/>
                         </div>
-                        
-                </div>
-
-            </div>
-            <br>
-            <div class="container">
-                <div class="d-flex justify-content-evenly flex-wrap gap-3">
-                    <div class="col-4 mt-5 mb-5" v-for="meal in meals" :key="meal.id">
-                        <AppCardMeals :meal="meal" />
-                        <div class="mt-5 d-flex flex-column text-center">
-                            
-                            <div class="mt-3">
-                                <!-- <button  class="btn btn-info" type="button"
-                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                                    aria-controls="offcanvasRight"></button> -->
-                             
-                            </div>
-                            <!-- <div class="mt-3">
-                                <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                                aria-controls="offcanvasRight" class="btn btn-danger" @click="removeFromCart(meal.id), getTotal()">Remove from cart</button>
-                            </div> -->
-                        </div>
-
                     </div>
                 </div>
-
+                <br>
+                <div class="container">
+                    <div class="d-flex flex-wrap gap-3">
+                        <div class="col-4 mt-5 mb-5" v-for="meal in meals" :key="meal.id">
+                            <AppCardMeals :meal="meal" />
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="destra">
+                <div class="container my-sticky">
+                    <div class="row">
+                        <div class="col border bg-info">
+                            <div class="card my-cart-brutto">
+                                <h5 class="card-title">Your Cart</h5>
+                                <div class="card-body" id="ciao">
+                                    <div v-if="store.cart.length > 0" class="subtotal"> <a href=""
+                                            class="btn btn-info">checkout </a></div>
+                                    <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart">
+                                        <img :src="`${store.baseUrl}/storage/${item.image}`" alt="" class="my-cart-img">
+                                        <div>
+                                            <p>{{ item.name }}</p>
+                                            <AppCartAddRemBtn :item="item" />
+                                            <p>{{ item.price * item.quantity }} €</p>
+                                            <button class="btn btn-danger"
+                                                @click="removeFromCart(item.id), getTotal()">Remove from
+                                                cart</button>
+                                        </div>
 
+                                    </div>
+                                    <div v-if="store.cart.length > 0" class="subtotal">Totale: <span>€ {{ getTotal()
+                                    }}</span>
+                                        <button class="btn btn-danger ms-2" @click="emptyCart()">Empty cart</button>
+                                    </div>
+                                    <div v-if="store.cart.length === 0">
+
+                                        <p>The cart is empty</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
         <AppFooter />
     </div>
 </template>
@@ -184,5 +219,22 @@ export default {
 
 .col-3 {
     background-color: white;
+}
+
+.my-sticky {
+    position: sticky;
+    top: 2%;
+    padding: 5px;
+}
+
+.destra {
+    position: relative;
+    right: 10%;
+}
+
+.my-cart-brutto{
+    max-height: 700px;
+    width: 400px;
+    overflow-y: scroll;
 }
 </style>

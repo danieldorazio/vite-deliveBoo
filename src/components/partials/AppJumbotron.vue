@@ -7,8 +7,8 @@ export default {
 <template>
     <div class=" my_jumbotron position-relative">
         <div class="my_slogan position-absolute top-50 end-50 translate-middle text-center">
-            <h1>Fluid jumbotron</h1>
-            <p>This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+            <h1>DeliveBoo</h1>
+            <p class="fs-5">Celebrate every bite of happiness delivered right to your doorstep</p>
         </div>
     </div>
 </template>

@@ -11,19 +11,30 @@ export default {
         }
     },
     methods: {
-        updateQuantity(mealId, quantity) {
+        updateQuantity(number,mealId, quantity) {
+            console.log(mealId,'meal id');
+            console.log(quantity,'quantyt');
             for (const meal of this.store.cart) {
-                if (meal.id == mealId) {
-                    meal.quantity = quantity
+                if(number == 1){
+                    if (meal.id == mealId) {
+                        meal.quantity = meal.quantity + 1;
+                    }
+                }
+                if(number == -1){
+                    if (meal.id == mealId) {
+                        meal.quantity = meal.quantity -1;
+                    }
                 }
             }
             localStorage.setItem('cart', JSON.stringify(this.store.cart))
         },
         addRemoveQty(number, itemQuantity) {
+            console.log(itemQuantity,'itemquantity');
             if (number == 1) {
                 if (this.quantity < 10) {
                     this.quantity++
                     itemQuantity = this.quantity
+                    console.log(this.quantity, 'thisqantity');
                 }
             }
             if (number == -1) {
@@ -40,9 +51,9 @@ export default {
 
 <template>
     <div>
-        <button @click="addRemoveQty(-1, item.quantity), updateQuantity(item.id, this.quantity)">-</button>
-        <input type="number" v-model="this.quantity" disabled>
-        <button @click="addRemoveQty(1, item.quantity), updateQuantity(item.id, this.quantity)">+</button>
+        <button @click="addRemoveQty(-1, item.quantity), updateQuantity(-1,item.id, this.quantity)">-</button>
+        <input type="number" v-model="this.item.quantity" disabled>
+        <button @click="addRemoveQty(1, item.quantity), updateQuantity(1,item.id, this.quantity)">+</button>
     </div>
 </template>
 

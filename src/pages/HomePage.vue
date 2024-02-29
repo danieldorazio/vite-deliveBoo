@@ -79,7 +79,7 @@ export default {
 .my_main {
     height: $height-main;
     overflow-y: scroll;
-    background-color: aliceblue;
+    background-color: #ddd1cb;
 }
 
 .my_main::-webkit-scrollbar {

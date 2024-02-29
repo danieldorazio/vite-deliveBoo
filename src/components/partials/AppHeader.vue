@@ -33,7 +33,7 @@ export default {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <!-- DROPDOWN DELLE CATEGORIE -->
-          <li class="nav-item dropdown">
+          <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               Categories
@@ -47,11 +47,11 @@ export default {
                 </router-link>
               </li>
             </ul>
-          </li>
+          </li> -->
         </ul>
-        <div class="me-5">
+        <!-- <div class="me-5">
           <input type="search" name="search-restaurant" id="search-restaurant" placeholder="Search restaurant.." class="btn btn-info" v-model="searchText" @keyup="searchRestaurant">
-        </div>
+        </div> -->
         <div class="text-white my_btn">
           <a href="http://127.0.0.1:8000/" class="text-decoration-none text-black">Work with us</a>
         </div>

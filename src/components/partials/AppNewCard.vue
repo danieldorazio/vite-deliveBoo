@@ -54,7 +54,7 @@ export default {
 }
 
 .my-border{
-    border: 1px solid transparent ;
+    border: 10px solid transparent ;
 }
 
 .my-color-border{

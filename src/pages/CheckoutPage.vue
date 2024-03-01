@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import { store } from '../store';
+import AppFooter from '../components/partials/AppFooter.vue';
 
 export default {
     data() {
@@ -22,63 +23,55 @@ export default {
                 delivery_time: '',
                 client_phone: ''
             },
-        }
+        };
     },
     created() {
-
-
         axios
             .get(`${this.store.baseUrl}/api/braintree/token`)
             .then((resp) => {
-                this.token = resp.data.clientToken
-                console.log(this.token);
-            })
-            .finally(this.createForm)
+            this.token = resp.data.clientToken;
+            console.log(this.token);
+        })
+            .finally(this.createForm);
     },
     methods: {
         createForm() {
             var user_data = this.user_data;
             const button = document.querySelector('#submit-button');
-
-
-
             braintree.dropin.create({
                 authorization: this.token,
                 container: '#dropin-container'
             }, function (createErr, instance) {
-
                 button.addEventListener('click', function () {
-
                     instance.requestPaymentMethod((requestPaymentMethodErr, payload) => {
-
                         this.paymentNonce = payload.nonce;
                         console.log("Paymentnonce", this.paymentNonce);
                         axios
                             .post("http://127.0.0.1:8000/api/order", {
-
-                                total: user_data.totalPrice,
-                                cart: user_data.cart,
-                                payment: user_data.payment,
-                                date: user_data.date,
-                                client_email: user_data.client_email,
-                                client_name: user_data.client_name,
-                                delivery_address: user_data.delivery_address,
-                                delivery_time: user_data.delivery_time,
-                                client_phone: user_data.client_phone,
-                                payment_method_nonce: payload.nonce
-                            })
-                            .then((resp) => console.log(resp))
+                            total: user_data.totalPrice,
+                            cart: user_data.cart,
+                            payment: user_data.payment,
+                            date: user_data.date,
+                            client_email: user_data.client_email,
+                            client_name: user_data.client_name,
+                            delivery_address: user_data.delivery_address,
+                            delivery_time: user_data.delivery_time,
+                            client_phone: user_data.client_phone,
+                            payment_method_nonce: payload.nonce
+                        })
+                            .then((resp) => console.log(resp));
                     });
                     console.log("Pagamento avvenuto");
                 });
             });
         },
-        waitPag(){
+        waitPag() {
             setTimeout(() => {
                 this.flag = false;
             }, 5000);
         }
-    }
+    },
+    components: { AppFooter }
 }
 </script>
 
@@ -118,6 +111,10 @@ export default {
             <div id="dropin-container"></div>
             <button id="submit-button" @click.prevent="waitPag()" class="btn btn-info">Submit payment</button>
         </div>
+    </div>
+
+    <div class="mt-4">
+        <AppFooter />
     </div>
     <!-- <router-link  :to="{ name: 'home'}" @click="waitPag()"></router-link> -->
 </template>

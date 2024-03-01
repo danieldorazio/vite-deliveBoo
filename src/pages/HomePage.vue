@@ -52,7 +52,7 @@ export default {
                         <div class="col" v-for="category in categories" :key="category.name">
                             <div class="position-relative">
                                 <input type="checkbox" :name="category.slug" :id="category.slug" :value="category.slug"
-                                    class="position-absolute my-pos" v-model="this.store.category_slug" />
+                                    class="position-absolute my-pos d-none" v-model="this.store.category_slug" />
                                 <label :for="category.slug">
                                     <span>
                                         <AppCard :category="category" />

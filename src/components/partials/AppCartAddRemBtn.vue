@@ -55,9 +55,9 @@ export default {
 
 <template>
     <div>
-        <button @click="addRemoveQty(-1, item.quantity), updateQuantity(-1,item.id, this.quantity)" class="btn btn-success">-</button>
+        <button @click="addRemoveQty(-1, item.quantity), updateQuantity(-1,item.id, this.quantity)" class=" ms-2 btn btn-success">-</button>
         <input type="number" v-model="this.item.quantity" disabled>
-        <button @click="addRemoveQty(1, item.quantity), updateQuantity(1,item.id, this.quantity)">+</button>
+        <button @click="addRemoveQty(1, item.quantity), updateQuantity(1,item.id, this.quantity)" class=" ms-2 btn btn-success">+</button>
     </div>
 </template>
 

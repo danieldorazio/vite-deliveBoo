@@ -23,7 +23,7 @@ export default {
 
 .my_jumbotron {
     height: calc($height-main - 175px);
-    background-image: url(../../assets/img/bg-header.png);
+    background-image: url('../../assets/img/bg-header.png');
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;

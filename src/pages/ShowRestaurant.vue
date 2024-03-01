@@ -102,10 +102,10 @@ export default {
                 <br>
                 <div class="container ">
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-3 rounded">
                             <img :src="`${store.baseUrl}/storage/${restaurant.image}`" alt="" class="card-img-top ">
                         </div>
-                        <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                        <div class="col-6 d-flex flex-column justify-content-center align-items-center rounded ms-5">
                             <div>
                                 <p class="fs-5">Name: <strong>{{ restaurant.restaurant_name }}</strong></p>
                             </div>
@@ -219,7 +219,7 @@ export default {
 
 
 .col-6 {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
 }
 
 .col-3 {

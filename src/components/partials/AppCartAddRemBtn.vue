@@ -55,10 +55,36 @@ export default {
 
 <template>
     <div>
-        <button @click="addRemoveQty(-1, item.quantity), updateQuantity(-1,item.id, this.quantity)" class=" ms-2 btn btn-success">-</button>
+        <button @click="addRemoveQty(1, item.quantity), updateQuantity(1,item.id, this.quantity)" class=" ms-2 btn btn-success my_btn">
+            <span class="my-sim-piú">+</span>
+        </button>
         <input type="number" v-model="this.item.quantity" disabled>
-        <button @click="addRemoveQty(1, item.quantity), updateQuantity(1,item.id, this.quantity)" class=" ms-2 btn btn-success">+</button>
+        <button @click="addRemoveQty(-1, item.quantity), updateQuantity(-1,item.id, this.quantity)" class=" ms-2 btn btn-success my_btn">
+            <span class="my-sim-meno">-</span>
+        </button>
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+.my_btn{
+    height: 20px;
+    width: 20px;
+    aspect-ratio: 1;
+    font-size: 10px;
+    position: relative;
+}
+
+
+.my-sim-piú{
+    position: absolute;
+    top: 0;
+    left: 35%;
+}
+
+.my-sim-meno{
+    position: absolute;
+    top: 0;
+    left: 40%;
+}
+</style>

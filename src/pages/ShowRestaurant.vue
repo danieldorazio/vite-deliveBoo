@@ -97,8 +97,8 @@ export default {
 <template>
     <div class="my_main">
 
-        <div class="back d-flex justify-content-evenly">
-            <div>
+        <div class="back d-flex justify-content-evenly ">
+            <div class="dstr p-4">
                 <br>
                 <div class="container ">
                     <div class="row">
@@ -132,7 +132,7 @@ export default {
             </div>
             <div class="destra">
                 <div class="container my-sticky">
-                    <div class="row">
+                    <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 g-3">
                         <div class="col">
                             <div class="card my-cart-br  p-3">
                                 <h5 class="card-title">Your Cart</h5>
@@ -230,6 +230,10 @@ export default {
     position: sticky;
     top: 2%;
     padding: 5px;
+
+    @media (max-width: 768px) {
+        position: relative;
+    }
 }
 
 .destra {

@@ -29,7 +29,7 @@ export default {
 
 <template>
     <div class="wrapper">
-        <AppHeader :categories="categories" />
+        <!-- <AppHeader :categories="categories" /> -->
         <router-view></router-view>
     </div>
 </template>

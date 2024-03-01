@@ -12,13 +12,14 @@ export default {
   }, methods: {
     searchRestaurant() {
       console.log('ciao cesare');
-    }
+    },
+    
   }
 };
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg " id="my-woo">
   <div class="container-fluid">
     <!-- LOGO DA MODIFICARE -->
     <router-link :to="{ name: 'home' }" class="nav-link text-black" @click="this.store.category_slug = []">
@@ -66,9 +67,24 @@ export default {
 nav {
   height: $height-nav;
   //background-image: url(../../assets/img/navbar-wood.jpg);
-  background-color: $color-footer;
+  
   background-position: center;
   background-size: cover;
+  // -webkit-transform: translateX(-50%);
+  //   -ms-transform: translateX(-50%);
+    transform: translateX(-50%); 
+    position: fixed;
+    top: 0;
+    left: 50%;
+    z-index: 100;
+    max-width: 1220%;
+    width: 100%;
+    padding: 1rem 1rem 0 1rem;
+    .nav-bar-scrolled {
+  background-color: red;
+}
+
+    
 
   .container-fluid {
     .my_logo {

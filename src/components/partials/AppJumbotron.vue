@@ -1,11 +1,14 @@
 <script>
-export default {
+import AppHeader from './AppHeader.vue';
 
+export default {
+    components: { AppHeader }
 }
 </script>
 
 <template>
     <div class=" my_jumbotron position-relative">
+        <AppHeader/>
         <div class="my_slogan translate-middle text-center">
             <h1>DeliveBoo</h1>
             <p class="fs-5">Celebrate every bite of happiness delivered right to your doorstep</p>
@@ -20,7 +23,7 @@ export default {
 
 .my_jumbotron {
     height: calc($height-main - 175px);
-    background-image: url(../../assets/img/jumbotron.jpg);
+    background-image: url(../../assets/img/bg-header.png);
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;

@@ -26,10 +26,10 @@ export default {
 </script>
 
 <template>
-    <div class="fake-h">
+    <footer class="fake-h">
         <div class="container">
-            <div class="row d-flex justufy-content-between">
-                <div class="col-6">
+            <div class="row d-flex justify-content-between row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+                <div class="col">
                     <div class="card-1 rounded">
                         <h3 class="text-center">Contact us</h3>
                         <ul class="row">
@@ -83,7 +83,7 @@ export default {
                 
             </div>
         </div>
-    </div>
+    </footer>
 </template>
 
 <style lang="scss" scoped>

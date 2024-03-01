@@ -50,7 +50,7 @@ export default {
                 SearchBar
             </div> -->
 
-            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3" v-if="restaurants">
+            <div class="rest-list row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-3" v-if="restaurants">
                 <div v-for=" restaurant in restaurants" :key="restaurant.id">
                     <RestaurantCard :restaurant="restaurant" />
                 </div>
@@ -90,4 +90,18 @@ export default {
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(.5, #FAA343), color-stop(1, #F8E16C));
     border-radius: 10px;
 }
+.rest-list {
+    @media (min-width: 1024px) {
+            
+        }
+
+        @media (max-width: 760px) {
+            // margin-left: 0%;
+        }
+
+        @media (max-width: 320px) {
+            margin-left: 50%;
+    }
+}
+
 </style>

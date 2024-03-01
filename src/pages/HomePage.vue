@@ -47,11 +47,11 @@ export default {
                     </p>
                     <hr />
                     <h6>Select the categories that you want to search</h6>
-                    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
+                    <div class="restaurants row row-cols-1 row-cols-lg-4 row-cols-md-2 row-cols-sm-1 g-3">
                         <div class="col" v-for="category in categories" :key="category.name">
                             <div class="position-relative">
                                 <input type="checkbox" :name="category.slug" :id="category.slug" :value="category.slug"
-                                    class="position-absolute my-pos d-none" v-model="this.store.category_slug"/>
+                                    class="position-absolute my-pos d-none" v-model="this.store.category_slug" />
                                 <label :for="category.slug">
                                     <span>
                                         <AppCard :category="category" />
@@ -62,7 +62,7 @@ export default {
                     </div>
                 </div>
                 <div>Checked categories: {{ this.store.category_slug }}</div>
-                <div class="mt-3">
+                <div class="cat-btn mt-3">
                     <AppButtonHome :categories="categories" />
                 </div>
 
@@ -105,5 +105,17 @@ export default {
 .my-pos {
     top: 94.5%;
     z-index: 999;
+}
+
+.restaurants {
+    @media (max-width: 768px) {
+        margin-left: 20%;
+    }
+}
+
+.cat-btn {
+    @media (max-width: 768px) {
+        text-align: center;
+    }
 }
 </style>

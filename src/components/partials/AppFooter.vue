@@ -27,7 +27,7 @@ export default {
 
 <template>
     <footer class="fake-h">
-        <div class="container">
+        <!-- <div class="container">
             <div class="row d-flex justify-content-between row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
                 <div class="col">
                     <div class="card-1 rounded">
@@ -47,12 +47,12 @@ export default {
                                 <p>{{ link }}</p>
                             </li>
                         </ul>
-                        <!-- <h3 class="text-center">Help</h3> -->
-                        <!-- <ul>
+                         <h3 class="text-center">Help</h3> 
+                         <ul>
                             <li v-for="link in help_links">
                                 <p>{{ link }}</p>
                             </li>
-                        </ul> -->
+                        </ul> 
                     </div>
                 </div>
                 <div class="col-3">
@@ -67,16 +67,77 @@ export default {
                 </div>
                 
             </div>
+        </div> -->
+        <div class="title-center">
+            <div class="bk-title">
+                <h2>CONTACTS</h2>
+            </div>
         </div>
+        <div class="d-flex justify-content-around footer-wrap">
+            <div>
+                <h3> <i class="fa-solid fa-location-dot"></i> LOCATION</h3>
+                <p>via daniel Roma</p>
+            </div>
+            <div>
+                 <h3> <i class="fa-solid fa-phone"></i> PHONE</h3>
+                 <p>3420301612</p>
+            </div>
+            <div>
+                <h3><i class="fa-solid fa-envelope"></i> EMAIL</h3>
+                <p>ludo.segretaria@gmail.com</p>
+            </div>
+            <div>
+                <ul>
+                    <li><i class="fa-brands fa-facebook"></i></li>
+                    <li><i class="fa-brands fa-x-twitter"></i></li>
+                    <li><i class="fa-brands fa-instagram"></i></li>
+                    <li><i class="fa-brands fa-youtube"></i></li>
+                </ul>
+            </div>
+        </div>
+
     </footer>
 </template>
 
 <style lang="scss" scoped>
 @use "../../styles/partials/variables" as *;
 
+.footer-wrap{
+    padding-bottom: 50px;
+
+    i{
+        color: yellow;
+    }
+}
+.title-center{
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 10px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 50px;
+
+    .bk-title {
+    background-image: url(../../assets/img/bg-title.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 80px;
+    font-size: 40px;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 20px;
+}
+}
+
+
+
 .fake-h {
-    background-color: $color-footer;
+    background-color: black;
     color: white;
+    min-height: 300px;
+    padding-top: 100px;
 }
 
 .card-1 {

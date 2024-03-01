@@ -5,9 +5,10 @@ import AppCard from "../components/partials/AppCard.vue";
 import AppFooter from "../components/partials/AppFooter.vue";
 import AppJumbotron from "../components/partials/AppJumbotron.vue";
 import AppButtonHome from "../components/partials/AppButtonHome.vue";
+import AppNewCard from "../components/partials/AppNewCard.vue";
 
 export default {
-    components: { AppJumbotron, AppCard, AppFooter, AppButtonHome },
+    components: { AppJumbotron, AppCard, AppFooter, AppButtonHome, AppNewCard },
 
     data() {
         return {
@@ -33,7 +34,7 @@ export default {
 </script>
 
 <template>
-    <div class="my_main">
+    <div class="my_main pattern-category">
         <AppJumbotron />
         <div class="container p-0 mt-5 mb-5">
             <div v-if="loading">
@@ -41,13 +42,16 @@ export default {
             </div>
             <div v-else>
                 <div>
-                    <h1>The most popular cuisines</h1>
-                    <p>
+                    <div class="d-flex justify-content-center">
+                        <img src="../assets/img/bg-title.png" alt="" class="me-3">
+                        <h1 class="text-center text-white">The most popular cuisines</h1>
+                    </div>
+                    <p class="text-center text-white fs-5">
                         Find the most popular cuisines from restaurants in your area and
                         order online for delivery.
                     </p>
-                    <hr />
-                    <h6>Select the categories that you want to search</h6>
+                    <hr class="text-white" />
+                    <h3 class="text-center text-white">CHOOSE A CATEGORY</h3>
                     <div class="restaurants row row-cols-1 row-cols-lg-4 row-cols-md-2 row-cols-sm-1 g-3">
                         <div class="col" v-for="category in categories" :key="category.name">
                             <div class="position-relative">
@@ -56,7 +60,8 @@ export default {
                                     <!-- class="position-absolute my-pos d-none" v-model="this.store.category_slug" /> -->
                                 <label :for="category.slug">
                                     <span>
-                                        <AppCard :category="category" />
+                                        <!-- <AppCard :category="category" /> -->
+                                        <AppNewCard :category="category"/>
                                     </span>
                                 </label>
                             </div>
@@ -64,7 +69,7 @@ export default {
                     </div>
                 </div>
                 <!-- <div>Checked categories: {{ this.store.category_slug }}</div> -->
-                <div class="cat-btn mt-3">
+                <div class="cat-btn mt-3 d-flex justify-content-center">
                     <AppButtonHome :categories="categories" />
                 </div>
 
@@ -79,8 +84,7 @@ export default {
 
 .my_main {
     height: $height-main;
-    overflow-y: scroll;
-    background-color: #ddd1cb;
+    overflow-y: scroll;;
 }
 
 .my_main::-webkit-scrollbar {
@@ -119,5 +123,10 @@ export default {
     @media (max-width: 768px) {
         text-align: center;
     }
+}
+
+.pattern-category{
+    background-image: url('../assets/img/bg-pattern.jpg');
+    background-repeat: repeat;
 }
 </style>

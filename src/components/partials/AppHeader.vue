@@ -9,8 +9,8 @@ export default {
     return {
       store,
     };
-  },methods:{
-    searchRestaurant(){
+  }, methods: {
+    searchRestaurant() {
       console.log('ciao cesare');
     }
   }
@@ -19,21 +19,21 @@ export default {
 
 <template>
   <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-      <!-- LOGO DA MODIFICARE -->
-      <router-link :to="{ name: 'home' }" class="nav-link text-black">
-        <img class="my_logo" src="../../assets/img/logo.png" alt="" />
-      </router-link>
-      <!-- HAMBURGHER BUTTON -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+  <div class="container-fluid">
+    <!-- LOGO DA MODIFICARE -->
+    <router-link :to="{ name: 'home' }" class="nav-link text-black" @click="this.store.category_slug = []">
+      <img class="my_logo" src="../../assets/img/logo.png" alt="" />
+    </router-link>
+    <!-- HAMBURGHER BUTTON -->
+    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
+      </button> -->
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <!-- DROPDOWN DELLE CATEGORIE -->
-          <!-- <li class="nav-item dropdown">
+    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- DROPDOWN DELLE CATEGORIE -->
+        <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               Categories
@@ -48,16 +48,16 @@ export default {
               </li>
             </ul>
           </li> -->
-        </ul>
-        <!-- <div class="me-5">
+      </ul>
+      <!-- <div class="me-5">
           <input type="search" name="search-restaurant" id="search-restaurant" placeholder="Search restaurant.." class="btn btn-info" v-model="searchText" @keyup="searchRestaurant">
         </div> -->
-        <div class="text-white my_btn">
-          <a href="http://127.0.0.1:8000/" class="text-decoration-none text-black">Work with us</a>
-        </div>
+      <div class="text-white my_btn">
+        <a href="http://127.0.0.1:8000/" class="text-decoration-none text-black">Work with us</a>
       </div>
-    </div>
-  </nav>
+    <!-- </div> -->
+  </div>
+</nav>
 </template>
 
 <style lang="scss" scoped>

@@ -23,10 +23,10 @@ export default {
 
 
 <template>
-    <div class="btn btn-info">
+    <div class="btn my-btn-color">
         <!--  -->
         <router-link :to="{name: 'restaurants', params: {slug: categories[0].slug}}" class="nav-link">
-            Ricerca
+            <h4>Search</h4>
         </router-link>
     </div>
 </template>
@@ -34,4 +34,11 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.my-btn-color{
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: 7px double #ffcc33;
+    color: #fff;
+}
 </style>

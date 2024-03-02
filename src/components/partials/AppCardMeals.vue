@@ -87,10 +87,10 @@ export default {
     </div>
     <div class="text-center mt-5">
             <div v-if="!this.store.cart.find(element => element.id == this.meal.id)">
-                <button  @click="addToCart(this.meal.id), getTotal()" class="btn btn-success" type="button" data-bs-target="#ciao" >Add to cart</button>
+                <button  @click="addToCart(this.meal.id), getTotal()" class="my_btn" type="button" data-bs-target="#ciao" >Add to cart</button>
             </div>
-            <div v-else class="btn btn-light">
-                <strong>Added to cart</strong>
+            <div v-else class="my_btn_gray">
+                Added to cart
             </div>
         </div>
 </template>
@@ -134,10 +134,10 @@ export default {
 
             h4 {
                 padding: 5px 25px;
-                background: linear-gradient(90deg, #f8e16c 0%, #faa343 100%);
+                background: linear-gradient(90deg, #f8e16c 0%, #ffcc33 100%);
                 bottom: -25px;
                 border-radius: 15px;
-                box-shadow: 0 0 0 10px $color-footer;
+                box-shadow: 0 0 0 10px #282828;
             }
 
             .content-meal {
@@ -148,7 +148,7 @@ export default {
 
             .img-bx {
                 inset: -50px 60px 250px 60px;
-                box-shadow: 0 0 0 10px #faa343;
+                box-shadow: 0 0 0 10px #ffcc33;
 
                 &::before {
                     opacity: 1;
@@ -179,7 +179,7 @@ export default {
                 border-top-right-radius: 20px;
                 transform: translateY(-100px);
                 opacity: 0;
-                box-shadow: 5px -5px 0 4px #faa343;
+                box-shadow: 5px -5px 0 4px #ffcc33;
                 pointer-events: none;
                 transition: 0.5s;
             }
@@ -194,7 +194,7 @@ export default {
                 border-top-left-radius: 20px;
                 transform: translateY(-100px);
                 opacity: 0;
-                box-shadow: -5px -5px 0 4px #faa343;
+                box-shadow: -5px -5px 0 4px #ffcc33;
                 pointer-events: none;
                 transition: 0.5s;
             }
@@ -210,5 +210,32 @@ export default {
             }
         }
     }
+}
+.my_btn{
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    color: #000;
+    padding: 8px 16px;
+    background-color: #ffcc33;
+    transition: 1000ms;
+    border: none;
+    font-weight: bold;
+    &:hover { 
+        transition: 1000ms;
+        background-color: #b8b8b8;
+        color: white;
+    }
+}
+.my_btn_gray {
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    color: white;
+    padding: 8px 16px;
+    background-color: #b8b8b8;
+    transition: 1000ms;
+    border: none;
+    font-weight: bold;
 }
 </style>

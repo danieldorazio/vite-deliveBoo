@@ -87,43 +87,43 @@ export default {
 
 
                 <div class="mt-5">
-                    <form :class="this.flag ? 'd-none' : ''" class="my-form row justify-content-between ">
-                        <div class="mb-3 w-50 ">
+                    <form :class="this.flag ? 'd-none' : ''" class="my-form row justify-content-center ">
+                        <div class="mb-3 col-9 col-sm-12 col-lg-6">
                             <label for="client_name" class="form-label">NAME</label>
                             <input type="text" class="form-control  " id="client_name" v-model="this.user_data.client_name"
                                 placeholder="NAME">
                         </div>
 
-                        <div class="mb-3 w-50 col-4">
+                        <div class="mb-3 col-9 col-sm-12 col-lg-6">
                             <label for="delivery_address" class="form-label">ADDRESS</label>
                             <input type="text" class="form-control    text-secondary text-secondary" id="delivery_address"
                                 v-model="this.user_data.delivery_address" placeholder="ADDRESS">
                         </div>
 
-                        <div class="mb-3 col-12">
+                        <div class="mb-3 col-9 col-sm-12">
                             <label for="client_email" class="form-label">EMAIL</label>
                             <input type="email" class="form-control  " id="client_email" aria-describedby="emailHelp"
                                 v-model="this.user_data.client_email" placeholder="EMAIL">
                             <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
                         </div>
 
-                        <div class="mb-3 col-4">
+                        <div class="mb-3 col-9 col-sm-4">
                             <label for="client_phone" class="form-label">PHONE</label>
                             <input type="text" class="form-control  " id="client_phone"
                                 v-model="this.user_data.client_phone" placeholder="PHONE">
                         </div>
-                        <div class="mb-3 col-4">
+                        <div class="mb-3 col-9 col-sm-4">
                             <label for="date" class="form-label">DATE</label>
                             <input type="date" id="date" class="form-control   text-secondary" name="date"
                                 data-format="yyyy/mm/dd" v-model="this.user_data.date">
                         </div>
-                        <div class="mb-3 col-4">
+                        <div class="mb-3 col-9 col-sm-4">
                             <label for="delivery_time" class="form-label">DELIVERY TIME</label>
                             <input type="datetime-local" id="delivery_time" class="form-control text-secondary"
                                 name="delivery_time" data-format="dd/mm/yyyy HH:mm:ss"
                                 v-model="this.user_data.delivery_time">
                         </div>
-                        <button type="submit" class="btn btn-warning w-25 "
+                        <button type="submit" class="btn btn-warning col-6"
                             @click.prevent="this.flag = true">Submit</button>
                     </form>
                 </div>

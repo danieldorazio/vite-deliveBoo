@@ -132,36 +132,38 @@ export default {
                 <div class="container my-sticky">
                     <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 g-3">
                         <div class="col">
-                            <div class="card my-cart-br  p-3">
+                            <div class="rounded-top my-cart-br p-3 my_bg_gray text-white">
                                 <h5 class="card-title">Your Cart</h5>
-                                <div class="card-body" id="ciao">
-                                    <div class="item  d-flex justify-content-around p-3" v-for="item in store.cart"
+                                <div class="card-body p-3" id="ciao">
+                                    <div class="item d-flex mb-3" v-for="item in store.cart"
                                         :key="item.id">
-                                        <img :src="`${store.baseUrl}/storage/${item.image}`" alt="" class="my-cart-img">
-                                        <div>
+                                        <img :src="`${store.baseUrl}/storage/${item.image}`" alt="" class="my-cart-img me-3">
+                                        <div class="d-flex flex-column text-center align-items-center">
                                             <p>{{ item.name }}</p>
                                             <AppCartAddRemBtn :item="item" />
-                                            <p>{{ item.price * item.quantity }} €</p>
-                                            <button class="btn btn-warning"
-                                                @click="removeFromCart(item.id), getTotal()">Remove from
-                                                cart
-                                            </button>
+                                            <div class="d-flex justify-content-center align-items-center mt-3 text-center">
+                                                <p class="mb-0 me-3 btn btn-warning">{{ item.price * item.quantity }} €</p>
+                                                <button class="btn btn-danger"
+                                                    @click="removeFromCart(item.id), getTotal()"><i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        
 
                                     </div>
-                                    <div v-if="store.cart.length > 0">
-                                        <strong>Totale:</strong> 
-                                        <span>{{ getTotal()}} € </span>
-                                    </div>
-                                    <div v-if="store.cart.length > 0" class="subtotal mt-3">
-                                        <button class="btn btn-danger me-3" @click="emptyCart()">Empty cart</button>
-                                        <router-link  :to="{ name: 'checkout'}" class="btn btn-info">Go To Payment</router-link>
-                                    </div>
-                                    <div v-if="store.cart.length === 0">
-                                        <p class="text-danger">The cart is empty</p>
-                                    </div>
                                 </div>
+                            </div>
+                            <div class="my_cart_footer rounded-bottom p-3 my_bg_gray text-white" v-if="store.cart.length > 0">
+                                <div v-if="store.cart.length > 0">
+                                    <strong>Totale:</strong> 
+                                    <span>{{ getTotal()}} € </span>
+                                </div>
+                                <div v-if="store.cart.length > 0" class="subtotal mt-3">
+                                    <button class="btn btn-danger me-3" @click="emptyCart()">Empty cart</button>
+                                    <router-link  :to="{ name: 'checkout'}" class="btn btn-info">Go To Payment</router-link>
+                                </div>
+                            </div>
+                            <div v-if="store.cart.length === 0">
+                                <p class="text-danger">The cart is empty</p>
                             </div>
                         </div>
                     </div>
@@ -247,5 +249,8 @@ export default {
 }
 .my_bg_gray {
     background-color: rgb(40, 40, 40);
+}
+.my_cart_footer {
+    width: 400px;
 }
 </style>

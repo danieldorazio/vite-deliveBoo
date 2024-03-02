@@ -97,26 +97,24 @@ export default {
 <template>
     <div class="my_main">
 
-        <div class="back d-flex justify-content-evenly ">
+        <div class="back d-flex justify-content-evenly">
             <div class="dstr p-4">
                 <br>
                 <div class="container ">
                     <div class="row">
-                        <div class="col-3 rounded">
-                            <img :src="`${store.baseUrl}/storage/${restaurant.image}`" alt="" class="card-img-top ">
+                        <div class="col-3 ">
+                            <img :src="`${store.baseUrl}/storage/${restaurant.image}`" alt="" class="card-img-top rounded-circle">
                         </div>
-                        <div class="col-6 d-flex flex-column justify-content-center align-items-center rounded ms-5">
+                        <div class="col-6 d-flex flex-column justify-content-center align-items-center rounded ms-5 text-white my_bg_gray">
                             <div>
-                                <p class="fs-5">Name: <strong>{{ restaurant.restaurant_name }}</strong></p>
+                                <p class="fs-5 text-uppercase fw-bolder">{{ restaurant.restaurant_name }}</p>
                             </div>
                             <div>
-                                <p class="fs-5"> Street: <strong>{{ restaurant.street }}</strong></p>
+                                <p class="fs-5"> Address: <strong>{{ restaurant.street }}</strong></p>
                             </div>
                             <div>
-                                <p class="fs-5"> Open Time: <strong>{{ restaurant.time_open }}</strong></p>
-                            </div>
-                            <div>
-                                <p class="fs-5"> Close Time: <strong>{{ restaurant.time_close }}</strong></p>
+                                <p class="fs-5 badge rounded-pill text-bg-warning me-2"><strong>{{ restaurant.time_open }}</strong></p>
+                                <p class="fs-5 badge rounded-pill text-bg-warning ms-2"><strong>{{ restaurant.time_close }}</strong></p>
                             </div>
                         </div>
                     </div>
@@ -146,8 +144,8 @@ export default {
                                             <p>{{ item.price * item.quantity }} €</p>
                                             <button class="btn btn-warning"
                                                 @click="removeFromCart(item.id), getTotal()">Remove from
-                                                cart</button>
-                                                
+                                                cart
+                                            </button>
                                         </div>
                                         
 
@@ -214,7 +212,8 @@ export default {
 }
 
 .back {
-    background-color: #FAA343;
+    background-image: url('../assets/img/bg-pattern.jpg');
+    background-repeat: repeat;
 }
 
 
@@ -223,7 +222,7 @@ export default {
 }
 
 .col-3 {
-    background-color: white;
+    background-color: black;
 }
 
 .my-sticky {
@@ -245,5 +244,8 @@ export default {
     max-height: 700px;
     width: 400px;
     overflow-y: scroll;
+}
+.my_bg_gray {
+    background-color: rgb(40, 40, 40);
 }
 </style>

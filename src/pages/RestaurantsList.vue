@@ -4,9 +4,10 @@ import RestaurantCard from '../components/partials/RestaurantCard.vue';
 import AppFooter from '../components/partials/AppFooter.vue';
 import axios from 'axios';
 import { store } from '../store';
+import NewRestaurantCard from '../components/partials/NewRestaurantCard.vue';
 
 export default {
-    components: { AppHeader, RestaurantCard, AppFooter },
+    components: { AppHeader, RestaurantCard, AppFooter, NewRestaurantCard },
 
     data() {
         return {
@@ -23,7 +24,7 @@ export default {
         })
             .then((resp) => {
                 this.restaurants = resp.data.result;
-
+                console.log(this.restaurants);
             })
             .finally(() => {
                 this.loading = false;
@@ -37,22 +38,19 @@ export default {
 
 <template>
     <div class="my_main">
-        <div class="container mb-5">
+        <AppHeader/>
+        <div class="container mb-5 my_padding text-light">
             <div>
-                <h2>You have selected the following categories: </h2>
-                <h4 v-for="category in this.store.category_slug" :key="category">
-                    <strong>- {{ category }}</strong>
+                <h2 class="my_title">You have selected the following categories: </h2>
+                <h4 class="my_category" v-for="category in this.store.category_slug" :key="category">
+                 {{ category }}
                 </h4>
             </div>
 
-            <!-- <div>
-                Category buttons
-                SearchBar
-            </div> -->
-
             <div class="rest-list row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-3" v-if="restaurants">
                 <div v-for=" restaurant in restaurants" :key="restaurant.id">
-                    <RestaurantCard :restaurant="restaurant" />
+                    <!-- <RestaurantCard :restaurant="restaurant" /> -->
+                    <NewRestaurantCard :restaurant="restaurant"/>
                 </div>
             </div>
             <div v-else class="no-res">
@@ -67,11 +65,15 @@ export default {
 
 <style lang="scss" scoped>
 @use '../styles/partials/variables' as*;
-
+.my_padding{
+    padding-top: 100px;
+}
 .my_main {
     height: $height-main;
     overflow-y: scroll;
     background-color: aliceblue;
+    background-image: url('../assets/img/bg-pattern.jpg');
+    background-repeat: repeat;
 }
 
 .my_main::-webkit-scrollbar {
@@ -102,6 +104,20 @@ export default {
         @media (max-width: 320px) {
             margin-left: 50%;
     }
+}
+.my_category {
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    color: #000;
+    padding: 8px 16px;
+    background-color: #ffcc33;
+    font-weight: bold;
+    margin-right: 1rem;
+}
+.my_title {
+    text-transform: uppercase;
+    font-weight: bolder;
 }
 
 </style>

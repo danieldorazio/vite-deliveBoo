@@ -23,7 +23,7 @@ export default {
 
 
 <template>
-    <div class="btn my-btn-color">
+    <div class="my-btn-color">
         <!--  -->
         <router-link :to="{name: 'restaurants', params: {slug: categories[0].slug}}" class="nav-link">
             <h4>Search</h4>
@@ -40,5 +40,11 @@ export default {
     border-radius: 50px;
     border: 7px double #ffcc33;
     color: #fff;
+    transition: 1000ms;
+    &:hover {
+        transition: 1000ms;
+        border: 7px double #ffcc33;
+        background-color: #ffcc33;
+    }
 }
 </style>

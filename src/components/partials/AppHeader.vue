@@ -108,7 +108,6 @@ nav {
     color: black;
     background: linear-gradient(90deg, #f8e16c 0%, #faa343 100%);
     padding: 10px 30px;
-    border: 2px solid #f8e16c;
     box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
     border-radius: 50px;
     transition: 1000ms;
@@ -120,7 +119,6 @@ nav {
       padding: 10px 50px;
       transform: translateY(-0px);
       background: linear-gradient(90deg, #f8e16c 0%, #faa343 100%);
-      border: solid 2px #f8e16c;
     }
   }
 }

@@ -54,37 +54,36 @@ export default {
 </script>
 
 <template>
-    <div>
-        <button @click="addRemoveQty(1, item.quantity), updateQuantity(1,item.id, this.quantity)" class=" ms-2 btn btn-success my_btn">
-            <span class="my-sim-piú">+</span>
+    <div class="d-flex">
+        <button @click="addRemoveQty(-1, item.quantity), updateQuantity(-1,item.id, this.quantity)" class="my_btn">
+           <span class="hello">-</span> 
         </button>
-        <input type="number" v-model="this.item.quantity" disabled>
-        <button @click="addRemoveQty(-1, item.quantity), updateQuantity(-1,item.id, this.quantity)" class=" ms-2 btn btn-success my_btn">
-            <span class="my-sim-meno">-</span>
+            <input class="my_input text-center" type="number" v-model="this.item.quantity" disabled>
+        <button @click="addRemoveQty(1, item.quantity), updateQuantity(1,item.id, this.quantity)" class="my_btn ">
+            <span>+</span>
         </button>
     </div>
 </template>
 
 <style lang="scss" scoped>
+.my_input{
+    max-width: 40px;
+    background-color: #000;
+    color: white;
+    border: 1px solid black;
 
-.my_btn{
-    height: 20px;
-    width: 20px;
-    aspect-ratio: 1;
-    font-size: 10px;
-    position: relative;
 }
-
-
-.my-sim-piú{
-    position: absolute;
-    top: 0;
-    left: 35%;
-}
-
-.my-sim-meno{
-    position: absolute;
-    top: 0;
-    left: 40%;
+.my_btn {
+    text-decoration: none;
+    display: inline;
+    color: #000;
+    background-color: #ffcc33;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    .hello {
+        transform: translate(-200px);
+    }
 }
 </style>

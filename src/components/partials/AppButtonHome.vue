@@ -23,11 +23,11 @@ export default {
 
 
 <template>
-    <div class="my-btn-color">
-        <router-link :to="{name: 'restaurants', params: {slug: 'list'}}" class="nav-link" >
+    <router-link :to="{name: 'restaurants', params: {slug: 'list'}}" class="nav-link" >
+        <div class="my-btn-color">
             <button class="my_unstyled" :disabled="this.store.category_slug[0] === undefined">Search</button>
-        </router-link>
-    </div>
+        </div>
+    </router-link>
 </template>
 
 

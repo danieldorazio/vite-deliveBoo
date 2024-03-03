@@ -106,7 +106,8 @@ export default {
             setTimeout(() => {
                 this.$router.push('/thanks')
                 this.flag = false;
-                localStorage.setItem('cart', '[]'); 
+                localStorage.setItem('cart', '[]');
+                this.store.cart = []; 
             }, 5000);
         }
     },

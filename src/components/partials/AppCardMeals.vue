@@ -87,11 +87,11 @@ export default {
     </div>
     <div class="text-center mt-5">
             <div v-if="!this.store.cart.find(element => element.id == this.meal.id)">
-                <button  @click="addToCart(this.meal.id), getTotal()" class="my_btn" type="button" data-bs-target="#ciao" >Add to cart</button>
+                <button  @click="addToCart(this.meal.id), getTotal()" class="my_btn my_color_btn_payment" type="button" data-bs-target="#ciao" >Add to cart</button>
             </div>
-            <div v-else class="my_btn_gray">
+            <button v-else class="my_btn my_color_btn_added">
                 Added to cart
-            </div>
+            </button>
         </div>
 </template>
 
@@ -102,7 +102,8 @@ export default {
     .my-card-meals {
         width: 320px;
         height: 250px;
-        background-color: #ffff;
+        background-color: rgba(40, 40, 40, 0.5);
+        color: white;
         border-radius: 20px;
         display: flex;
         justify-content: center;
@@ -114,7 +115,7 @@ export default {
         h4 {
             position: absolute;
             bottom: 8px;
-            color: black;
+            color: white;            
             transition: 0.5;
             font-weight: 600;
         }
@@ -134,6 +135,7 @@ export default {
 
             h4 {
                 padding: 5px 25px;
+                color: #000;
                 background: linear-gradient(90deg, #f8e16c 0%, #ffcc33 100%);
                 bottom: -25px;
                 border-radius: 15px;
@@ -211,22 +213,6 @@ export default {
         }
     }
 }
-.my_btn{
-    text-decoration: none;
-    display: inline-block;
-    text-transform: uppercase;
-    color: #000;
-    padding: 8px 16px;
-    background-color: #ffcc33;
-    transition: 1000ms;
-    border: none;
-    font-weight: bold;
-    &:hover { 
-        transition: 1000ms;
-        background-color: #b8b8b8;
-        color: white;
-    }
-}
 .my_btn_gray {
     text-decoration: none;
     display: inline-block;
@@ -237,5 +223,26 @@ export default {
     transition: 1000ms;
     border: none;
     font-weight: bold;
+}
+.my_bg_gray {
+    background-color: rgba(40, 40, 40, 0.5);
+}
+.my_btn {
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: none;
+    color: black;
+    padding: 10px 30px;
+    box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+    border-radius: 50px;
+    transition: 1000ms;
+    transform: translateY(0);
+    cursor: pointer;
+  }
+.my_color_btn_payment {
+    background: linear-gradient(90deg, #f8e16c 0%, #faa343 100%);
+}
+.my_color_btn_added {
+    background: linear-gradient(90deg, #b8b8b8 0%, #4c4c4c 100%);
 }
 </style>

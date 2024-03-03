@@ -103,7 +103,7 @@ nav {
   }
 
   .my_btn {
-    font-weight: 0;
+    font-weight: bold;
     font-size: 14px;
     color: black;
     background: linear-gradient(90deg, #f8e16c 0%, #faa343 100%);

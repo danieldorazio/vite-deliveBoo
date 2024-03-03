@@ -162,8 +162,8 @@ export default {
                                     <span>{{ getTotal()}} € </span>
                                 </div>
                                 <div v-if="store.cart.length > 0" class="subtotal mt-3">
-                                    <button class="btn btn-danger me-3" @click="emptyCart()">Empty cart</button>
-                                    <router-link  :to="{ name: 'checkout'}" class="btn btn-info">Go To Payment</router-link>
+                                    <a class="my_btn my_color_btn_empty me-3" @click="emptyCart()">Empty cart</a>
+                                    <router-link  :to="{ name: 'checkout'}" class="my_btn my_color_btn_payment">Go To Payment</router-link>
                                 </div>
                             </div>
                         </div>
@@ -250,9 +250,40 @@ export default {
     overflow-y: scroll;
 }
 .my_bg_gray {
-    background-color: rgb(40, 40, 40);
+    background-color: rgba(40, 40, 40, 0.5);
 }
 .my_cart_footer {
     width: 400px;
 }
+.my_btn {
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: none;
+    color: black;
+    padding: 10px 30px;
+    box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+    border-radius: 50px;
+    transition: 1000ms;
+    transform: translateY(0);
+    cursor: pointer;
+
+    &:hover {
+      transition: 1000ms;
+      padding: 10px 50px;
+      transform: translateY(-0px);
+    }
+  }
+.my_color_btn_payment {
+    background: linear-gradient(90deg, #f8e16c 0%, #faa343 100%);
+    &:hover {
+        background: linear-gradient(90deg, #f8e16c 0%, #faa343 100%);
+    }
+}
+.my_color_btn_empty {
+    background: linear-gradient(90deg, #f75641 0%, red 100%);
+    &:hover {
+        background: linear-gradient(90deg, #f75641 0%, red 100%);
+    }
+}
+
 </style>

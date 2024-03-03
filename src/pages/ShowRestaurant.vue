@@ -4,6 +4,7 @@ import { store } from '../store';
 import AppFooter from '../components/partials/AppFooter.vue';
 import AppCartAddRemBtn from '../components/partials/AppCartAddRemBtn.vue';
 import AppCardMeals from '../components/partials/AppCardMeals.vue'
+import AppHeader from '../components/partials/AppHeader.vue';
 
 export default {
     data() {
@@ -35,7 +36,7 @@ export default {
                 this.loading = false;
             });
     },
-    components: { AppFooter, AppCardMeals, AppCartAddRemBtn },
+    components: { AppFooter, AppCardMeals, AppCartAddRemBtn, AppHeader },
     methods: {
         removeFromCart(mealId) {
             let temp = this.store.cart.filter(elem => elem.id != mealId);
@@ -96,7 +97,7 @@ export default {
 
 <template>
     <div class="my_main">
-
+        <AppHeader/>
         <div class="back d-flex justify-content-evenly">
             <div class="dstr p-4">
                 <br>
@@ -148,7 +149,10 @@ export default {
                                                 </button>
                                             </div>
                                         </div>
-
+                                        
+                                    </div>
+                                    <div v-if="store.cart.length === 0">
+                                        <p class="text-danger">The cart is empty</p>
                                     </div>
                                 </div>
                             </div>
@@ -161,9 +165,6 @@ export default {
                                     <button class="btn btn-danger me-3" @click="emptyCart()">Empty cart</button>
                                     <router-link  :to="{ name: 'checkout'}" class="btn btn-info">Go To Payment</router-link>
                                 </div>
-                            </div>
-                            <div v-if="store.cart.length === 0">
-                                <p class="text-danger">The cart is empty</p>
                             </div>
                         </div>
                     </div>
@@ -216,6 +217,7 @@ export default {
 .back {
     background-image: url('../assets/img/bg-pattern.jpg');
     background-repeat: repeat;
+    padding: 90px;
 }
 
 

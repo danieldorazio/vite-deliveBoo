@@ -24,9 +24,8 @@ export default {
 
 <template>
     <div class="my-btn-color">
-        <!--  -->
-        <router-link :to="{name: 'restaurants', params: {slug: categories[0].slug}}" class="nav-link">
-            <h4>Search</h4>
+        <router-link :to="{name: 'restaurants', params: {slug: 'list'}}" class="nav-link" >
+            <button class="my_unstyled" :disabled="this.store.category_slug[0] === undefined">Search</button>
         </router-link>
     </div>
 </template>
@@ -47,4 +46,9 @@ export default {
         background-color: #ffcc33;
     }
 }
+.my_unstyled {
+    border: none;
+    background: none;
+    color: #fff;
+}   
 </style>

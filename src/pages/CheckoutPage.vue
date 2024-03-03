@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { store } from '../store';
 import AppFooter from '../components/partials/AppFooter.vue';
+import AppHeader from '../components/partials/AppHeader.vue';
 
 export default {
     data() {
@@ -67,16 +68,20 @@ export default {
         },
         waitPag() {
             setTimeout(() => {
+                this.$router.push('/thanks')
                 this.flag = false;
+                localStorage.setItem('cart', '[]'); 
             }, 5000);
         }
     },
-    components: { AppFooter }
+    components: { AppFooter, AppHeader }
 }
 </script>
 
 <template>
     <div class="my_main">
+        <AppHeader/>
+
         <div class="my-background d-flex align-content-center">
             <div class="my-container container text-warning mt-4">
 
@@ -96,7 +101,7 @@ export default {
 
                         <div class="mb-3 w-50 col-4">
                             <label for="delivery_address" class="form-label">ADDRESS</label>
-                            <input type="text" class="form-control    text-secondary text-secondary" id="delivery_address"
+                            <input type="text" class="form-control" id="delivery_address"
                                 v-model="this.user_data.delivery_address" placeholder="ADDRESS">
                         </div>
 
@@ -114,12 +119,12 @@ export default {
                         </div>
                         <div class="mb-3 col-4">
                             <label for="date" class="form-label">DATE</label>
-                            <input type="date" id="date" class="form-control   text-secondary" name="date"
+                            <input type="date" id="date" class="form-control text-white" name="date"
                                 data-format="yyyy/mm/dd" v-model="this.user_data.date">
                         </div>
                         <div class="mb-3 col-4">
                             <label for="delivery_time" class="form-label">DELIVERY TIME</label>
-                            <input type="datetime-local" id="delivery_time" class="form-control text-secondary"
+                            <input type="datetime-local" id="delivery_time" class="form-control text-white"
                                 name="delivery_time" data-format="dd/mm/yyyy HH:mm:ss"
                                 v-model="this.user_data.delivery_time">
                         </div>
@@ -179,6 +184,7 @@ export default {
 
 .my-background {
     background-image: url(../assets/img/bg-pattern.jpg);
+    padding: 90px;
 
     .my-container {
         height: $height-main;
@@ -187,16 +193,17 @@ export default {
 
 .my-form {
     input {
-        background-color: #000000;
+        background-color: rgb(84, 84, 84);
         border: #000000;
         padding: 15px;
+        color: #ffffff;
     }
 }
 
 
 
 .form-control::placeholder {
-    color: #6c757d;
+    color: #ffffff;
     opacity: 1;
 }
 

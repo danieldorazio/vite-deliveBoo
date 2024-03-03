@@ -25,6 +25,29 @@ export default {
             },
         };
     },
+    computed: {
+        isNameValid() {
+            return this.user_data.client_name.trim() !== '';
+        },
+        isEmailValid() {
+            // Utilizza una regolare espressione per la validazione dell'email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(this.user_data.client_email);
+        },
+        isAddressValid() {
+            return this.user_data.delivery_address.trim() !== '';
+        },
+        isPhoneNumberValid() {
+            const phoneRegex = /^\d{10}$/;
+            return phoneRegex.test(this.user_data.client_phone);
+        },
+        isDateValid() {
+            return this.user_data.date.trim() !== '';
+        },
+        isDeliveryTimeValid() {
+            return this.user_data.delivery_time.trim() !== '';
+        },
+    },
     created() {
         axios
             .get(`${this.store.baseUrl}/api/braintree/token`)
@@ -35,6 +58,19 @@ export default {
             .finally(this.createForm);
     },
     methods: {
+        submitForm() {
+            // Effettua il submit solo se entrambi i campi sono validi
+            if (this.isNameValid && this.isEmailValid && this.isAddressValid && this.isPhoneNumberValid && this.isDateValid && this.isDeliveryTimeValid) {
+                // Gestisci l'invio del form qui
+                console.log('Form inviato con successo');
+                this.flag = true
+
+
+            } else {
+                console.log('Il form contiene errori');
+            }
+        },
+
         createForm() {
             var user_data = this.user_data;
             const button = document.querySelector('#submit-button');
@@ -87,44 +123,54 @@ export default {
 
 
                 <div class="mt-5">
-                    <form :class="this.flag ? 'd-none' : ''" class="my-form row justify-content-between ">
-                        <div class="mb-3 w-50 ">
+                    <form :class="this.flag ? 'd-none' : ''" class="my-form row justify-content-center">
+                        <div class="mb-3 col-9 col-sm-12 col-lg-6">
                             <label for="client_name" class="form-label">NAME</label>
-                            <input type="text" class="form-control  " id="client_name" v-model="this.user_data.client_name"
-                                placeholder="NAME">
+                            <input type="text" class="form-control  " id="client_name"
+                                v-model="this.user_data.client_name" placeholder="NAME"
+                                :class="{ 'is-invalid': !isNameValid }">
+                            <span v-if="!isNameValid" class="error">Il nome è obbligatorio</span>
                         </div>
 
-                        <div class="mb-3 w-50 col-4">
+                        <div class="mb-3 col-9 col-sm-12 col-lg-6">
                             <label for="delivery_address" class="form-label">ADDRESS</label>
-                            <input type="text" class="form-control    text-secondary text-secondary" id="delivery_address"
-                                v-model="this.user_data.delivery_address" placeholder="ADDRESS">
+                            <input type="text" class="form-control    text-secondary text-secondary"
+                                id="delivery_address" v-model="this.user_data.delivery_address" placeholder="ADDRESS"
+                                :class="{ 'is-invalid': !isAddressValid }">
+                            <span v-if="!isAddressValid" class="error">La via è obbligatoria</span>
                         </div>
 
-                        <div class="mb-3 col-12">
+                        <div class="mb-3 col-9 col-sm-12">
                             <label for="client_email" class="form-label">EMAIL</label>
                             <input type="email" class="form-control  " id="client_email" aria-describedby="emailHelp"
-                                v-model="this.user_data.client_email" placeholder="EMAIL">
-                            <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                                v-model="this.user_data.client_email" placeholder="EMAIL"
+                                :class="{ 'is-invalid': !isEmailValid }">
+                            <span v-if="!isEmailValid" class="error">L'email non è valida</span>
                         </div>
 
-                        <div class="mb-3 col-4">
+                        <div class="mb-3 col-9 col-sm-4">
                             <label for="client_phone" class="form-label">PHONE</label>
                             <input type="text" class="form-control  " id="client_phone"
-                                v-model="this.user_data.client_phone" placeholder="PHONE">
+                                v-model="this.user_data.client_phone" placeholder="PHONE"
+                                :class="{ 'is-invalid': !isPhoneNumberValid }">
+                            <span v-if="!isPhoneNumberValid" class="error">Il numero di telefono deve essere composto da
+                                10 cifre numeriche</span>
                         </div>
-                        <div class="mb-3 col-4">
+                        <div class="mb-3 col-9 col-sm-4">
                             <label for="date" class="form-label">DATE</label>
                             <input type="date" id="date" class="form-control   text-secondary" name="date"
-                                data-format="yyyy/mm/dd" v-model="this.user_data.date">
+                                data-format="yyyy/mm/dd" v-model="this.user_data.date"
+                                :class="{ 'is-invalid': !isDateValid }">
+                            <span v-if="!isDateValid" class="error">La data è obbligatorio</span>
                         </div>
-                        <div class="mb-3 col-4">
+                        <div class="mb-3 col-9 col-sm-4">
                             <label for="delivery_time" class="form-label">DELIVERY TIME</label>
                             <input type="datetime-local" id="delivery_time" class="form-control text-secondary"
                                 name="delivery_time" data-format="dd/mm/yyyy HH:mm:ss"
-                                v-model="this.user_data.delivery_time">
+                                v-model="this.user_data.delivery_time" :class="{ 'is-invalid': !isDeliveryTimeValid }">
+                            <span v-if="!isDeliveryTimeValid" class="error">Il giorno di consegna è obbligatoria</span>
                         </div>
-                        <button type="submit" class="btn btn-warning w-25 "
-                            @click.prevent="this.flag = true">Submit</button>
+                        <button type="submit" class="btn btn-warning col-6" @click.prevent="submitForm">Submit</button>
                     </form>
                 </div>
                 <div :class="this.flag ? '' : 'd-none'">
@@ -149,6 +195,14 @@ export default {
 
 <style lang="scss" scoped>
 @use "../styles/partials/variables" as *;
+
+.is-invalid {
+    border-color: red;
+}
+
+.error {
+    color: red;
+}
 
 .my_main {
     height: $height-main;

@@ -1,8 +1,9 @@
 <script>
+import { store } from "../store";
 export default {
     data() {
         return {
-
+            store,
         }
     }
 }
@@ -12,8 +13,9 @@ export default {
     <div class="my_main">
         <div class="back text-white d-flex justify-content-center align-items-center">
             <div class="text-center">
-                <h1>THANK YU BRV HAI KOMPRAT LA PASTA? FOZZA NAPOLI</h1>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis nihil corrupti delectus a. Ab a laboriosam, neque error explicabo totam illo itaque et blanditiis, quia exercitationem sapiente ad mollitia minus.</p>
+                <h1>THANK YOU FOR USING <span>DELIVEBOO</span></h1>
+                <p class="fs-5">Your order has been placed and will arrive at the time you indicated. Please take a moment to review your experience using <span>DeliveBoo.</span></p>
+                <p>By clicking the button below, you will be redirected to the home page.</p>
                 <router-link :to="{ name: 'home' }" @click="this.store.category_slug = []">
                     <button class="my_btn">
                         Home
@@ -30,6 +32,10 @@ export default {
     height: 100vh;
     background-color: aliceblue;
     position: relative;
+
+    span{
+        color: #ffcc33;
+    }
 }
 
 .back {
@@ -48,5 +54,6 @@ export default {
     transition: 1000ms;
     border: none;
     font-weight: bold;
+    border-radius: 10px;
 }
 </style>

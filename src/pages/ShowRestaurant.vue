@@ -220,13 +220,8 @@ export default {
     padding: 90px;
 }
 
-
-.col-6 {
-    background-color: rgb(255, 255, 255);
-}
-
 .col-3 {
-    background-color: black;
+    background-color: transparent;
 }
 
 .my-sticky {

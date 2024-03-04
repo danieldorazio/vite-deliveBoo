@@ -23,7 +23,7 @@ export default {
 
 
 <template>
-    <router-link :to="{name: 'restaurants', params: {slug: 'list'}}" class="nav-link" >
+    <router-link :to="{name: 'restaurants', params: {slug: 'list'}}" class="nav-link" :class="this.store.category_slug[0] === undefined ? 'my-disabled' : ''">
         <div class="my-btn-color">
             <button class="my_unstyled" :disabled="this.store.category_slug[0] === undefined">Search</button>
         </div>
@@ -33,6 +33,10 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.my-disabled{
+    pointer-events: none;
+}
 
 .my-btn-color{
     padding: 1rem 2rem;

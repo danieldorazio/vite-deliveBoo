@@ -68,15 +68,17 @@ export default {
                 
             </div>
         </div> -->
-        <div class="title-center">
-            <div class="bk-title">
-                <h2>CONTACTS</h2>
+        <hr class="my-color-hr">
+        <div class="title-center ">
+            <div class="d-flex justify-content-center">
+                <img src="../../assets/img/bg-title.png" alt="" class="me-3">
+                <h1 class="text-center text-white me-5">CONTACTS</h1>
             </div>
         </div>
         <div class="d-flex justify-content-around footer-wrap">
             <div>
                 <h3> <i class="fa-solid fa-location-dot"></i> LOCATION</h3>
-                <p>via daniel Roma</p>
+                <p>Via del Corso 5,Roma</p>
             </div>
             <div>
                  <h3> <i class="fa-solid fa-phone"></i> PHONE</h3>
@@ -87,7 +89,11 @@ export default {
                 <p>ludo.segretaria@gmail.com</p>
             </div>
             <div>
-                <ul>
+                <h3><i class="fa-solid fa-square-share-nodes"></i>
+                    <i class="fa-solid fa-share-nodes"></i>
+                    <i class="fa-solid fa-link"></i> SOCIAL</h3>
+                <ul class="d-flex gap-3">
+                    <li><i class="fa-brands fa-github"></i></li>
                     <li><i class="fa-brands fa-facebook"></i></li>
                     <li><i class="fa-brands fa-x-twitter"></i></li>
                     <li><i class="fa-brands fa-instagram"></i></li>
@@ -106,7 +112,7 @@ export default {
     padding-bottom: 50px;
 
     i{
-        color: yellow;
+        color: #ffcc33;
     }
 }
 .title-center{
@@ -118,17 +124,7 @@ export default {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     margin-bottom: 50px;
-
-    .bk-title {
-    background-image: url(../../assets/img/bg-title.png);
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-size: 80px;
-    font-size: 40px;
-    margin-bottom: 20px;
-    position: relative;
-    padding-bottom: 20px;
-}
+    padding-top: 50px;
 }
 
 
@@ -137,7 +133,6 @@ export default {
     background-color: black;
     color: white;
     min-height: 300px;
-    padding-top: 100px;
 }
 
 .card-1 {
@@ -157,5 +152,10 @@ ul {
     li {
         margin: 2px 0;
     }
+}
+
+.my-color-hr{
+    margin: 0;
+    border: 2px solid #ffcc33;
 }
 </style>

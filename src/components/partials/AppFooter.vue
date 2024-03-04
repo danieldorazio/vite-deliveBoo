@@ -27,8 +27,9 @@ export default {
 
 <template>
     <footer class="fake-h">
-        <!-- <div class="container">
-            <div class="row d-flex justify-content-between row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+        <hr class="my-color-hr">
+         <div class="container">
+          <!--  <div class="row d-flex justify-content-between row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
                 <div class="col">
                     <div class="card-1 rounded">
                         <h3 class="text-center">Contact us</h3>
@@ -68,29 +69,29 @@ export default {
                 
             </div>
         </div> -->
-        <hr class="my-color-hr">
+        
         <div class="title-center ">
             <div class="d-flex justify-content-center">
                 <img src="../../assets/img/bg-title.png" alt="" class="me-3">
                 <h1 class="text-center text-white me-5">CONTACTS</h1>
             </div>
         </div>
-        <div class="d-flex justify-content-around footer-wrap">
-            <div>
+        <div class="resp row d-flex justify-content-around footer-wrap">
+            <div class="col-lg col-md-1">
                 <h3> <i class="fa-solid fa-location-dot"></i> LOCATION</h3>
-                <p>Via del Corso 5,Roma</p>
+                <p>Via del Corso 5, Roma</p>
             </div>
-            <div>
+            <div class="col-lg col-md-1">
                  <h3> <i class="fa-solid fa-phone"></i> PHONE</h3>
                  <p>3420301612</p>
             </div>
-            <div>
+            <div class="col-lg col-md-1">
                 <h3><i class="fa-solid fa-envelope"></i> EMAIL</h3>
                 <p>ludo.segretaria@gmail.com</p>
             </div>
-            <div>
+            <div class="col-lg col-md-1 resp">
                 <h3><i class="fa-solid fa-square-share-nodes"></i> SOCIAL</h3>
-                <div class="d-flex gap-3">
+                <div class="d-flex gap-3 resp-icons">
                     <span><i class="fa-brands fa-github"></i></span>
                     <span><i class="fa-brands fa-facebook"></i></span>
                     <span><i class="fa-brands fa-x-twitter"></i></span>
@@ -99,7 +100,7 @@ export default {
                 </div>
             </div>
         </div>
-
+    </div>
     </footer>
 </template>
 
@@ -111,8 +112,10 @@ export default {
 
     i{
         color: #ffcc33;
+
     }
 }
+
 .title-center{
     text-align: center;
     max-width: 600px;
@@ -146,5 +149,21 @@ export default {
 .my-color-hr{
     margin: 0;
     border: 2px solid #ffcc33;
+}
+
+.resp {
+    @media (max-width: 800px) {
+        text-align: center;
+        // padding-left: 1rem;
+        
+    }
+}
+
+.resp-icons {
+  @media (max-width: 800px) {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+  }
 }
 </style>

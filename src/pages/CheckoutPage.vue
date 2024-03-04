@@ -129,54 +129,58 @@ export default {
 
 
                 <div class="mt-5">
-                    <form :class="this.flag ? 'd-none' : ''" class="my-form row justify-content-center">
+                    <form :class="this.flag ? 'd-none' : ''" class="my-form row justify-content-center" novalidate>
                         <div class="mb-3 col-9 col-sm-12 col-lg-6">
-                            <label for="client_name" class="form-label">NAME</label>
+                            <label for="client_name" class="form-label me-2">NAME</label>
+                            <span v-if="!isNameValid" class="error">*</span>
                             <input type="text" class="form-control  " id="client_name"
                                 v-model="this.user_data.client_name" placeholder="NAME"
-                                :class="{ 'is-invalid': !isNameValid }">
-                            <span v-if="!isNameValid" class="error">Il nome è obbligatorio</span>
+                                :class="{ 'is-invalid': !isNameValid }" required>
+                            
                         </div>
 
                         <div class="mb-3 col-9 col-sm-12 col-lg-6">
-                            <label for="delivery_address" class="form-label">ADDRESS</label>
+                            <label for="delivery_address" class="form-label me-2">ADDRESS</label>
+                            <span v-if="!isAddressValid" class="error">*</span>
                             <input type="text" class="form-control"
                                 id="delivery_address" v-model="this.user_data.delivery_address" placeholder="ADDRESS"
                                 :class="{ 'is-invalid': !isAddressValid }">
-                            <span v-if="!isAddressValid" class="error">La via è obbligatoria</span>
+                            
                         </div>
 
                         <div class="mb-3 col-9 col-sm-12">
-                            <label for="client_email" class="form-label">EMAIL</label>
+                            <label for="client_email" class="form-label me-2">EMAIL</label>
+                            <span v-if="!isEmailValid" class="error">*</span>
                             <input type="email" class="form-control  " id="client_email" aria-describedby="emailHelp"
                                 v-model="this.user_data.client_email" placeholder="EMAIL"
                                 :class="{ 'is-invalid': !isEmailValid }">
-                            <span v-if="!isEmailValid" class="error">L'email non è valida</span>
+                            
                         </div>
 
                         <div class="mb-3 col-9 col-sm-4">
-                            <label for="client_phone" class="form-label">PHONE</label>
+                            <label for="client_phone" class="form-label me-2">PHONE</label>
+                            <span v-if="!isPhoneNumberValid" class="error">*</span>
                             <input type="text" class="form-control  " id="client_phone"
                                 v-model="this.user_data.client_phone" placeholder="PHONE"
                                 :class="{ 'is-invalid': !isPhoneNumberValid }">
-                            <span v-if="!isPhoneNumberValid" class="error">Il numero di telefono deve essere composto da
+                            <span v-if="!isPhoneNumberValid" class="error my-phone">Il numero di telefono deve essere composto da
                                 10 cifre numeriche</span>
                         </div>
                         <div class="mb-3 col-9 col-sm-4">
-                            <label for="date" class="form-label">DATE</label>
-                            <input type="date" id="date" class="form-control text-white" name="date"
+                            <label for="date" class="form-label me-2">DATE</label>
+                            <span v-if="!isDateValid" class="error">*</span>
+                            <input type="date" id="date" class="form-control text-white pe-5" name="date"
                                 data-format="yyyy/mm/dd" v-model="this.user_data.date"
                                 :class="{ 'is-invalid': !isDateValid }">
-                            <span v-if="!isDateValid" class="error">La data è obbligatorio</span>
                         </div>
                         <div class="mb-3 col-9 col-sm-4">
-                            <label for="delivery_time" class="form-label">DELIVERY TIME</label>
-                            <input type="datetime-local" id="delivery_time" class="form-control text-white"
+                            <label for="delivery_time" class="form-label me-2">DELIVERY TIME</label>
+                            <span v-if="!isDeliveryTimeValid" class="error">*</span>
+                            <input type="datetime-local" id="delivery_time" class="form-control text-white pe-5"
                                 name="delivery_time" data-format="dd/mm/yyyy HH:mm:ss"
                                 v-model="this.user_data.delivery_time" :class="{ 'is-invalid': !isDeliveryTimeValid }">
-                            <span v-if="!isDeliveryTimeValid" class="error">Il giorno di consegna è obbligatoria</span>
                         </div>
-                        <button type="submit" class="btn btn-warning col-6" @click.prevent="submitForm">Submit</button>
+                        <button type="submit" class="btn btn-warning col-4" @click.prevent="submitForm">Submit</button>
                     </form>
                 </div>
                 <div :class="this.flag ? '' : 'd-none'">
@@ -189,7 +193,6 @@ export default {
                 </div>
             </div>
         </div>
-
 
         <div>
             <AppFooter />
@@ -206,8 +209,8 @@ export default {
     border-color: red;
 }
 
-.error {
-    color: red;
+.my-phone {
+    font-size: .75rem;
 }
 
 .my_main {

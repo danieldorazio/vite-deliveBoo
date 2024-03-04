@@ -73,26 +73,30 @@ export default {
 </script>
 
 <template>
-    <div class="container-meals position-relative d-flex justify-content-center align-items-center flex-wrap">
-        <div class="my-card-meals position-relative">
-            <div class="img-bx">
-                <img :src="`${store.baseUrl}/storage/${meal.image}`" alt="" class="card-img-top" />
+    <div class="">
+        <div class="container-meals position-relative d-flex justify-content-center align-items-center flex-wrap">
+            <div class="my-card-meals position-relative">
+                <div class="img-bx">
+                    <img :src="`${store.baseUrl}/storage/${meal.image}`" alt="" class="card-img-top" />
+                </div>
+                <div class="content-meal">
+                    <p><strong>Description meal: </strong> {{ meal.description }}</p>
+                    <p><strong>Price meal: </strong> {{ meal.price }} €</p>
+                </div>
+                <h4>{{ meal.name }}</h4>
             </div>
-            <div class="content-meal">
-                <p><strong>Description meal: </strong> {{ meal.description }}</p>
-                <p><strong>Price meal: </strong> {{ meal.price }} €</p>
-            </div>
-            <h4>{{ meal.name }}</h4>
         </div>
-    </div>
-    <div class="text-center mt-5">
+        <div class="text-center mt-5">
             <div v-if="!this.store.cart.find(element => element.id == this.meal.id)">
-                <button  @click="addToCart(this.meal.id), getTotal()" class="my_btn my_color_btn_payment" type="button" data-bs-target="#ciao" >Add to cart</button>
+                <button @click="addToCart(this.meal.id), getTotal()" class="my_btn my_color_btn_payment" type="button"
+                    data-bs-target="#ciao">Add to cart</button>
             </div>
             <button v-else class="my_btn my_color_btn_added">
                 Added to cart
             </button>
         </div>
+    </div>
+
 </template>
 
 <style lang="scss" scoped>
@@ -115,7 +119,7 @@ export default {
         h4 {
             position: absolute;
             bottom: 8px;
-            color: white;            
+            color: white;
             transition: 0.5;
             font-weight: 600;
         }
@@ -213,6 +217,7 @@ export default {
         }
     }
 }
+
 .my_btn_gray {
     text-decoration: none;
     display: inline-block;
@@ -224,9 +229,11 @@ export default {
     border: none;
     font-weight: bold;
 }
+
 .my_bg_gray {
     background-color: rgba(40, 40, 40, 0.5);
 }
+
 .my_btn {
     font-weight: bold;
     font-size: 14px;
@@ -238,10 +245,12 @@ export default {
     transition: 1000ms;
     transform: translateY(0);
     cursor: pointer;
-  }
+}
+
 .my_color_btn_payment {
     background: linear-gradient(90deg, #f8e16c 0%, #faa343 100%);
 }
+
 .my_color_btn_added {
     background: linear-gradient(90deg, #b8b8b8 0%, #4c4c4c 100%);
 }

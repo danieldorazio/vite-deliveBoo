@@ -38,23 +38,23 @@ export default {
 
 <template>
     <div class="my_main">
-        <AppHeader/>
+        <AppHeader />
         <div class="container mb-5 my_padding text-light">
             <div>
                 <h2 class="my_title">You have selected the following categories: </h2>
                 <h4 class="my_category" v-for="category in this.store.category_slug" :key="category">
-                 {{ category }}
+                    {{ category }}
                 </h4>
             </div>
 
             <div class="rest-list row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-3" v-if="restaurants">
-                <div v-for=" restaurant in restaurants" :key="restaurant.id">
+                <div v-for=" restaurant in restaurants" :key="restaurant.id" class="d-flex justify-content-center">
                     <!-- <RestaurantCard :restaurant="restaurant" /> -->
-                    <NewRestaurantCard :restaurant="restaurant"/>
+                    <NewRestaurantCard :restaurant="restaurant" />
                 </div>
             </div>
             <div v-else class="no-res">
-               <p>No restaurant available</p>
+                <p>No restaurant available</p>
             </div>
         </div>
         <AppFooter />
@@ -65,9 +65,11 @@ export default {
 
 <style lang="scss" scoped>
 @use '../styles/partials/variables' as*;
-.my_padding{
+
+.my_padding {
     padding-top: 100px;
 }
+
 .my_main {
     height: $height-main;
     overflow-y: scroll;
@@ -92,19 +94,19 @@ export default {
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(.5, #FAA343), color-stop(1, #F8E16C));
     border-radius: 10px;
 }
+
 .rest-list {
-    @media (min-width: 1024px) {
-            
-        }
+    @media (min-width: 1024px) {}
 
-        @media (max-width: 760px) {
-            // margin-left: 0%;
-        }
+    @media (max-width: 760px) {
+        // margin-left: 0%;
+    }
 
-        @media (max-width: 320px) {
-            margin-left: 50%;
+    @media (max-width: 320px) {
+        margin-left: 50%;
     }
 }
+
 .my_category {
     text-decoration: none;
     display: inline-block;
@@ -115,9 +117,9 @@ export default {
     font-weight: bold;
     margin-right: 1rem;
 }
+
 .my_title {
     text-transform: uppercase;
     font-weight: bolder;
 }
-
 </style>

@@ -5,9 +5,10 @@ import AppCard from "../components/partials/AppCard.vue";
 import AppFooter from "../components/partials/AppFooter.vue";
 import AppJumbotron from "../components/partials/AppJumbotron.vue";
 import AppButtonHome from "../components/partials/AppButtonHome.vue";
+import AppTeam from "../components/partials/AppTeam.vue";
 
 export default {
-    components: { AppJumbotron, AppCard, AppFooter, AppButtonHome },
+    components: { AppJumbotron, AppCard, AppFooter, AppButtonHome, AppTeam },
 
     data() {
         return {
@@ -67,9 +68,9 @@ export default {
                 <div class="cat-btn mt-3">
                     <AppButtonHome :categories="categories" />
                 </div>
-
             </div>
         </div>
+        <AppTeam />
         <AppFooter />
     </div>
 </template>

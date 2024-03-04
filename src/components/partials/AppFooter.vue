@@ -89,16 +89,14 @@ export default {
                 <p>ludo.segretaria@gmail.com</p>
             </div>
             <div>
-                <h3><i class="fa-solid fa-square-share-nodes"></i>
-                    <i class="fa-solid fa-share-nodes"></i>
-                    <i class="fa-solid fa-link"></i> SOCIAL</h3>
-                <ul class="d-flex gap-3">
-                    <li><i class="fa-brands fa-github"></i></li>
-                    <li><i class="fa-brands fa-facebook"></i></li>
-                    <li><i class="fa-brands fa-x-twitter"></i></li>
-                    <li><i class="fa-brands fa-instagram"></i></li>
-                    <li><i class="fa-brands fa-youtube"></i></li>
-                </ul>
+                <h3><i class="fa-solid fa-square-share-nodes"></i> SOCIAL</h3>
+                <div class="d-flex gap-3">
+                    <span><i class="fa-brands fa-github"></i></span>
+                    <span><i class="fa-brands fa-facebook"></i></span>
+                    <span><i class="fa-brands fa-x-twitter"></i></span>
+                    <span><i class="fa-brands fa-instagram"></i></span>
+                    <span><i class="fa-brands fa-youtube"></i></span>
+                </div>
             </div>
         </div>
 
@@ -143,15 +141,6 @@ export default {
     text-align: left;
     padding: 1rem;
     height: 240px;
-}
-
-ul {
-    text-decoration: none;
-    list-style-type: none;
-
-    li {
-        margin: 2px 0;
-    }
 }
 
 .my-color-hr{

@@ -27,7 +27,7 @@ export default {
             // controlla se il ristorante è stato cambiato, se vero cancella il carrello precedente
             for (const storemeal of this.store.cart) {
                 if (storemeal.restaurant_id != this.meal.restaurant_id) {
-                    if (confirm(' If you add this meal to your cart it will be emptied, are you sure?')) {
+                    if (confirm('If you add to your cart a meal from a different restaurant, your previous cart will be emptied. Do you wish to proceed?')) {
                         this.store.cart = [];
                         if (this.store.cart.length == 0) {
                             this.store.cart.push(this.meal);

@@ -37,7 +37,7 @@ export default {
 <template>
     <div class="my_main pattern-category">
         <AppJumbotron />
-        <div class="container p-0 mt-5 mb-5">
+        <div class="container  mt-5 mb-5">
             <div v-if="loading">
                 <h3>Loading...</h3>
             </div>
@@ -75,7 +75,7 @@ export default {
                 </div>
             </div>
         </div>
-        <AppTeam />
+        <!-- <AppTeam /> -->
         <AppFooter />
     </div>
 </template>
@@ -85,12 +85,15 @@ export default {
 
 .my_main {
     height: $height-main;
-    overflow-y: scroll;;
+    overflow-y: scroll;
+    
+    
 }
 
 .my_main::-webkit-scrollbar {
     width: 12px;
     border-radius: 10px;
+    
 }
 
 .my_main::-webkit-scrollbar-track {

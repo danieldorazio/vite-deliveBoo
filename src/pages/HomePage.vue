@@ -5,10 +5,11 @@ import AppCard from "../components/partials/AppCard.vue";
 import AppFooter from "../components/partials/AppFooter.vue";
 import AppJumbotron from "../components/partials/AppJumbotron.vue";
 import AppButtonHome from "../components/partials/AppButtonHome.vue";
+import AppTeam from "../components/partials/AppTeam.vue";
 import AppNewCard from "../components/partials/AppNewCard.vue";
 
 export default {
-    components: { AppJumbotron, AppCard, AppFooter, AppButtonHome, AppNewCard },
+    components: { AppJumbotron, AppCard, AppFooter, AppButtonHome, AppNewCard, AppTeam },
 
     data() {
         return {
@@ -72,9 +73,9 @@ export default {
                 <div class="cat-btn mt-3 d-flex justify-content-center">
                     <AppButtonHome :categories="categories" />
                 </div>
-
             </div>
         </div>
+        <AppTeam />
         <AppFooter />
     </div>
 </template>

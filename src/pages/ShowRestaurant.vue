@@ -137,7 +137,7 @@ export default {
                 <div class="container my-sticky">
                     <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 g-3">
                         <div class="col">
-                            <div class="rounded-top my-cart-br p-3 my_bg_gray text-white">
+                            <div class="rounded-top my-cart-br p-3 my_bg_gray text-white  my">
                                 <h5 class="card-title">Your Cart</h5>
                                 <div class="card-body p-3" id="ciao">
                                     <div class="item d-flex mb-3" v-for="item in store.cart" :key="item.id">
@@ -293,6 +293,24 @@ export default {
     position: relative;
     background-color: black;
 }
+
+.my-cart-br::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 10px;
+}
+
+.my-cart-br::-webkit-scrollbar-track {
+    border-radius: 10px;
+    border: 1px solid #cacaca;
+    background-color: #f1f1f1;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+.my-cart-br::-webkit-scrollbar-thumb {
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(.5, #FAA343), color-stop(1, #F8E16C));
+    border-radius: 10px;
+}
+
 
 .my_main::-webkit-scrollbar {
     width: 12px;

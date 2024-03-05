@@ -191,7 +191,7 @@ export default {
             </div>
             <div class="offcanvas-body small my-offcanvas ">
                 <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 g-3 justify-content-center">
-                        <div class="col">
+                        <div class="col my-display">
                             <div class="rounded-top my-cart-br p-3 my_bg_gray text-white">
                                 <h5 class="card-title">Your Cart</h5>
                                 <div class="card-body p-3" id="ciao">
@@ -240,6 +240,10 @@ export default {
 
 <style lang="scss" scoped>
 @use '../styles/partials/variables' as*;
+
+.my-display {
+    display: contents;
+}
 
 .my-bg-offcanvas{
     background-color: black;

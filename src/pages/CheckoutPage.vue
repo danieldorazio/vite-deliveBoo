@@ -121,6 +121,15 @@ export default {
 
         <div class="my-background d-flex align-content-center">
             <div class="my-container container text-warning mt-4">
+                <div>
+                <ul class="d-flex flex-column text-white">
+                    <li v-for="piatto in this.store.cart">
+                       Name: {{ piatto.name }}
+                       Quantity : {{ piatto.quantity }}
+                       TotalPrice: {{ piatto.price * piatto.quantity}}
+                    </li>
+                </ul>
+            </div>
 
                 <div class="d-flex justify-content-center align-items-center gap-5 p-3 text-white">
                     <img src="../assets/img/bg-title.png" alt="">

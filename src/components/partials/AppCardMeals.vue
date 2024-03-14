@@ -73,20 +73,19 @@ export default {
 </script>
 
 <template>
-    <div class="">
-        <div class="container-meals position-relative d-flex justify-content-center align-items-center flex-wrap">
-            <div class="my-card-meals position-relative">
-                <div class="img-bx">
-                    <img :src="`${store.baseUrl}/storage/${meal.image}`" alt="" class="card-img-top" />
-                </div>
-                <div class="content-meal">
-                    <p><strong>Description meal: </strong> {{ meal.description }}</p>
-                    <p><strong>Price meal: </strong> {{ meal.price }} €</p>
-                </div>
-                <h4>{{ meal.name }}</h4>
+    <!-- AppCardMeals -->
+    <div class="wrapper">
+        <div class="card">
+            <div class="poster"> <img :src="`${store.baseUrl}/storage/${meal.image}`" alt="" class="card-img-top" />
             </div>
-        </div>
-        <div class="text-center mt-5">
+            <div class="details">
+                <h1>{{ meal.name }}</h1>
+                <h2> {{ meal.price }} €</h2>
+                <p class="desc">
+                    <strong>Description meal: </strong>
+                    {{ meal.description }}
+                </p>
+                <div class="text-center mt-5">
             <div v-if="!this.store.cart.find(element => element.id == this.meal.id)">
                 <button @click="addToCart(this.meal.id), getTotal()" class="my_btn my_color_btn_payment" type="button"
                     data-bs-target="#ciao">Add to cart</button>
@@ -95,129 +94,194 @@ export default {
                 Added to cart
             </button>
         </div>
+            </div>
+        </div>
     </div>
+
 
 </template>
 
 <style lang="scss" scoped>
 @use '../../styles/partials/variables' as *;
 
-.container-meals {
-    .my-card-meals {
-        width: 320px;
-        height: 250px;
-        background-color: rgba(40, 40, 40, 0.5);
-        color: white;
-        border-radius: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        cursor: pointer;
-        transition: 0.5s;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
-        h4 {
-            position: absolute;
-            bottom: 8px;
-            color: white;
-            transition: 0.5;
-            font-weight: 600;
-        }
-
-        .content-meal {
-            position: relative;
-            padding: 40px;
-            text-align: center;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-50px);
-            transition: 0.5s;
-        }
-
-        &:hover {
-            height: 350px;
-
-            h4 {
-                padding: 5px 25px;
-                color: #000;
-                background: linear-gradient(90deg, #f8e16c 0%, #ffcc33 100%);
-                bottom: -25px;
-                border-radius: 15px;
-                box-shadow: 0 0 0 10px #282828;
-            }
-
-            .content-meal {
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(40px);
-            }
-
-            .img-bx {
-                inset: -50px 60px 250px 60px;
-                box-shadow: 0 0 0 10px #ffcc33;
-
-                &::before {
-                    opacity: 1;
-                    transform: translateY(50px);
-                }
-
-                &::after {
-                    opacity: 1;
-                    transform: translateY(50px);
-                }
-            }
-        }
-
-        .img-bx {
-            position: absolute;
-            inset: 20px 20px 50px 20px;
-            background: #f00;
-            border-radius: 15px;
-            transition: 0.5s;
-
-            &::before {
-                content: "";
-                position: absolute;
-                width: 20px;
-                height: 20px;
-                background: transparent;
-                left: -30px;
-                border-top-right-radius: 20px;
-                transform: translateY(-100px);
-                opacity: 0;
-                box-shadow: 5px -5px 0 4px #ffcc33;
-                pointer-events: none;
-                transition: 0.5s;
-            }
-
-            &::after {
-                content: "";
-                position: absolute;
-                width: 20px;
-                height: 20px;
-                background: transparent;
-                right: -30px;
-                border-top-left-radius: 20px;
-                transform: translateY(-100px);
-                opacity: 0;
-                box-shadow: -5px -5px 0 4px #ffcc33;
-                pointer-events: none;
-                transition: 0.5s;
-            }
-
-            img {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 15px;
-            }
-        }
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter, sans-serif;
 }
 
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f5f5f5;
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    // padding: 20px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.card {
+    position: relative;
+    width: 325px;
+    height: 350px;
+    background: #000;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+.poster {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.poster::before {
+    content: '';
+    position: absolute;
+    bottom: -45%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: .3s;
+}
+
+.card:hover .poster::before {
+    bottom: 0;
+}
+
+.poster img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .3s;
+}
+
+.card:hover .poster img {
+    transform: scale(1.1);
+}
+
+.details {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding: 1.5em 1.5em 2em;
+    background: #000a;
+    backdrop-filter: blur(16px) saturate(120%);
+    transition: .3s;
+    color: #fff;
+    z-index: 2;
+}
+
+.card:hover .details {
+    bottom: 0;
+}
+
+.details h1,
+.details h2 {
+    font-weight: 700;
+}
+
+.details h1 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.details h2 {
+    font-weight: 400;
+    font-size: 1em;
+    margin-bottom: 10px;
+    opacity: .6;
+}
+
+.details .rating {
+    position: relative;
+    margin-bottom: 15px;
+    display: flex;
+    gap: .25em;
+}
+
+.details .rating i {
+    color: #e3c414;
+}
+
+.details .rating span {
+    margin-left: 0.25em;
+}
+
+.details .tags {
+    display: flex;
+    gap: .375em;
+    margin-bottom: .875em;
+    font-size: .85em;
+}
+
+.details .tags span {
+    padding: .35rem .65rem;
+    color: #fff;
+    border: 1.5px solid rgba(255 255 255 / 0.4);
+    border-radius: 4px;
+    border-radius: 50px;
+}
+
+.details .desc {
+    color: #fff;
+    opacity: .8;
+    line-height: 1.5;
+    margin-bottom: 1em;
+}
+
+.details .cast h3 {
+    margin-bottom: .5em;
+}
+
+.details .cast ul {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    width: 100%;
+}
+
+.details .cast ul li {
+    list-style: none;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1.5px solid #fff;
+}
+
+.details .cast ul li img {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/**************************************************************************** */
 .my_btn_gray {
     text-decoration: none;
     display: inline-block;

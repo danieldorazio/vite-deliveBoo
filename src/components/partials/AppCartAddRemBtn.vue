@@ -16,7 +16,7 @@ export default {
             console.log(quantity,'quantyt');
             for (const meal of this.store.cart) {
                 if(number == 1){
-                    if (meal.quantity < 10) {
+                    if (meal.quantity < 99) {
                         if (meal.id == mealId) {
                         meal.quantity = meal.quantity + 1;
                     }
@@ -35,7 +35,7 @@ export default {
         addRemoveQty(number, itemQuantity) {
             console.log(itemQuantity,'itemquantity');
             if (number == 1) {
-                if (this.quantity < 10) {
+                if (this.quantity < 99) {
                     this.quantity++
                     itemQuantity = this.quantity
                     console.log(this.quantity, 'thisqantity');

@@ -128,7 +128,7 @@ export default {
                 <div class="container">
                     <div class="d-flex flex-wrap gap-3 row row-cols-lg-3 row-cols-sm-1 my-justify ">
                         <div class="col-4 mt-5 mb-5" v-for="meal in meals" :key="meal.id">
-                            <AppCardMeals :meal="meal"  />
+                            <AppCardMeals :meal="meal" />
                         </div>
                     </div>
                 </div>
@@ -138,25 +138,25 @@ export default {
                     <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 g-3">
                         <div class="col">
                             <div class="rounded-top my-cart-br p-3 my_bg_gray text-white  my">
-                                <h5 class="card-title">Your Cart</h5>
-                                <div class="card-body p-3" id="ciao">
-                                    <div class="item d-flex mb-3" v-for="item in store.cart" :key="item.id">
-                                        <img :src="`${store.baseUrl}/storage/${item.image}`" alt=""
-                                            class="my-cart-img me-3">
-                                        <div class="d-flex flex-column text-center align-items-center">
-                                            <p>{{ item.name }}</p>
-                                            <AppCartAddRemBtn :item="item" />
-                                            <div
-                                                class="d-flex justify-content-center align-items-center mt-3 text-center">
-                                                <p class="mb-0 me-3 btn btn-warning">{{ item.price * item.quantity }} €
-                                                </p>
-                                                <button class="btn btn-danger"
-                                                    @click="removeFromCart(item.id), getTotal()"><i
-                                                        class="fa-solid fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </div>
+                                <div class="d-flex justify-content-between align-items-center p-3">
+                                    <h3 class="card-title">Your order</h3> <span class=" fs-3">{{ getTotal() }} € </span>
+                                </div>
 
+                                
+                                <div class="card-body p-3 " id="ciao">
+                                    <div  v-for="item in store.cart" :key="item.id">
+                                        
+                                        <div class="d-flex flex-row flex-wrap gap-2  text-center align-items-center justify-content-between mb-5">
+                                            <p class="fs-5 w-50">{{ item.name }}</p>
+                                            <p class="">{{ item.price * item.quantity}} €</p>
+                                                <AppCartAddRemBtn :item="item" />
+                                                <div class="">
+                                                    <button class="btn btn-danger"
+                                                        @click="removeFromCart(item.id), getTotal()"><i
+                                                            class="fa-solid fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                        </div>
                                     </div>
                                     <div v-if="store.cart.length === 0">
                                         <p class="text-danger">The cart is empty</p>
@@ -171,7 +171,7 @@ export default {
                                 </div>
                                 <div v-if="store.cart.length > 0" class="subtotal mt-3">
                                     <a class="my_btn my_color_btn_empty me-3" @click="emptyCart()">Empty cart</a>
-                                    <router-link :to="{ name: 'checkout'}" class="my_btn my_color_btn_payment">Go To
+                                    <router-link :to="{ name: 'checkout' }" class="my_btn my_color_btn_payment">Go To
                                         Payment</router-link>
                                 </div>
                             </div>
@@ -180,58 +180,57 @@ export default {
                 </div>
             </div>
         </div>
-        <button class="my_btn  my-offcanvas w-100 text-black" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
-            aria-controls="offcanvasBottom">CART</button>
+        <button class="my_btn  my-offcanvas w-100 text-black" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">CART</button>
 
         <div class="offcanvas offcanvas-bottom  my-bg-offcanvas" tabindex="-1" id="offcanvasBottom"
             aria-labelledby="offcanvasBottomLabel">
             <div class="offcanvas-header">
-               
+
                 <button type="button" class="btn-close " data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body small my-offcanvas ">
                 <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 g-3 justify-content-center">
-                        <div class="col my-display">
-                            <div class="rounded-top my-cart-br p-3 my_bg_gray text-white">
-                                <h5 class="card-title">Your Cart</h5>
-                                <div class="card-body p-3" id="ciao">
-                                    <div class="item d-flex mb-3" v-for="item in store.cart" :key="item.id">
-                                        <img :src="`${store.baseUrl}/storage/${item.image}`" alt=""
-                                            class="my-cart-img me-3">
-                                        <div class="d-flex flex-column text-center align-items-center">
-                                            <p>{{ item.name }}</p>
-                                            <AppCartAddRemBtn :item="item" />
-                                            <div
-                                                class="d-flex justify-content-center align-items-center mt-3 text-center">
-                                                <p class="mb-0 me-3 btn btn-warning">{{ item.price * item.quantity }} €
-                                                </p>
-                                                <button class="btn btn-danger"
-                                                    @click="removeFromCart(item.id), getTotal()"><i
-                                                        class="fa-solid fa-trash"></i>
-                                                </button>
-                                            </div>
+                    <div class="col my-display">
+                        <div class="rounded-top my-cart-br p-3 my_bg_gray text-white">
+                            <h5 class="card-title">Your Cart</h5>
+                            <div class="card-body p-3" id="ciao">
+                                <div class="item d-flex mb-3" v-for="item in store.cart" :key="item.id">
+                                    <img :src="`${store.baseUrl}/storage/${item.image}`" alt=""
+                                        class="my-cart-img me-3">
+                                    <div class="d-flex flex-column text-center align-items-center">
+                                        <p>{{ item.name }}</p>
+                                        <AppCartAddRemBtn :item="item" />
+                                        <div class="d-flex justify-content-center align-items-center mt-3 text-center">
+                                            <p class="mb-0 me-3 btn btn-warning">{{ item.price * item.quantity }} €
+                                            </p>
+                                            <button class="btn btn-danger"
+                                                @click="removeFromCart(item.id), getTotal()"><i
+                                                    class="fa-solid fa-trash"></i>
+                                            </button>
                                         </div>
+                                    </div>
 
-                                    </div>
-                                    <div v-if="store.cart.length === 0">
-                                        <p class="text-danger">The cart is empty</p>
-                                    </div>
                                 </div>
-                            </div>
-                            <div class="my_cart_footer rounded-bottom p-3 my_bg_gray text-white"
-                                v-if="store.cart.length > 0">
-                                <div v-if="store.cart.length > 0">
-                                    <strong>Totale:</strong>
-                                    <span>{{ getTotal() }} € </span>
-                                </div>
-                                <div v-if="store.cart.length > 0" class="subtotal mt-3">
-                                    <a class="my_btn my_color_btn_empty me-3" @click="emptyCart()">Empty cart</a>
-                                    <router-link :to="{ name: 'checkout'}" class="my_btn my_color_btn_payment">Go To
-                                        Payment</router-link>
+                                <div v-if="store.cart.length === 0">
+                                    <p class="text-danger">The cart is empty</p>
                                 </div>
                             </div>
                         </div>
+                        <div class="my_cart_footer rounded-bottom p-3 my_bg_gray text-white"
+                            v-if="store.cart.length > 0">
+                            <div v-if="store.cart.length > 0">
+                                <strong>Totale:</strong>
+                                <span>{{ getTotal() }} € </span>
+                            </div>
+                            <div v-if="store.cart.length > 0" class="subtotal mt-3">
+                                <a class="my_btn my_color_btn_empty me-3" @click="emptyCart()">Empty cart</a>
+                                <router-link :to="{ name: 'checkout'}" class="my_btn my_color_btn_payment">Go To
+                                    Payment</router-link>
+                            </div>
+                        </div>
                     </div>
+                </div>
             </div>
         </div>
         <AppFooter />
@@ -245,33 +244,38 @@ export default {
     display: contents;
 }
 
-.my-bg-offcanvas{
+.my-bg-offcanvas {
     background-color: black;
     display: flex;
     justify-content: center;
 }
-.my-offcanvas{
+
+.my-offcanvas {
     display: none;
-    
+
 }
-.my-justify{
+
+.my-justify {
     justify-content: center;
 }
-@media (max-width: 1025px){
-    .my-sticky{
+
+@media (max-width: 1025px) {
+    .my-sticky {
         width: 25%;
     }
-    .my-justify{
+
+    .my-justify {
         justify-content: space-between;
     }
 
 }
 
 @media (max-width: 900px) {
-    .my-offcanvas{
+    .my-offcanvas {
         display: inline-block;
     }
-    .my-sticky{
+
+    .my-sticky {
         display: none;
     }
 }
@@ -279,7 +283,8 @@ export default {
 .offcanvas.offcanvas-bottom {
     height: 85vh;
 }
-.btn-close{
+
+.btn-close {
     color: white;
     background-color: white;
 }
@@ -346,12 +351,12 @@ export default {
     cursor: pointer;
 
     &:hover {
-      transition: 1000ms;
-      padding: 10px 50px;
-      transform: translateY(-0px);
-      background: linear-gradient(90deg, #f8e16c 0%, #faa343 100%);
+        transition: 1000ms;
+        padding: 10px 50px;
+        transform: translateY(-0px);
+        background: linear-gradient(90deg, #f8e16c 0%, #faa343 100%);
     }
-  }
+}
 
 .row {
     height: 100%;
@@ -384,9 +389,9 @@ export default {
 }
 
 .my-cart-br {
-    max-height: 700px;
-    width: 400px;
-    overflow-y: scroll;
+    max-height: 500px;
+    width: 350px;
+    overflow-y: auto;
 }
 
 .my_bg_gray {
@@ -394,7 +399,7 @@ export default {
 }
 
 .my_cart_footer {
-    width: 400px;
+    width: 350px;
 }
 
 .my_btn {

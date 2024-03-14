@@ -54,7 +54,7 @@ export default {
           <input type="search" name="search-restaurant" id="search-restaurant" placeholder="Search restaurant.." class="btn btn-info" v-model="searchText" @keyup="searchRestaurant">
         </div> -->
       <div class="text-white my_btn">
-        <a href="http://127.0.0.1:8000/" class="text-decoration-none text-black">Work with us</a>
+        <a href="http://127.0.0.1:8000/" class="text-decoration-none text-black">Login or Register</a>
       </div>
     <!-- </div> -->
   </div>

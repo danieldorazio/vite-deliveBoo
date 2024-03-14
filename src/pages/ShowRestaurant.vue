@@ -108,17 +108,17 @@ export default {
                                 class="card-img-top rounded-circle">
                         </div>
                         <div
-                            class="col-6 d-flex flex-column justify-content-center align-items-center rounded ms-5 text-white my_bg_gray">
+                            class="col-6 d-flex flex-column justify-content-center align-items-center text-center rounded ms-5 p-2 text-white my_bg_gray">
                             <div>
                                 <p class="fs-5 text-uppercase fw-bolder">{{ restaurant.restaurant_name }}</p>
                             </div>
                             <div>
                                 <p class="fs-5"> Address: <strong>{{ restaurant.street }}</strong></p>
                             </div>
-                            <div>
-                                <p class="fs-5 badge rounded-pill text-bg-warning me-2"><strong>{{ restaurant.time_open
+                            <div class="">
+                                <p class="fs-5 badge rounded-pill text-bg-warning me-xl-3"><strong>{{ restaurant.time_open
                                         }}</strong></p>
-                                <p class="fs-5 badge rounded-pill text-bg-warning ms-2"><strong>{{ restaurant.time_close
+                                <p class="fs-5 badge rounded-pill text-bg-warning ms-xl-3"><strong>{{ restaurant.time_close
                                         }}</strong></p>
                             </div>
                         </div>
@@ -156,7 +156,6 @@ export default {
                                                 </button>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div v-if="store.cart.length === 0">
                                         <p class="text-danger">The cart is empty</p>
@@ -165,11 +164,11 @@ export default {
                             </div>
                             <div class="my_cart_footer rounded-bottom p-3 my_bg_gray text-white"
                                 v-if="store.cart.length > 0">
-                                <div v-if="store.cart.length > 0">
-                                    <strong>Totale:</strong>
+                                <div class="d-flex justify-content-between px-3" v-if="store.cart.length > 0">
+                                    <strong>Total price:</strong>
                                     <span>{{ getTotal() }} € </span>
                                 </div>
-                                <div v-if="store.cart.length > 0" class="subtotal mt-3">
+                                <div v-if="store.cart.length > 0" class="subtotal d-flex justify-content-between mt-3">
                                     <a class="my_btn my_color_btn_empty me-3" @click="emptyCart()">Empty cart</a>
                                     <router-link :to="{ name: 'checkout'}" class="my_btn my_color_btn_payment">Go To
                                         Payment</router-link>
@@ -384,9 +383,9 @@ export default {
 }
 
 .my-cart-br {
-    max-height: 700px;
+    max-height: 100vh;
     width: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .my_bg_gray {

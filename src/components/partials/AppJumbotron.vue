@@ -41,7 +41,7 @@ export default {
 
 
         <swiper :spaceBetween="30" :loop="true" :centeredSlides="true" :autoplay="{
-            delay:5000,
+            delay: 5000,
             disableOnInteraction: false,
         }" :pagination="{
             clickable: true,
@@ -140,7 +140,7 @@ export default {
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    color: var(--swiper-theme-color);
+    color: #ffcc33;
 }
 
 .autoplay-progress svg {
@@ -152,7 +152,7 @@ export default {
     width: 100%;
     height: 100%;
     stroke-width: 4px;
-    stroke: var(--swiper-theme-color);
+    stroke: #ffcc33;
     fill: none;
     stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
     stroke-dasharray: 125.6;
@@ -184,7 +184,5 @@ export default {
         right: 10%;
         width: 30%;
     }
-
-
 }
 </style>

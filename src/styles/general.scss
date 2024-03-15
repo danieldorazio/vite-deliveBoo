@@ -1,5 +1,21 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 
+.swiper-button-next {
+    color: #ffcc33;
+}   
+
+.swiper-button-prev {
+    color: #ffcc33;
+}
+
+.swiper-pagination-bullet {
+    background: white;
+}
+
+.swiper-pagination-bullet-active {
+    background: #ffcc33;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
 }

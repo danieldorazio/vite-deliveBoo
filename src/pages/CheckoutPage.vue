@@ -107,7 +107,7 @@ export default {
                 this.$router.push('/thanks')
                 this.flag = false;
                 localStorage.setItem('cart', '[]');
-                this.store.cart = []; 
+                this.store.cart = [];
             }, 5000);
         }
     },
@@ -117,71 +117,139 @@ export default {
 
 <template>
     <div class="my_main">
-        <AppHeader/>
+        <AppHeader />
 
         <div class="my-background d-flex align-content-center">
             <div class="my-container container text-warning mt-4">
-
                 <div class="d-flex justify-content-center align-items-center gap-5 p-3 text-white">
                     <img src="../assets/img/bg-title.png" alt="">
                     <h2>CHECKOUT</h2>
                 </div>
 
+                <div class="mt-5 row gap-5 ">
+                    <div class="col-7">
+                        <form :class="this.flag ? 'd-none' : ''" class="my-form row justify-content-center" novalidate>
+                            <div class="mb-3 col-9 col-sm-12 col-lg-6">
+                                <label for="client_name" class="form-label me-2">NAME</label>
+                                <span v-if="!isNameValid" class="error">*</span>
+                                <input type="text" class="form-control  " id="client_name"
+                                    v-model="this.user_data.client_name" placeholder="NAME"
+                                    :class="{ 'is-invalid': !isNameValid }" required>
 
-                <div class="mt-5">
-                    <form :class="this.flag ? 'd-none' : ''" class="my-form row justify-content-center" novalidate>
-                        <div class="mb-3 col-9 col-sm-12 col-lg-6">
-                            <label for="client_name" class="form-label me-2">NAME</label>
-                            <span v-if="!isNameValid" class="error">*</span>
-                            <input type="text" class="form-control  " id="client_name"
-                                v-model="this.user_data.client_name" placeholder="NAME"
-                                :class="{ 'is-invalid': !isNameValid }" required>
-                            
-                        </div>
+                            </div>
 
-                        <div class="mb-3 col-9 col-sm-12 col-lg-6">
-                            <label for="delivery_address" class="form-label me-2">ADDRESS</label>
-                            <span v-if="!isAddressValid" class="error">*</span>
-                            <input type="text" class="form-control"
-                                id="delivery_address" v-model="this.user_data.delivery_address" placeholder="ADDRESS"
-                                :class="{ 'is-invalid': !isAddressValid }">
-                            
-                        </div>
+                            <div class="mb-3 col-9 col-sm-12 col-lg-6">
+                                <label for="delivery_address" class="form-label me-2">ADDRESS</label>
+                                <span v-if="!isAddressValid" class="error">*</span>
+                                <input type="text" class="form-control" id="delivery_address"
+                                    v-model="this.user_data.delivery_address" placeholder="ADDRESS"
+                                    :class="{ 'is-invalid': !isAddressValid }">
 
-                        <div class="mb-3 col-9 col-sm-12">
-                            <label for="client_email" class="form-label me-2">EMAIL</label>
-                            <span v-if="!isEmailValid" class="error">*</span>
-                            <input type="email" class="form-control  " id="client_email" aria-describedby="emailHelp"
-                                v-model="this.user_data.client_email" placeholder="EMAIL"
-                                :class="{ 'is-invalid': !isEmailValid }">
-                            
-                        </div>
+                            </div>
 
-                        <div class="mb-3 col-9 col-sm-4">
-                            <label for="client_phone" class="form-label me-2">PHONE</label>
-                            <span v-if="!isPhoneNumberValid" class="error">*</span>
-                            <input type="text" class="form-control  " id="client_phone"
-                                v-model="this.user_data.client_phone" placeholder="PHONE"
-                                :class="{ 'is-invalid': !isPhoneNumberValid }">
-                            <span v-if="!isPhoneNumberValid" class="error my-phone">Il numero di telefono deve essere composto da
-                                10 cifre numeriche</span>
-                        </div>
-                        <div class="mb-3 col-9 col-sm-4">
-                            <label for="date" class="form-label me-2">DATE</label>
-                            <span v-if="!isDateValid" class="error">*</span>
-                            <input type="date" id="date" class="form-control text-white pe-5" name="date"
-                                data-format="yyyy/mm/dd" v-model="this.user_data.date"
-                                :class="{ 'is-invalid': !isDateValid }">
-                        </div>
-                        <div class="mb-3 col-9 col-sm-4">
-                            <label for="delivery_time" class="form-label me-2">DELIVERY TIME</label>
-                            <span v-if="!isDeliveryTimeValid" class="error">*</span>
-                            <input type="datetime-local" id="delivery_time" class="form-control text-white pe-5"
-                                name="delivery_time" data-format="dd/mm/yyyy HH:mm:ss"
-                                v-model="this.user_data.delivery_time" :class="{ 'is-invalid': !isDeliveryTimeValid }">
-                        </div>
-                        <button type="submit" class="btn btn-warning col-4" @click.prevent="submitForm">Submit</button>
-                    </form>
+                            <div class="mb-3 col-9 col-sm-12">
+                                <label for="client_email" class="form-label me-2">EMAIL</label>
+                                <span v-if="!isEmailValid" class="error">*</span>
+                                <input type="email" class="form-control  " id="client_email"
+                                    aria-describedby="emailHelp" v-model="this.user_data.client_email"
+                                    placeholder="EMAIL" :class="{ 'is-invalid': !isEmailValid }">
+
+                            </div>
+
+                            <div class="mb-3 col-9 col-sm-4">
+                                <label for="client_phone" class="form-label me-2">PHONE</label>
+                                <span v-if="!isPhoneNumberValid" class="error">*</span>
+                                <input type="text" class="form-control  " id="client_phone"
+                                    v-model="this.user_data.client_phone" placeholder="PHONE"
+                                    :class="{ 'is-invalid': !isPhoneNumberValid }">
+                                <span v-if="!isPhoneNumberValid" class="error my-phone">Il numero di telefono deve
+                                    essere composto da
+                                    10 cifre numeriche</span>
+                            </div>
+                            <div class="mb-3 col-9 col-sm-4">
+                                <label for="date" class="form-label me-2">DATE</label>
+                                <span v-if="!isDateValid" class="error">*</span>
+                                <input type="date" id="date" class="form-control text-white pe-5" name="date"
+                                    data-format="yyyy/mm/dd" v-model="this.user_data.date"
+                                    :class="{ 'is-invalid': !isDateValid }">
+                            </div>
+                            <div class="mb-3 col-9 col-sm-4">
+                                <label for="delivery_time" class="form-label me-2">DELIVERY TIME</label>
+                                <span v-if="!isDeliveryTimeValid" class="error">*</span>
+                                <input type="datetime-local" id="delivery_time" class="form-control text-white pe-5"
+                                    name="delivery_time" data-format="dd/mm/yyyy HH:mm:ss"
+                                    v-model="this.user_data.delivery_time"
+                                    :class="{ 'is-invalid': !isDeliveryTimeValid }">
+                            </div>
+                            <button type="submit" class="btn btn-warning col-4"
+                                @click.prevent="submitForm">Submit</button>
+                        </form>
+                    </div>
+                    <div class="col-3 my_bg-dark p-0">
+                        <h2 class="text-center pt-3 pb-3 ">TOTAL PRICE {{ user_data.totalPrice }} &euro; </h2>
+                        <ul class="d-flex flex-column text-white my_scroll">
+                            <li class="d-flex justify-content-between mb-3 pe-3" v-for="piatto in this.store.cart"
+                                :key="piatto">
+                                <div>
+                                    {{ piatto.quantity }} x {{ piatto.name }}
+                                </div>
+
+                                <div>
+                                    {{ piatto.price * piatto.quantity }} &euro;
+                                </div>
+                            </li>
+                            <li class="d-flex justify-content-between mb-3" v-for="piatto in this.store.cart"
+                                :key="piatto">
+                                <div>
+                                    {{ piatto.quantity }} x {{ piatto.name }}
+                                </div>
+
+                                <div>
+                                    {{ piatto.price * piatto.quantity }} &euro;
+                                </div>
+                            </li>
+                            <li class="d-flex justify-content-between mb-3" v-for="piatto in this.store.cart"
+                                :key="piatto">
+                                <div>
+                                    {{ piatto.quantity }} x {{ piatto.name }}
+                                </div>
+
+                                <div>
+                                    {{ piatto.price * piatto.quantity }} &euro;
+                                </div>
+                            </li>
+                            <li class="d-flex justify-content-between mb-3" v-for="piatto in this.store.cart"
+                                :key="piatto">
+                                <div>
+                                    {{ piatto.quantity }} x {{ piatto.name }}
+                                </div>
+
+                                <div>
+                                    {{ piatto.price * piatto.quantity }} &euro;
+                                </div>
+                            </li>
+                            <li class="d-flex justify-content-between mb-3" v-for="piatto in this.store.cart"
+                                :key="piatto">
+                                <div>
+                                    {{ piatto.quantity }} x {{ piatto.name }}
+                                </div>
+
+                                <div>
+                                    {{ piatto.price * piatto.quantity }} &euro;
+                                </div>
+                            </li>
+                            <li class="d-flex justify-content-between mb-3" v-for="piatto in this.store.cart"
+                                :key="piatto">
+                                <div>
+                                    {{ piatto.quantity }} x {{ piatto.name }}
+                                </div>
+
+                                <div>
+                                    {{ piatto.price * piatto.quantity }} &euro;
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div :class="this.flag ? '' : 'd-none'">
                     <div id="dropin-wrapper">
@@ -204,6 +272,41 @@ export default {
 
 <style lang="scss" scoped>
 @use "../styles/partials/variables" as *;
+
+.my_bg-dark {
+    background-color: #000000;
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+}
+
+.my_scroll {
+    overflow: auto;
+    max-height: 50vh;
+}
+
+.my_scroll::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 10px;
+}
+
+.my_scroll::-webkit-scrollbar-track {
+    border-radius: 10px;
+    border: 1px solid #cacaca;
+    background-color: #f1f1f1;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+.my_scroll::-webkit-scrollbar-thumb {
+    background-image: -webkit-gradient(linear,
+            left bottom,
+            left top,
+            color-stop(0.5, #faa343),
+            color-stop(1, #f8e16c));
+    border-radius: 10px;
+}
 
 .is-invalid {
     border-color: red;

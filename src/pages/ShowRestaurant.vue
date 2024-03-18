@@ -12,6 +12,7 @@ export default {
             store,
             restaurant: {},
             meals: [],
+            showModal: false,
         };
     },
     created() {
@@ -53,42 +54,6 @@ export default {
         },
         emptyCart() {
             this.store.cart = [];
-            localStorage.setItem('cart', JSON.stringify(this.store.cart));
-        },
-        addToCart(mealId) {
-            // controlla se il ristorante è stato cambiato, se vero cancella il carrello precedente
-            for (const storemeal of this.store.cart) {
-                if (storemeal.restaurant_id != this.meal.restaurant_id) {
-                    if (confirm('Are you sure')) {
-                        this.store.cart = [];
-                        if (this.store.cart.length == 0) {
-                            this.store.cart.push(this.meal);
-                        }
-                        else {
-                            let res = this.store.cart.find(element => element.id == mealId);
-                            if (res === undefined) {
-                                this.store.cart.push(this.meal);
-                            }
-                        }
-                        this.meal.quantity = 1;
-                        localStorage.setItem('cart', JSON.stringify(this.store.cart));
-                        return;
-                    }
-                    else {
-                        return;
-                    }
-                }
-            }
-            if (this.store.cart.length == 0) {
-                this.store.cart.push(this.meal);
-            }
-            else {
-                let res = this.store.cart.find(element => element.id == mealId);
-                if (res === undefined) {
-                    this.store.cart.push(this.meal);
-                }
-            }
-            this.meal.quantity = 1;
             localStorage.setItem('cart', JSON.stringify(this.store.cart));
         },
     }

@@ -8,6 +8,7 @@ export default {
     data() {
         return {
             store,
+            showModal: false,
         };
     },
     methods: {
@@ -16,6 +17,9 @@ export default {
             this.store.cart = temp;
             this.quantity = 1;
             localStorage.setItem('cart', JSON.stringify(temp));
+        },
+        hideModal() {
+            this.showModal = false;
         },
         getTotal() {
             let sum = this.store.cart.reduce(function (accumulator, obj) {
@@ -27,25 +31,10 @@ export default {
             // controlla se il ristorante è stato cambiato, se vero cancella il carrello precedente
             for (const storemeal of this.store.cart) {
                 if (storemeal.restaurant_id != this.meal.restaurant_id) {
-                    if (confirm('If you add to your cart a meal from a different restaurant, your previous cart will be emptied. Do you wish to proceed?')) {
-                        this.store.cart = [];
-                        if (this.store.cart.length == 0) {
-                            this.store.cart.push(this.meal);
-                        }
-                        else {
-                            let res = this.store.cart.find(element => element.id == mealId);
-                            if (res === undefined) {
-                                this.store.cart.push(this.meal);
-                            }
-                        }
-                        this.meal.quantity = 1;
-                        localStorage.setItem('cart', JSON.stringify(this.store.cart));
-                        return;
-                    }
-                    else {
-                        return;
-                    }
+                    this.showModal = true
+                    return            
                 }
+
             }
             if (this.store.cart.length == 0) {
                 this.store.cart.push(this.meal);
@@ -59,6 +48,11 @@ export default {
             this.meal.quantity = 1;
             localStorage.setItem('cart', JSON.stringify(this.store.cart));
         },
+        clearAdd() {
+            this.store.cart = []
+            this.addToCart()
+            this.hideModal()
+        }
     },
     mounted() {
         console.log(this.meal.id);
@@ -96,9 +90,20 @@ export default {
         </div>
             </div>
         </div>
-    </div>
-
-
+        </div>
+            <!-- Modal -->
+            <div :class="showModal ? '' : 'd-none'">
+                <div class="my_modal">
+                    <h3>Warning</h3>
+                    <p>If you add to your cart a meal from a different restaurant, your previous cart will be emptied. Do you wish to proceed?</p>
+                    <div>
+                        <button class="btn btn-warning" @click="hideModal">
+                            Cancel 
+                        </button>
+                        <button @click="clearAdd" class="btn btn-success">add</button>
+                    </div>
+                </div>
+            </div>
 </template>
 
 <style lang="scss" scoped>

@@ -94,13 +94,14 @@ export default {
             <!-- Modal -->
             <div :class="showModal ? '' : 'd-none'">
                 <div class="my_modal">
-                    <h3>Warning</h3>
-                    <p>If you add to your cart a meal from a different restaurant, your previous cart will be emptied. Do you wish to proceed?</p>
-                    <div>
-                        <button class="btn btn-warning" @click="hideModal">
-                            Cancel 
-                        </button>
-                        <button @click="clearAdd" class="btn btn-success">add</button>
+                    <div class="my_modal_content">
+                        <h3 class="text-center mb-3">Warning</h3>
+                        <p class="text-white mb-3">If you add <span class="meal_name">"{{ meal.name }}"</span>  to your cart , your previous cart will be emptied and the selected meal will be added. Do you wish to proceed?</p>
+                        
+                        <div class="text-center">
+                            <button class="btn btn-danger me-3" @click="hideModal">Cancel</button>
+                            <button @click="clearAdd" class="btn btn-success">Proceed</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -322,5 +323,31 @@ body {
 
 .my_color_btn_added {
     background: linear-gradient(90deg, #b8b8b8 0%, #4c4c4c 100%);
+}
+.my_modal{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .my_modal_content {
+        width: 450px;
+        padding: 20px;
+        background-image: url(../../assets/img/bg-pattern.jpg);
+        color: #ffcc33;
+        border: 10px double #ffcc33;
+        border-radius: 10px;
+    }
+    .meal_name{
+        color: #ffcc33;
+    }
 }
 </style>

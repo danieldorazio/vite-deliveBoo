@@ -66,7 +66,6 @@ export default {
                 console.log('Form inviato con successo');
                 this.flag = true
 
-
             } else {
                 console.log('Il form contiene errori');
             }
@@ -185,70 +184,25 @@ export default {
                                 @click.prevent="submitForm">Submit</button>
                         </form>
                     </div>
-                    <div class="col-3 my_bg-dark p-0">
-                        <h2 class="text-center pt-3 pb-3 ">TOTAL PRICE {{ user_data.totalPrice }} &euro; </h2>
+                    <div class="col-4 my_bg-dark p-3" :class="this.flag ? 'd-none' : ''">
+                        <h4 class="pt-3 pb-3 fw-bold">Your order</h4>
                         <ul class="d-flex flex-column text-white my_scroll">
                             <li class="d-flex justify-content-between mb-3 pe-3" v-for="piatto in this.store.cart"
                                 :key="piatto">
                                 <div>
-                                    {{ piatto.quantity }} x {{ piatto.name }}
+                                    {{ piatto.quantity }}x 
+                                    {{ piatto.name }}
                                 </div>
-
-                                <div>
-                                    {{ piatto.price * piatto.quantity }} &euro;
-                                </div>
-                            </li>
-                            <li class="d-flex justify-content-between mb-3" v-for="piatto in this.store.cart"
-                                :key="piatto">
-                                <div>
-                                    {{ piatto.quantity }} x {{ piatto.name }}
-                                </div>
-
-                                <div>
-                                    {{ piatto.price * piatto.quantity }} &euro;
-                                </div>
-                            </li>
-                            <li class="d-flex justify-content-between mb-3" v-for="piatto in this.store.cart"
-                                :key="piatto">
-                                <div>
-                                    {{ piatto.quantity }} x {{ piatto.name }}
-                                </div>
-
-                                <div>
-                                    {{ piatto.price * piatto.quantity }} &euro;
-                                </div>
-                            </li>
-                            <li class="d-flex justify-content-between mb-3" v-for="piatto in this.store.cart"
-                                :key="piatto">
-                                <div>
-                                    {{ piatto.quantity }} x {{ piatto.name }}
-                                </div>
-
-                                <div>
-                                    {{ piatto.price * piatto.quantity }} &euro;
-                                </div>
-                            </li>
-                            <li class="d-flex justify-content-between mb-3" v-for="piatto in this.store.cart"
-                                :key="piatto">
-                                <div>
-                                    {{ piatto.quantity }} x {{ piatto.name }}
-                                </div>
-
-                                <div>
-                                    {{ piatto.price * piatto.quantity }} &euro;
-                                </div>
-                            </li>
-                            <li class="d-flex justify-content-between mb-3" v-for="piatto in this.store.cart"
-                                :key="piatto">
-                                <div>
-                                    {{ piatto.quantity }} x {{ piatto.name }}
-                                </div>
-
                                 <div>
                                     {{ piatto.price * piatto.quantity }} &euro;
                                 </div>
                             </li>
                         </ul>
+                        <hr>
+                        <div class="d-flex justify-content-between pe-3 fw-bold">
+                            <div>Total Price:</div> 
+                            <div>{{ user_data.totalPrice}} €</div>
+                        </div>
                     </div>
                 </div>
                 <div :class="this.flag ? '' : 'd-none'">
@@ -274,7 +228,8 @@ export default {
 @use "../styles/partials/variables" as *;
 
 .my_bg-dark {
-    background-color: #000000;
+    background-color: #545454;
+    border-radius: var(--bs-border-radius);
 
     ul {
         list-style-type: none;
